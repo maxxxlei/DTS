@@ -24,7 +24,7 @@
       column="vName"
       type="string"
       not-null="false"
-      length="1000"
+      length="255"
     />
     <!-- 版本编号 -->
     <property
@@ -39,7 +39,7 @@
     <property
       name="vYear"
       column="v_year"
-      type="long"
+      type="string"
       not-null="false"
       length="4"
     />
@@ -47,9 +47,8 @@
     <property
       name="state"
       column="state"
-      type="long"
+      type="integer"
       not-null="false"
-      length="2"
     />
     <!-- 创建时间 -->
     <property
@@ -57,7 +56,6 @@
       column="create_time"
       type="date"
       not-null="false"
-      length="10"
     />
     <!-- 修改时间 -->
     <property
@@ -65,15 +63,13 @@
       column="update_time"
       type="date"
       not-null="false"
-      length="10"
     />
     <!-- 是否删除-->
     <property
       name="isDelete"
       column="is_delete"
-      type="long"
+      type="integer"
       not-null="false"
-      length="2"
     />
     <!-- 描述 -->
     <property

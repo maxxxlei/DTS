@@ -21,11 +21,11 @@ public class VersionPo extends BasePO {
 	/**
 	 * 年度
 	 */
-	private Long vYear;
+	private String vYear;
 	/**
 	 * 启用状态
 	 */
-	private Long state;
+	private Integer state;
 	/**
 	 * 创建时间
 	 */
@@ -37,7 +37,7 @@ public class VersionPo extends BasePO {
 	/**
 	 * 是否删除
 	 */
-	private Long isDelete;
+	private Integer isDelete;
 	/**
 	 * 描述
 	 */
@@ -60,18 +60,6 @@ public class VersionPo extends BasePO {
 	public void setvCode(String vCode) {
 		this.vCode = vCode;
 	}
-	public Long getvYear() {
-		return vYear;
-	}
-	public void setvYear(Long vYear) {
-		this.vYear = vYear;
-	}
-	public Long getState() {
-		return state;
-	}
-	public void setState(Long state) {
-		this.state = state;
-	}
 	public Date getCreateTime() {
 		return createTime;
 	}
@@ -84,18 +72,32 @@ public class VersionPo extends BasePO {
 	public void setUodateTime(Date uodateTime) {
 		this.uodateTime = uodateTime;
 	}
-	public Long getIsDelete() {
-		return isDelete;
-	}
-	public void setIsDelete(Long isDelete) {
-		this.isDelete = isDelete;
-	}
 	public String getDesc() {
 		return desc;
 	}
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
-	
+	public String getvYear() {
+		return vYear;
+	}
+	public void setvYear(String vYear) {
+		this.vYear = vYear;
+	}
+	public Integer getState() {
+		return state;
+	}
+	public void setState(Integer state) {
+		this.state = state;
+	}
+	public Integer getIsDelete() {
+		return isDelete;
+	}
+	public void setIsDelete(Integer isDelete) {
+		this.isDelete = isDelete;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 }
