@@ -1,5 +1,7 @@
 package com.seeyon.apps.xd.controller;
 
-public class Xd24Controller {
+import com.seeyon.ctp.common.controller.BaseController;
+
+public class Xd24Controller extends BaseController{
 
 }
