@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class entity-name="TargetItemPo" table="xd24_target_item">
+		<id name="id" type="long" column="id" length="21">
+			<generator class="assigned" />
+		</id>
+
+		<property name="targetId" type="long" column="target_Id" length="21" />
+		<property name="type" type="integer" column="type" />
+		<property name="khzq" type="integer" column="khzq" />
+		<property name="khzqxx" type="integer" column="khzqxx" />
+		<property name="month" type="long" column="month" length="2" />
+		<property name="startTime" type="date" column="start_time" />
+		<property name="endTime" type="date" column="end_time" />
+		<property name="goalId" type="long" column="goal_Id" length="21" />
+		<property name="goalName" type="string" column="goal_Name" length="255" />
+		<property name="otherMember" type="string" column="other_Member" length="500"/>
+		<property name="actualValue" type="string" column="actual_Value" length="500"/>
+
+	</class>
+</hibernate-mapping>
