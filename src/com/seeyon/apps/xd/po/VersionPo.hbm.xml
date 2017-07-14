@@ -78,7 +78,7 @@
     <!-- 描述 -->
     <property
       name="desc"
-      column="desc"
+      column="description"
       type="string"
       not-null="false"
     />
