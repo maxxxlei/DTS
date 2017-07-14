@@ -220,3 +220,85 @@ comment on column xd24_target_decompose.target_desc is
 
 comment on column xd24_target_decompose.target_recipientId is
 '目标—承接人ID';
+
+-- 版本管理
+drop table xd24_version;
+create table xd24_version
+(
+   ID NUMBER(21) PRIMARY KEY,
+   vName VARCHAR2(255) not null,
+   vCode VARCHAR2(255) not null,
+   v_year VARCHAR2(4) not null,
+   state SMALLINT not null,
+   create_time DATE not null,
+   update_time DATE,
+   is_delete SMALLINT not null,
+   description CLOB
+);
+
+
+comment on table xd24_version is
+'版本管理表';
+
+comment on column xd24_version.vName is
+'版本名称';
+
+comment on column xd24_version.vCode is
+'版本编号';
+
+comment on column xd24_version.v_year is
+'年度';
+
+comment on column xd24_version.state is
+'启用状态';
+
+comment on column xd24_version.create_time is
+'创建时间';
+
+comment on column xd24_version.update_time is
+'修改时间';
+
+comment on column xd24_version.is_delete is
+'是否删除';
+
+comment on column xd24_version.description is
+'描述';
+
+
+-- 版本管理表
+create table xd24_planType
+(
+   ID NUMBER(21) PRIMARY KEY,
+   p_type VARCHAR2(21) not null,
+   p_name VARCHAR2(255) not null,
+   state SMALLINT not null,
+   create_time DATE not null,
+   update_time DATE,
+   is_delete SMALLINT not null,
+   description CLOB
+);
+
+
+comment on table xd24_planType is
+'规划类型表';
+
+comment on column xd24_planType.p_type is
+'规划类型';
+
+comment on column xd24_planType.p_name is
+'规划名称';
+
+comment on column xd24_planType.state is
+'启动状态';
+
+comment on column xd24_planType.create_time is
+'创建时间';
+comment on column xd24_planType.update_time is
+'修改时间';
+
+comment on column xd24_version.is_delete is
+'是否删除';
+
+comment on column xd24_version.description is
+'描述';
+

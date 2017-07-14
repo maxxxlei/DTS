@@ -2,7 +2,6 @@ package com.seeyon.apps.xd.vo;
 
 import org.apache.log4j.Logger;
 
-import com.seeyon.ctp.common.AppContext;
 import com.seeyon.ctp.menu.check.AbstractMenuCheck;
 /**
  * 战略规划 菜单校验类
