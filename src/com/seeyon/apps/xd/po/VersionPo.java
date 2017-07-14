@@ -33,7 +33,7 @@ public class VersionPo extends BasePO {
 	/**
 	 * 修改时间
 	 */
-	private Date uodateTime;
+	private Date updateTime;
 	/**
 	 * 是否删除
 	 */
@@ -42,6 +42,13 @@ public class VersionPo extends BasePO {
 	 * 描述
 	 */
 	private String desc;
+	
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -65,12 +72,6 @@ public class VersionPo extends BasePO {
 	}
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
-	}
-	public Date getUodateTime() {
-		return uodateTime;
-	}
-	public void setUodateTime(Date uodateTime) {
-		this.uodateTime = uodateTime;
 	}
 	public String getDesc() {
 		return desc;
