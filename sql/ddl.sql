@@ -90,17 +90,18 @@ comment on column xd24_target.khpj_state is
 comment on column xd24_target.qmzj_state is
 '全面总结状态';
 
--- 版本管理表
+-- 版本管理
+drop table xd24_version;
 create table xd24_version
 (
    ID NUMBER(21) PRIMARY KEY,
-   vName VARCHAR2(1000) not null,
+   vName VARCHAR2(255) not null,
    vCode VARCHAR2(255) not null,
-   v_year NUMBER(4) not null,
-   state NUMBER(2) not null,
+   v_year VARCHAR2(4) not null,
+   state SMALLINT not null,
    create_time DATE not null,
    update_time DATE,
-   is_delete NUMBER(2) not null,
+   is_delete SMALLINT not null,
    description CLOB
 );
 
@@ -131,6 +132,7 @@ comment on column xd24_version.is_delete is
 
 comment on column xd24_version.description is
 '描述';
+
 
 
 
