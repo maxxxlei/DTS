@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.seeyon.ctp.common.AppContext;
+import com.seeyon.ctp.common.authenticate.domain.User;
 import com.seeyon.ctp.common.controller.BaseController;
 import com.seeyon.ctp.common.exceptions.BusinessException;
 /**
@@ -16,7 +18,10 @@ import com.seeyon.ctp.common.exceptions.BusinessException;
 public class Xd24TargetController extends BaseController{
 
 	public ModelAndView createTarget(HttpServletRequest request,HttpServletResponse response) throws BusinessException{
+		ModelAndView mav = new ModelAndView("apps/xd24zfz/target/createTarget");
+		User user = AppContext.getCurrentUser();
 		
-		return new ModelAndView("apps/target/1");
+		mav.addObject("user", user);
+		return mav;
 	}
 }
