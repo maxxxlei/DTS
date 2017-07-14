@@ -148,7 +148,7 @@ create table xd24_planType
 );
 
 
-<<<<<<< HEAD
+
 comment on table xd24_planType is
 '规划类型表';
 
@@ -171,6 +171,37 @@ comment on column xd24_version.is_delete is
 
 comment on column xd24_version.description is
 '描述';
-=======
 
->>>>>>> branch 'master' of https://github.com/sjzy-gitHub/xd24zfz.git
+
+-- 规划表
+
+create table xd24_guihua
+(
+		ID NUMBER(21) PRIMARY KEY,
+		ghName VARCHAR2(255),
+		year NUMBER(4) not null,
+		accountId NUMBER(21) not null,
+		memberId NUMBER(21) not null,
+		type SMALLINT not null,
+		createtime DATE not null,
+		updatetime DATE not null,
+		description CLOB,
+		attachment VARCHAR2(500),
+		state SMALLINT not null,
+		is_delete SMALLINT not null
+);
+
+
+comment on table xd24_guihua is '规划表';
+comment on column xd24_guihua.ghName is '规划名称';
+comment on column xd24_guihua.year is '年度';
+comment on column xd24_guihua.accountId is '单位ID';
+comment on column xd24_guihua.memberId is '编制人ID';
+comment on column xd24_guihua.type is '规划类型';
+comment on column xd24_guihua.createtime is '编制时间';
+comment on column xd24_guihua.updatetime is '修改时间';
+comment on column xd24_guihua.description is '描述';
+comment on column xd24_guihua.attachment is '标的物';
+comment on column xd24_guihua.state is '审批状态';
+comment on column xd24_guihua.is_delete is '是否删除';
+
