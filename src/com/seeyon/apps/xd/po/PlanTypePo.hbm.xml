@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class entity-name="com.seeyon.apps.xd.po.PlanTypePo" table="xd24_planType">
+		<id name="id" type="long" column="id" length="20">
+			<generator class="assigned" />
+		</id>
+
+		<property name="id" type="long" column="ID" not-null="false" length="21" />
+		<property name="ptype" type="long" column="P_TYPE" not-null="false" length="21" />
+		<property name="pname" type="string" column="P_NAME" not-null="false" length="255" />
+		<property name="state" type="integer" column="STATE" not-null="false" length="2" />
+		<property name="createtime" type="date" column="CREATE_TIME" not-null="false" length="7" />
+
+		<property name="updatetime" type="date" column="UPDATE_TIME" length="7" />
+		<property name="isdelete" type="integer" column="IS_DELETE" length="2" />
+		<property name="desc" type="string" column="DESCRIPTION" length="4000" />
+		
+		<!-- edit flag,do not delete !!! -->
+
+	</class>
+</hibernate-mapping>

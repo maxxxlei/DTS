@@ -133,5 +133,39 @@ comment on column xd24_version.description is
 '描述';
 
 
+-- 版本管理表
+create table xd24_planType
+(
+   ID NUMBER(21) PRIMARY KEY,
+   p_type VARCHAR2(21) not null,
+   p_name VARCHAR2(255) not null,
+   state SMALLINT not null,
+   create_time DATE not null,
+   update_time DATE,
+   is_delete SMALLINT not null,
+   description CLOB
+);
 
 
+comment on table xd24_planType is
+'规划类型表';
+
+comment on column xd24_planType.p_type is
+'规划类型';
+
+comment on column xd24_planType.p_name is
+'规划名称';
+
+comment on column xd24_planType.state is
+'启动状态';
+
+comment on column xd24_planType.create_time is
+'创建时间';
+comment on column xd24_planType.update_time is
+'修改时间';
+
+comment on column xd24_version.is_delete is
+'是否删除';
+
+comment on column xd24_version.description is
+'描述';
