@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.seeyon.apps.xd.po">
+    <!-- 版本管理表 -->
+  <class
+    name="VersionPo"
+    table="xd24_version"
+  >
+    <!-- ID -->
+    <id
+      name="id"
+      type="long"
+      column="ID"
+      length="21"
+    >
+      <generator class="assigned"/>
+    </id>
+	<!-- 版本名称 -->
+    <property
+      name="vName"
+      column="vName"
+      type="string"
+      not-null="false"
+      length="1000"
+    />
+    <!-- 版本编号 -->
+    <property
+      name="vCode"
+      column="vCode"
+      type="string"
+      not-null="false"
+      length="255"
+    />
+
+    <!-- 年度 -->
+    <property
+      name="vYear"
+      column="v_year"
+      type="long"
+      not-null="false"
+      length="4"
+    />
+    <!-- 启用状态 -->
+    <property
+      name="state"
+      column="state"
+      type="long"
+      not-null="false"
+      length="2"
+    />
+    <!-- 创建时间 -->
+    <property
+      name="createTime"
+      column="create_time"
+      type="date"
+      not-null="false"
+      length="10"
+    />
+    <!-- 修改时间 -->
+    <property
+      name="updateTime"
+      column="update_time"
+      type="date"
+      not-null="false"
+      length="10"
+    />
+    <!-- 是否删除-->
+    <property
+      name="isDelete"
+      column="is_delete"
+      type="long"
+      not-null="false"
+      length="2"
+    />
+    <!-- 描述 -->
+    <property
+      name="desc"
+      column="desc"
+      type="string"
+      not-null="false"
+    />
+  </class>
+</hibernate-mapping>
