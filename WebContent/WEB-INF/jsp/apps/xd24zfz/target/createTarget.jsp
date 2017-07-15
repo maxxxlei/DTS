@@ -24,19 +24,19 @@
 				<td>编号</td>
 				<td><input type="text" ></td>
 				<td>岗位</td>
-				<td><input type="text" value="${user.postName }"></td>
+				<td><input type="text" value="${user.postName }" readonly="readonly"></td>
 			</tr>
 			<tr>
 				<td>单位</td>
-				<td><input type="text" value="${user.accountName }"></td>
+				<td><input type="text" value="${user.accountName }" readonly="readonly"></td>
 				<td>中心</td>
-				<td><input type="text" value=""></td>
+				<td><input type="text" value="" readonly="readonly"></td>
 				<td>部门</td>
-				<td><input type="text" value="${user.departMentName }"></td>
+				<td><input type="text" value="${user.departMentName }" readonly="readonly"></td>
 				<td>组</td>
-				<td><input type="text" value=""></td>
+				<td><input type="text" value="" readonly="readonly"></td>
 				<td>责任人</td>
-				<td><input type="text" value="${user.name }"></td>
+				<td><input type="text" value="${user.name }" readonly="readonly"></td>
 			</tr>
 		</table>
 		<table id="sjmb">
@@ -49,6 +49,8 @@
 				<td>上级目标名称</td>
 				<td><input type="text" id="smbmc"></td>
 			</tr>
+		</table>
+		<table>
 			<tr>目标承接</tr>
 			<tr>
 				<td>目标编号</td>
@@ -87,7 +89,43 @@
 			</tr>
 			<tr>
 				<td>目标描述</td>
-				<td><input type="text" id="mbms"></td>
+				<td><textarea rows="1" cols="1"></textarea></td>
+			</tr>
+		</table>
+		<table>
+			<div>目标考核项</div>
+			<tr>1.1 考核指标项</tr>
+			<thead>
+				<td>序号</td>
+				<td>考核周期</td>
+				<td>考核周期细项</td>
+				<td>月</td>
+				<td>考核开始日</td>
+				<td>考核截止日</td>
+				<td>指标项</td>
+				<td>度量</td>
+				<td>要求</td>
+				<td>目标值</td>
+				<td>协同责任人</td>
+			</thead>
+			<tr>
+				<td><input type="text"></td>
+				<td>
+					<select id="khzq" name="khzq">
+					</select>
+				</td>
+				<td>
+					<select id="khzqxx" name="khzqxx">
+					</select>
+				</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
 			</tr>
 		</table>
 	</form>
