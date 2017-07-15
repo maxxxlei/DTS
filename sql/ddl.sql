@@ -337,3 +337,88 @@ comment on column xd24_guihua.state is '审批状态';
 comment on column xd24_guihua.is_delete is '是否删除';
 
 
+
+drop table "xd24_version" cascade constraints;
+
+/*==============================================================*/
+/* Table: "xd24_version"                                        */
+/*==============================================================*/
+create table "xd24_version" 
+(
+   "id"                 NUMBER(21)           not null,
+   "vCode"              VARCHAR2(255),
+   "v_year"             NUMBER(4),
+   "isEnable"           NUMBER(2),
+   "create_time"        DATE,
+   "update_time"        DATE,
+   "is_delete"          NUMBER(2),
+   "desc"               CLOB,
+   "versionId"          NUMBER(21),
+   "v_state"            SMALLINT,
+   constraint PK_XD24_VERSION primary key ("id")
+);
+
+comment on table "xd24_version" is
+'24字方针系统目标、行动计划版本管理';
+
+comment on column "xd24_version"."id" is
+'主键';
+
+comment on column "xd24_version"."isEnable" is
+'状态，是否启用、停用，
+0：停用
+1：启用';
+
+comment on column "xd24_version"."create_time" is
+'创建时间';
+
+comment on column "xd24_version"."is_delete" is
+'是否删除';
+
+comment on column "xd24_version"."desc" is
+'描述';
+
+comment on column "xd24_version"."versionId" is
+'版本ID';
+
+comment on column "xd24_version"."v_state" is
+'版本是否生效';
+
+
+drop table "xd24_zzjhlx" cascade constraints;
+
+/*==============================================================*/
+/* Table: "xd24_zzjhlx"                                         */
+/*==============================================================*/
+create table "xd24_zzjhlx" 
+(
+   "id"                 NUMBER(21),
+   "name"               VARCHAR2(255),
+   "isEnable"           SMALLINT,
+   "versionId"          NUMBER(21),
+   "v_state"            SMALLINT,
+   "createtime"         DATE,
+   "updatetime"         DATE,
+   "isDelete"           SMALLINT,
+   "description"        CLOB
+);
+
+comment on table "xd24_zzjhlx" is
+'组织计划类型设置功能（
+经营计划、研发工作计划、开发工作计划、拓展工作计划、资金计划、预算计划、财务管控计划、授信计划、招聘计划、常规工作计划）';
+
+comment on column "xd24_zzjhlx"."name" is
+'战略地图名称';
+
+comment on column "xd24_zzjhlx"."isEnable" is
+'是否启用';
+
+comment on column "xd24_zzjhlx"."v_state" is
+'版本是否有效';
+
+comment on column "xd24_zzjhlx"."isDelete" is
+'是否删除';
+
+comment on column "xd24_zzjhlx"."description" is
+'描述';
+

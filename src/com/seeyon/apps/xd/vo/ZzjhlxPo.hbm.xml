@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class entity-name="com.seeyon.apps.xd.vo.ZzjhlxPo" table="xd24_zzjhlx">
+		<id name="id" type="long" column="id" length="21">
+			<generator class="assigned" />
+		</id>
+
+		<property name="name" type="string" column="name" not-null="false" length="255" />
+		<property name="isEnable" type="integer" column="isEnable" not-null="false" length="21" />
+		<property name="versionId" type="long" column="versionId" not-null="false" length="21" />
+		<property name="state" type="integer" column="v_state" not-null="false" length="2" />
+		<property name="createtime" type="date" column="createtime" not-null="false" length="7" />
+		<property name="updatetime" type="date" column="updatetime" length="7" />
+		<property name="isdelete" type="integer" column="isDelete" length="2" />
+		<property name="desc" type="string" column="description" length="4000" />
+		
+		<!-- edit flag,do not delete !!! -->
+
+	</class>
+</hibernate-mapping>
