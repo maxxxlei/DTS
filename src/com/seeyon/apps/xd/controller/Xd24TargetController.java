@@ -1,5 +1,7 @@
 package com.seeyon.apps.xd.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,6 +16,7 @@ import com.seeyon.ctp.common.exceptions.BusinessException;
 import com.seeyon.ctp.organization.bo.V3xOrgAccount;
 import com.seeyon.ctp.organization.bo.V3xOrgDepartment;
 import com.seeyon.ctp.organization.bo.V3xOrgPost;
+import com.seeyon.ctp.organization.dao.OrgCache;
 import com.seeyon.ctp.organization.manager.OrgManager;
 /**
  * 目标controller
@@ -43,13 +46,18 @@ public class Xd24TargetController extends BaseController{
 		uv.setPostId(postId);
 		V3xOrgPost post = orgManager.getPostById(postId);
 		uv.setPostName(post.getName());
-		Long departmentId = user.getDepartmentId();
-		uv.setDepartMentId(departmentId);
+		Long groupId = user.getDepartmentId();
+		uv.setGroupId(groupId);
+		V3xOrgDepartment group = orgManager.getDepartmentById(groupId);
+		uv.setGroupName(group.getName());
 		V3xOrgAccount orgAccount = orgManager.getAccountById(accountId);
 		uv.setAccountName(orgAccount.getName());
-		V3xOrgDepartment department = orgManager.getDepartmentById(departmentId);
-		uv.setDepartMentName(department.getName());
-		LOGGER.info("人员信息========="+uv.toString());
+		V3xOrgDepartment departMent = orgManager.getDepartmentByPath(group.getParentPath());
+		uv.setDepartMentId(departMent.getId());
+		uv.setDepartMentName(departMent.getName());
+		V3xOrgDepartment centre = orgManager.getDepartmentByPath(departMent.getParentPath());
+		uv.setCentreId(centre.getId());
+		uv.setCentreName(centre.getName());
 		mav.addObject("user", uv);
 		return mav;
 	}

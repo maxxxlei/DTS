@@ -26,6 +26,8 @@ $(document).ready(function() {
 			hiddenPostOfDepartment:true,
 			minSize: 0,
 			callback : function(ret) {
+				debugger;
+				alert(ret);
 				$("#userName").val(ret.text);
 				var memberCode = ret.value;
 				var code = memberCode.substring(7);
@@ -53,23 +55,41 @@ $(document).ready(function() {
 				<td>编号</td>
 				<td><input type="text" ></td>
 				<td>岗位</td>
-				<td><input type="text" value="${user.postName }" readonly="readonly"></td>
+				<td>
+					<input type="text" value="${user.postName }" readonly="readonly">
+					<input type="hidden" value="${user.postId }" >
+				</td>
 			</tr>
 			<tr>
 				<td>单位</td>
-				<td><input type="text" value="${user.accountName }" readonly="readonly"></td>
+				<td>
+					<input type="text" value="${user.accountName }" readonly="readonly">
+					<input type="hidden" value="${user.accountId }" >
+				</td>
 				<td>中心</td>
-				<td><input type="text" value="" readonly="readonly"></td>
+				<td>
+					<input type="text" value="${user.centreName }" readonly="readonly">
+					<input type="hidden" value="${user.centreId }">
+				</td>
 				<td>部门</td>
-				<td><input type="text" value="${user.departMentName }" readonly="readonly"></td>
+				<td>
+					<input type="text" value="${user.departMentName }" readonly="readonly">
+					<input type="hidden" value="${user.departMentId }">
+				</td>
 				<td>组</td>
-				<td><input type="text" value="" readonly="readonly"></td>
+				<td>
+					<input type="text" value="${user.groupName }" readonly="readonly">
+					<input type="hidden" value="${user.groupId }" >
+				</td>
 				<td>责任人</td>
-				<td><input type="text" value="${user.name }" readonly="readonly"></td>
+				<td>
+					<input type="text" value="${user.name }" readonly="readonly">
+					<input type="hidden" value="${user.id }" >
+				</td>
 			</tr>
 		</table>
 		<table id="sjmb">
-			<tr>上级目标信息</tr>
+			<tr bgcolor="#ccccff">上级目标信息</tr>
 			<tr>
 				<td>上级目标编号</td>
 				<td><input type="text" id="smbbh"></td>
@@ -80,7 +100,7 @@ $(document).ready(function() {
 			</tr>
 		</table>
 		<table>
-			<tr>目标承接</tr>
+			<tr bgcolor="#ccccff">目标承接</tr>
 			<tr>
 				<td>目标编号</td>
 				<td><input type="text" id="mbbh"></td>

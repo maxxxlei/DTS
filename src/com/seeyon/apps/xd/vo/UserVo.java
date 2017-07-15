@@ -4,12 +4,41 @@ public class UserVo {
 
 	private Long id;
 	private String name;
-	private Long departMentId;
-	private String departMentName;
+	private Long groupId;//组
+	private String groupName;
 	private Long accountId;
-	private String accountName;
+	private String accountName;//单位
 	private Long postId;
-	private String postName;
+	private String postName;//岗位
+	private Long departMentId;
+	private String departMentName;//部门
+	private Long centreId;
+	private String centreName;//中心
+
+	public Long getGroupId() {
+		return groupId;
+	}
+	public void setGroupId(Long groupId) {
+		this.groupId = groupId;
+	}
+	public String getGroupName() {
+		return groupName;
+	}
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+	public Long getCentreId() {
+		return centreId;
+	}
+	public void setCentreId(Long centreId) {
+		this.centreId = centreId;
+	}
+	public String getCentreName() {
+		return centreName;
+	}
+	public void setCentreName(String centreName) {
+		this.centreName = centreName;
+	}
 	public Long getId() {
 		return id;
 	}
