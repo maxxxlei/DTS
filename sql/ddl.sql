@@ -207,7 +207,7 @@ create table xd24_target_decompose
 (
    id                 NUMBER(21)           not null,
    target_Id          NUMBER(21),
-   target_desc        VARCHAR2(500),
+   target_desc        CLOB,
    target_recipientId NUMBER(21),
    constraint PK_XD24_TARGET_DECOMPOSE primary key (id)
 );

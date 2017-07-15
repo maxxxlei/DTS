@@ -6,8 +6,12 @@
      <bean id="versionManager" class="com.seeyon.apps.xd.manager.VersionManagerImpl"></bean>
 	<bean id="xd24QuotaManager" class="com.seeyon.apps.xd.manager.Xd24QuotaManagerImpl"/>
 	<bean id="xd24QuotaDao" class="com.seeyon.apps.xd.dao.Xd24QuotaDaoImpl"/>
+
 	<!--目标Dao  -->
 	<bean name="xd24TargetDao" class="com.seeyon.apps.xd.dao.Xd24TargetDaoImpl"/>
 
 	<bean name="xd24TargetManager" class="com.seeyon.apps.xd.manager.Xd24TargetManagerImpl"/>
-</beans>
+     
+    <bean id="versionDao" class="com.seeyon.apps.xd.dao.VersionDaoImpl"></bean>
+     
+     </beans>

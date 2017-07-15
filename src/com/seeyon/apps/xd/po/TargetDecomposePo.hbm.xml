@@ -5,13 +5,13 @@
 
 <hibernate-mapping>
 
-	<class entity-name="TargetDecomposePo" table="xd24_target_decompose">
+	<class entity-name="com.seeyon.apps.xd.po.TargetDecomposePo" table="xd24_target_decompose">
 		<id name="id" type="long" column="id" length="21">
 			<generator class="assigned" />
 		</id>
 
 		<property name="targetId" type="long" column="target_Id" length="21" />
-		<property name="targetDesc" type="string" column="target_desc" length="500" />
+		<property name="targetDesc" type="clob" column="target_desc"/>
 		<property name="targetRecipientId" type="long" column="target_recipientId" length="21"/>
 
 	</class>

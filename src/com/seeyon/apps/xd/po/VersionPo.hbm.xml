@@ -18,14 +18,6 @@
     >
       <generator class="assigned"/>
     </id>
-	<!-- 版本名称 -->
-    <property
-      name="vName"
-      column="vName"
-      type="string"
-      not-null="false"
-      length="255"
-    />
     <!-- 版本编号 -->
     <property
       name="vCode"
@@ -46,7 +38,7 @@
     <!-- 启用状态 -->
     <property
       name="state"
-      column="state"
+      column="v_state"
       type="integer"
       not-null="false"
     />
@@ -54,14 +46,14 @@
     <property
       name="createTime"
       column="create_time"
-      type="date"
+      type="timestamp"
       not-null="false"
     />
     <!-- 修改时间 -->
     <property
       name="updateTime"
       column="update_time"
-      type="date"
+      type="timestamp"
       not-null="false"
     />
     <!-- 是否删除-->
@@ -74,9 +66,27 @@
     <!-- 描述 -->
     <property
       name="desc"
-      column="description"
+      column="descr"
       type="string"
       not-null="false"
+    />
+    <!-- 版本状态，是否启用、停用，
+		0：停用
+		1：启用 -->
+    <property
+      name="isEnable"
+      column="isEnable"
+      type="integer"
+      not-null="false"
+      length="2"
+    />
+    <!-- 版本id -->
+    <property
+      name="versionId"
+      column="versionId"
+      type="long"
+      not-null="false"
+      length="21"
     />
   </class>
 </hibernate-mapping>

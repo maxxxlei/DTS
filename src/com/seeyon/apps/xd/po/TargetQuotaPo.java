@@ -1,14 +1,15 @@
 package com.seeyon.apps.xd.po;
 
-import java.io.Serializable;
 import java.util.Date;
+
+import com.seeyon.ctp.common.po.BasePO;
 /**
  * 目标录入-考核、考察指标项表 entity
  * @author heliang.wang
  *
  * @time 2017年7月14日
  */
-public class TargetQuotaPo implements Serializable{
+public class TargetQuotaPo extends BasePO{
 
 	private static final long serialVersionUID = -5383846058055437251L;
 	private Long 	id;

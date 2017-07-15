@@ -1,4 +1,4 @@
-package com.seeyon.apps.xd.po;
+package com.seeyon.apps.xd.vo;
 
 import java.util.Date;
 
@@ -6,7 +6,7 @@ import com.seeyon.ctp.common.po.BasePO;
 /**
  * 版本管理实体
  */
-public class VersionPo extends BasePO {
+public class VersionVo extends BasePO {
 	
 	private static final long serialVersionUID = -4903060622895942789L;
 	private Long id;

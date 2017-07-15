@@ -5,7 +5,7 @@
 
 <hibernate-mapping>
 
-	<class entity-name="TargetQuotaPo" table="xd24_target_quota">
+	<class entity-name="com.seeyon.apps.xd.po.TargetQuotaPo" table="xd24_target_quota">
 		<id name="id" type="long" column="id" length="21">
 			<generator class="assigned" />
 		</id>
