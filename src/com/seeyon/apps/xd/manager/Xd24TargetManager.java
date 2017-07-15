@@ -1,6 +1,5 @@
 package com.seeyon.apps.xd.manager;
 
-import java.util.List;
 import java.util.Map;
 
 import com.seeyon.apps.xd.po.TargetPo;
@@ -16,7 +15,7 @@ public interface Xd24TargetManager {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public List getTargetList(FlipInfo flipInfo, Map<String, String> params) throws BusinessException;
+	public FlipInfo getTargetList(FlipInfo flipInfo, Map<String, String> params) throws BusinessException;
 	/**
 	 * 保存目标
 	 * @param tp

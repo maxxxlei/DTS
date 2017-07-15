@@ -94,7 +94,7 @@ $(function(){
      colModel.push({display: "目标名称",name: 'subject',width: '15%',align:'center'});
      colModel.push({display: "编制时间",name: 'createTime',width: '12%',align:'center'});
      colModel.push({display: "生效时间",name: 'effectTime',width: '12%',align:'center'});
-     colModel.push({display: "责任人",name: 'memberId',width: '10%',align:'center'});
+     colModel.push({display: "责任人",name: 'memberName',width: '10%',align:'center'});
      colModel.push({display: "目标开始时间",name: 'startTime',width: '12%',align:'center'});
      colModel.push({display: "目标结束时间",name: 'endTime',width: '12%',align:'center'});
      
