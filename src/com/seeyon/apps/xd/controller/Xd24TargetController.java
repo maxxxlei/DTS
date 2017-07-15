@@ -30,9 +30,9 @@ public class Xd24TargetController extends BaseController{
 		this.orgManager = orgManager;
 	}
 	
-	public ModelAndView createTarget(HttpServletRequest request,HttpServletResponse response) throws BusinessException{
+	public ModelAndView newTarget(HttpServletRequest request,HttpServletResponse response) throws BusinessException{
 		LOGGER.info("进入跳转新增目标页面....");
-		ModelAndView mav = new ModelAndView("apps/xd24zfz/target/createTarget");
+		ModelAndView mav = new ModelAndView("apps/xd24zfz/target/newTarget");
 		User user = AppContext.getCurrentUser();
 		UserVo uv = new UserVo();
 		uv.setId(user.getId());
@@ -59,7 +59,7 @@ public class Xd24TargetController extends BaseController{
 		return mav;
 
 	}
-	public ModelAndView getTargetList(HttpServletRequest request,HttpServletResponse response) throws BusinessException{
-		return new ModelAndView("apps/xd24zfz/target/targetList");
+	public ModelAndView listTarget(HttpServletRequest request,HttpServletResponse response) throws BusinessException{
+		return new ModelAndView("apps/xd24zfz/target/listTarget");
 	}
 }

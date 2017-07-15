@@ -22,7 +22,7 @@ public class Xd24TargetManagerImpl implements Xd24TargetManger{
 	@Override
 	public FlipInfo getTargetList(FlipInfo flipInfo, Map<String, String> query)
 			throws BusinessException {
-		
+		LOGGER.info("进入查询目标列表方法============");
 		return xd24Target.getTargetList(flipInfo, query);
 	}
 
