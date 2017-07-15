@@ -2,5 +2,6 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans default-autowire="byName">
 	<bean name="/test/xd24TargetController.do" class="com.seeyon.apps.xd.controller.Xd24TargetController"/>
+	<bean name="/xd24quota/xd24quotaController.do" class="com.seeyon.apps.xd.controller.Xd24QuotaController"/>
 </beans>
     

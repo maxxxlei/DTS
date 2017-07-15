@@ -302,3 +302,30 @@ comment on column xd24_version.is_delete is
 comment on column xd24_version.description is
 '描述';
 
+-- 指标库管理表
+
+create table xd24_quota 
+(
+   id                 NUMBER(21) PRIMARY KEY,
+   quotaClass         SMALLINT not null,
+   quotaName          VARCHAR2(255) not null,
+   quotaUnit          SMALLINT not null,
+   quotaType          VARCHAR2(255) not null
+);
+
+comment on table xd24_quota is
+'指标库';
+
+comment on column xd24_quota.quotaClass is
+'指标分类名称';
+
+comment on column xd24_quota.quotaName is
+'指标项名称';
+
+comment on column xd24_quota.quotaUnit is
+'度量';
+
+comment on column xd24_quota.quotaType is
+'指标控件类型
+';
+
