@@ -35,25 +35,29 @@ $(document).ready(function() {
 			}
 		});
 	});
+	//提交表单
+	$("#submit").click(function(){
+		
+	});
 });
 </script>
 </head>
 <body>
-	<form method="post">
-		<input type="submit" value="保存">
-		<input type="reset" value="重置">
+	<form method="post" id="targetForm">
+		<input type="submit" id="submit" value="保存">
+		<input type="reset" id="reset" value="重置">
 		<table border="1">
 			<tr>
 				<td>年度</td>
-				<td><input type="text" value=""></td>
+				<td><input type="text" id="year"></td>
 				<td>编制时间</td>
-				<td><input type="date" ></td>
+				<td><input type="date" id="bzsj"></td>
 				<td>生效时间</td>
-				<td><input type="date" ></td>
+				<td><input type="date" id="sxsj"></td>
 				<td>文件号</td>
-				<td><input type="text" ></td>
+				<td><input type="text" id="wjh"></td>
 				<td>编号</td>
-				<td><input type="text" ></td>
+				<td><input type="text" id="bh"></td>
 				<td>岗位</td>
 				<td>
 					<input type="text" value="${user.postName }" readonly="readonly">

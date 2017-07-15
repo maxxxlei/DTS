@@ -11,12 +11,14 @@
 		</id>
 
 		<property name="year" type="string" column="year" not-null="false" length="4" />
+		<property name="fileCode" type="string" column="file_code" not-null="false" length="255" />
+		<property name="code" type="string" column="code" not-null="false" length="255" />
 		<property name="createTime" type="date" column="create_time" not-null="false" />
 		<property name="effectTime" type="date" column="effect_Time" not-null="false" />
 		<property name="accountId" type="long" column="account_Id" length="21" />
 		<property name="memberId" type="long" column="member_Id" length="21" />
 		<property name="pTargetId" type="long" column="pTarget_Id" length="21" />
-		<property name="code" type="string" column="code" length="255" />
+		<property name="targetCode" type="string" column="target_code" length="255" />
 		<property name="dimension" type="integer" column="dimension" />
 		<property name="subject" type="string" column="subject" length="255" />
 		<property name="attr" type="integer" column="attr" />

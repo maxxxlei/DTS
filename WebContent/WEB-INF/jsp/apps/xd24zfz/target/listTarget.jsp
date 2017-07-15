@@ -122,8 +122,8 @@ $(function(){
  		var dialog = $.dialog({
  			id	: 'url',
  			url : _ctxPath + '/target/xd24TargetController.do?method=newTarget',
- 			width : 600,
- 			height : 400,
+ 			width : $(window).width(),
+ 			height : $(window).height(),
  			isDrag : true,
  			targetWindow : getCtpTop(),
  			title : "新建目标"

@@ -14,12 +14,14 @@ public class TargetPo implements Serializable{
 	
 	private Long 		id;
 	private String 		year;
+	private String		fileCode;	//文件号
+	private String		code;	//编号
 	private Date 		createTime; //编制时间
 	private Date		effectTime; //生效时间
 	private Long 		accountId;//单位id
-	private Long 		memberId;//编制人id
+	private Long 		memberId;//责任人id
 	private Long 		pTargetId;//上级目标id
-	private String 		code;	//目标编号
+	private String 		targetCode;	//目标编号
 	private int 		dimension; //战略地图维度
 	private String		subject; //目标名称
 	private int			attr; //目标属性
@@ -36,6 +38,18 @@ public class TargetPo implements Serializable{
 	private int 		gxjyState;//更新决议 审批状态
 	private int 		khpjState;//考核评价 审批状态
 	private int 		qmzjState;//全面总结状态
+	public String getFileCode() {
+		return fileCode;
+	}
+	public void setFileCode(String fileCode) {
+		this.fileCode = fileCode;
+	}
+	public String getTargetCode() {
+		return targetCode;
+	}
+	public void setTargetCode(String targetCode) {
+		this.targetCode = targetCode;
+	}
 	public Long getId() {
 		return id;
 	}
