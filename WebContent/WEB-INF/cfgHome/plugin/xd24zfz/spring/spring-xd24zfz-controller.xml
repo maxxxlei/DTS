@@ -2,6 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans default-autowire="byName">
 	<bean name="/target/xd24TargetController.do" class="com.seeyon.apps.xd.controller.Xd24TargetController"/>
+	<!-- 指标库管理 -->
 	<bean name="/xd24quota/xd24quotaController.do" class="com.seeyon.apps.xd.controller.Xd24QuotaController"/>
 </beans>
     

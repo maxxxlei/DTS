@@ -1,4 +1,4 @@
-package com.seeyon.apps.xd.po;
+package com.seeyon.apps.xd.vo;
 
 import java.io.Serializable;
 
@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author fengkai
  *
  */
-public class QuotaPo implements Serializable {
+public class QuotaVo implements Serializable {
 
 	
 	private static final long serialVersionUID = -6708333852054165703L;
