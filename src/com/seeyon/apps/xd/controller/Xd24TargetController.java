@@ -59,4 +59,7 @@ public class Xd24TargetController extends BaseController{
 		return mav;
 
 	}
+	public ModelAndView getTargetList(HttpServletRequest request,HttpServletResponse response) throws BusinessException{
+		return new ModelAndView("apps/xd24zfz/target/targetList");
+	}
 }

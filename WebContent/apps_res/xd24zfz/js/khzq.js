@@ -1,4 +1,7 @@
-﻿function Dsyb(){
+﻿/**
+ * 目标考核、考察二级联动js
+ */
+function Dsyb(){
 	this.Items = {};
 }
 Dsyb.prototype.add = function(id,iArray){
