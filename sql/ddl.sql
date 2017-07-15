@@ -3,6 +3,8 @@ create table xd24_target
 (
    ID                   NUMBER(21)           not null,
    year               VARCHAR2(4),
+   file_code          VARCHAR2(255),
+   target_code        VARCHAR2(255),
    create_time        DATE,
    effect_Time        DATE,
    account_Id         NUMBER(21),
@@ -15,7 +17,7 @@ create table xd24_target
    start_time         DATE,
    end_time           DATE,
    is_Core            SMALLINT,
-   desciption         CLOB,
+   description         CLOB,
    version_Id         NUMBER(21),
    version_state      SMALLINT,
    is_delete          SMALLINT,

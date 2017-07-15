@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ include file="/WEB-INF/jsp/common/common.jsp"%>
+<script type="text/javascript" src="${path }/ajax.do?managerName=xd24TargetManager"></script>
+<!--
+
+//-->
+</script>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -92,7 +97,6 @@ $(function(){
      colModel.push({display: "责任人",name: 'memberId',width: '10%',align:'center'});
      colModel.push({display: "目标开始时间",name: 'startTime',width: '12%',align:'center'});
      colModel.push({display: "目标结束时间",name: 'endTime',width: '12%',align:'center'});
-     colModel.push({display: "目标描述",name: 'description',width: '25%',align:'center'});
      
      //构造列表
       grid = $('#targetList').ajaxgrid({
@@ -111,6 +115,9 @@ $(function(){
          managerName : "xd24TargetManager",
          managerMethod : "getTargetList"
      });
+     var o = new Object();
+     $("#targetList").ajaxgridLoad(o);
+     
      function showInfo(data, r, c){
     	 
      }
@@ -121,14 +128,13 @@ $(function(){
      function  addTarget(){
  		var dialog = $.dialog({
  			id	: 'url',
- 			url : _ctxPath + '/target/xd24TargetController.do?method=newTarget',
+ 			url : _ctxPath + '/xd24/targetController.do?method=newTarget',
  			width : $(window).width(),
  			height : $(window).height(),
  			isDrag : true,
  			targetWindow : getCtpTop(),
  			title : "新建目标"
  		});
-
      }
      function updateTarget(){
     	 

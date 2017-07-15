@@ -37,8 +37,63 @@ $(document).ready(function() {
 	});
 	//提交表单
 	$("#submit").click(function(){
-		
+		$.ajax({
+            type:"post",
+            dataType:"json",
+            url:_ctxPath + '/xd24/targetController.do?method=saveTarget',
+            async:false,
+            data: getFormData(),
+            success:function(result){
+                if(result){
+                	$.alert("目标录入成功！");
+                	window.close();
+                    window.location.href = _ctxPath + '/xd24/targetController.do?method=listTarget';
+                }else{
+                	$.alert("保存数据失败！");
+                }
+            },
+            error:function(){
+            	$.alert("服务器异常！");
+            } 
+        });
 	});
+	function getFormData(){
+		var year = $("#year").val();
+		var bzsj = $("#bzsj").val();
+		var sxsj = $("#sxsj").val();
+		var wjh = $("#wjh").val();
+		var bh = $("#bh").val();
+		var zrrId = $("#zrrId").val();
+		var dwId = $("#dwId").val();
+		var smbId = $("#smbId").val();
+		var mbbh = $("#mbbh").val();
+		var zldtwd = $("#zldtwd option:selected").val();
+		var mbmc = $("#mbmc").val();
+		var targetAttr = $("input[name='targetAttr']:checked").val();
+		var startDate = $("#startDate").val();
+		var endDate = $("#endDate").val();
+		var isCore = $("input[name='isCore']:checked").val();
+		var desciption = $("#desciption").val();
+		var data ={
+				year:year,
+				bzsj:bzsj,
+				sxsj:sxsj,
+				wjh:wjh,
+				bh:bh,
+				zrrId:zrrId,
+				dwId:dwId,
+				smbId:smbId,
+				mbbh:mbbh,
+				zldtwd:zldtwd,
+				mbmc:mbmc,
+				targetAttr:targetAttr,
+				startDate:startDate,
+				endDate:endDate,
+				isCore:isCore,
+				desciption:desciption
+		}
+		return data;
+	}
 });
 </script>
 </head>
@@ -68,7 +123,7 @@ $(document).ready(function() {
 				<td>单位</td>
 				<td>
 					<input type="text" value="${user.accountName }" readonly="readonly">
-					<input type="hidden" value="${user.accountId }" >
+					<input type="hidden" id="dwId" value="${user.accountId }" >
 				</td>
 				<td>中心</td>
 				<td>
@@ -88,7 +143,7 @@ $(document).ready(function() {
 				<td>责任人</td>
 				<td>
 					<input type="text" value="${user.name }" readonly="readonly">
-					<input type="hidden" value="${user.id }" >
+					<input type="hidden" id="zrrId" value="${user.id }" >
 				</td>
 			</tr>
 		</table>
@@ -100,7 +155,10 @@ $(document).ready(function() {
 				<td>上级目标维度</td>
 				<td><input type="text" id="smbwd"></td>
 				<td>上级目标名称</td>
-				<td><input type="text" id="smbmc"></td>
+				<td>
+				    <input type="text" id="smbmc">
+				    <input type="hidden" id="smbId">
+				</td>
 			</tr>
 		</table>
 		<table border="1">
@@ -136,13 +194,13 @@ $(document).ready(function() {
 				<td><input type="date" id="endDate"></td>
 				<td>是否关键</td>
 				<td>
-					<input type="radio" name="isDelete" id="yes" value="0">是
-					<input type="radio" name="isDelete" id="no" value="1">否
+					<input type="radio" name="isCore" id="yes" value="0">是
+					<input type="radio" name="isCore" id="no" value="1">否
 				</td>
 			</tr>
 			<tr>
 				<td>目标描述</td>
-				<td><textarea rows="1" cols="1"></textarea></td>
+				<td><textarea id="desciption" rows="1" cols="3"></textarea></td>
 			</tr>
 		</table>
 		<table border="1">

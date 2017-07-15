@@ -15,14 +15,18 @@ public class Xd24TargetDaoImpl implements Xd24TargetDao {
 	private static final Logger LOGGER = Logger.getLogger(Xd24TargetDaoImpl.class);
 	
 	@Override
-	public FlipInfo getTargetList(FlipInfo flipInfo, Map<String, String> query)
+	public List getTargetList(FlipInfo flipInfo, Map<String, String> params)
 			throws BusinessException {
 		LOGGER.info("==========进入获取目标列表方法getTargetList==========");
-		String hql = " from TargetPo";
-		List<TargetPo> dataList = DBAgent.find(hql);
-		LOGGER.info("查询到的结果条数："+dataList.size());
-		flipInfo.setData(dataList);
-		return flipInfo;
+		StringBuffer hql = new StringBuffer("select t.id,t.subject,t.createTime,t.effectTime,t.memberId,t.startTime,");
+		hql.append("t.endTime from TargetPo t order by t.createTime desc");
+		return DBAgent.find(hql.toString(), params, flipInfo);
+	}
+
+	@Override
+	public void saveTarget(TargetPo tp) throws BusinessException {
+		
+		DBAgent.save(tp);
 	}
 
 }

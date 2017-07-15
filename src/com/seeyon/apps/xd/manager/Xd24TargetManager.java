@@ -1,4 +1,4 @@
-package com.seeyon.apps.xd.dao;
+package com.seeyon.apps.xd.manager;
 
 import java.util.List;
 import java.util.Map;
@@ -7,7 +7,7 @@ import com.seeyon.apps.xd.po.TargetPo;
 import com.seeyon.ctp.common.exceptions.BusinessException;
 import com.seeyon.ctp.util.FlipInfo;
 
-public interface Xd24TargetDao {
+public interface Xd24TargetManager {
 
 	/**
 	 * 后去目标任务列表

@@ -15,8 +15,8 @@
 		<property name="khzq" type="integer" column="khzq" />
 		<property name="khzqxx" type="integer" column="khzqxx" />
 		<property name="month" type="long" column="month" length="2" />
-		<property name="startTime" type="date" column="start_time" />
-		<property name="endTime" type="date" column="end_time" />
+		<property name="startTime" type="timestamp" column="start_time" />
+		<property name="endTime" type="timestamp" column="end_time" />
 		<property name="quotaId" type="long" column="quota_Id" length="21" />
 		<property name="quotaName" type="string" column="quota_Name" length="255" />
 		<property name="quotaUnit" type="string" column="quota_Unit" />

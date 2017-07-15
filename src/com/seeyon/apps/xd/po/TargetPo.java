@@ -1,17 +1,17 @@
 package com.seeyon.apps.xd.po;
 
-import java.io.Serializable;
 import java.util.Date;
+
+import com.seeyon.ctp.common.po.BasePO;
 /**
  * 目标录入主表 entity
  * @author heliang.wang
  *
  * @time 2017年7月14日
  */
-public class TargetPo implements Serializable{
+public class TargetPo extends BasePO{
 
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -5147350311650086895L;
 	private Long 		id;
 	private String 		year;
 	private String		fileCode;	//文件号
@@ -30,6 +30,7 @@ public class TargetPo implements Serializable{
 	private int 		isCore;	//是否关键
 	private String		description;
 	private Long 		versionId;//版本号ID
+	private int 		versionState;//版本号状态
 	private int 		isDelete;
 	private Date 		updateTime;
 	private int 		ghjhState;//规划阶段审批状态
@@ -38,6 +39,13 @@ public class TargetPo implements Serializable{
 	private int 		gxjyState;//更新决议 审批状态
 	private int 		khpjState;//考核评价 审批状态
 	private int 		qmzjState;//全面总结状态
+	
+	public int getVersionState() {
+		return versionState;
+	}
+	public void setVersionState(int versionState) {
+		this.versionState = versionState;
+	}
 	public String getFileCode() {
 		return fileCode;
 	}
