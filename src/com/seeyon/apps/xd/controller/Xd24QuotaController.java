@@ -28,9 +28,5 @@ public class Xd24QuotaController extends BaseController {
     	       return view;
 		       
 	}
-       public ModelAndView createQuotaa(HttpServletRequest request,HttpServletResponse response) throws BusinessException{
-	
-	       return new ModelAndView("/apps/quota/3");
-    }
 
 }
