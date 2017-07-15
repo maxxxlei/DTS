@@ -27,10 +27,9 @@ public class Xd24QuotaController extends BaseController {
 	private static final Logger LOGGER = Logger.getLogger(Xd24QuotaController.class);
 	private Xd24QuotaManager xd24QuotaManager;
 
-	public void setXd24TargetManager(Xd24QuotaManager xd24QuotaManager) {
+	public void setXd24QuotaManager(Xd24QuotaManager xd24QuotaManager) {
 		this.xd24QuotaManager = xd24QuotaManager;
 	}
-	
 	/**
 	 * 指标库列表页面
 	 * 
