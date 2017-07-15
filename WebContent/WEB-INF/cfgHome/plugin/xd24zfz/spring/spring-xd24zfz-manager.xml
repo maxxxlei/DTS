@@ -3,5 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" default-autowire="byName">
 <bean id="xd24quotaManager" class="com.seeyon.apps.xd.manager.Xd24QuotaManagerImpl"/>
-
+	<!--目标Dao  -->
+	<bean name="xd24TargetDao" class="com.seeyon.apps.xd.dao.Xd24TargetDaoImpl"/>
+	<!--目标Manager  -->
+	<bean name="xd24TargetManager" class="com.seeyon.apps.xd.manager.Xd24TargetManagerImpl"/>
 </beans>

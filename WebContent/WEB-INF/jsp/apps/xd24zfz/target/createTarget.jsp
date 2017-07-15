@@ -10,7 +10,8 @@
 <script>
 $(document).ready(function() {
 	//选择人员
-	$("#selectPeople").click(function selectPeopleAuth(auth,authValue){
+	$("span[name='selectPeople']").click(function selectPeopleAuth(auth,authValue){
+		debugger;
 		$.selectPeople({
 			text : auth,
 			value : authValue,
@@ -27,7 +28,6 @@ $(document).ready(function() {
 			minSize: 0,
 			callback : function(ret) {
 				debugger;
-				alert(ret);
 				$("#userName").val(ret.text);
 				var memberCode = ret.value;
 				var code = memberCode.substring(7);
@@ -88,8 +88,8 @@ $(document).ready(function() {
 				</td>
 			</tr>
 		</table>
-		<table id="sjmb">
-			<tr bgcolor="#ccccff">上级目标信息</tr>
+		<table border="1">
+			<tr id="sjmb">上级目标信息</tr>
 			<tr>
 				<td>上级目标编号</td>
 				<td><input type="text" id="smbbh"></td>
@@ -99,8 +99,8 @@ $(document).ready(function() {
 				<td><input type="text" id="smbmc"></td>
 			</tr>
 		</table>
-		<table>
-			<tr bgcolor="#ccccff">目标承接</tr>
+		<table border="1">
+			<tr>目标承接</tr>
 			<tr>
 				<td>目标编号</td>
 				<td><input type="text" id="mbbh"></td>
@@ -141,8 +141,9 @@ $(document).ready(function() {
 				<td><textarea rows="1" cols="1"></textarea></td>
 			</tr>
 		</table>
-		<table>
-			<div>目标考核项</div>
+		<table border="1">
+			<tr style='background-color:bule;'>目标考核项</tr>
+			<br/>
 			<tr>1.1 考核指标项</tr>
 			<thead>
 				<td>序号</td>
@@ -203,7 +204,190 @@ $(document).ready(function() {
 				<td><input type="text" id="mbz"></td>
 				<td>
 					<input type="text" id="userName" class="validate" validate="type:'string',name:'协同责任人',notNull:true,maxLength:50,avoidChar:'!@#$%^&amp;*+|,'" style="width:200px" readonly unselectable="on"/>
-                    <span id="selectPeople" class="ico16 radio_people_16 _autoBtn"></span>
+                    <span name="selectPeople" class="ico16 radio_people_16 _autoBtn"></span>
+				</td>
+			</tr>
+		</table>
+		<table border="1">
+			<tr>1.2 考核目标项</tr>
+			<thead>
+				<td>序号</td>
+				<td>考核周期</td>
+				<td>考核周期细项</td>
+				<td>月</td>
+				<td>考核开始日</td>
+				<td>考核截止日</td>
+				<td>目标项</td>
+				<td>工作目标完成标准</td>
+				<td>协同责任人</td>
+			</thead>
+			<tr>
+				<td><input type="text"></td>
+				<td>
+					<select name="khzq">
+					</select>
+				</td>
+				<td>
+					<select name="khzqxx">
+					</select>
+					<script>init_khzq()</script>
+				</td>
+				<td>
+					<select id="month" name="month">
+						<option value="">请选择</option>
+						<option value="1">1月</option>
+						<option value="2">2月</option>
+						<option value="3">3月</option>
+						<option value="4">4月</option>
+						<option value="5">5月</option>
+						<option value="6">6月</option>
+						<option value="7">7月</option>
+						<option value="8">8月</option>
+						<option value="9">9月</option>
+						<option value="10">10月</option>
+						<option value="11">11月</option>
+						<option value="12">12月</option>
+					</select>
+				</td>
+				<td><input type="date" id="khksrq"></td>
+				<td><input type="date" id="khjzrq"></td>
+				<td><input type="text" id="mbx"></td>
+				<td><input type="text" id="gzmbwcbz"></td>
+				<td>
+					<input type="text" id="userName" class="validate" validate="type:'string',name:'协同责任人',notNull:true,maxLength:50,avoidChar:'!@#$%^&amp;*+|,'" style="width:200px" readonly unselectable="on"/>
+                    <span name="selectPeople" class="ico16 radio_people_16 _autoBtn"></span>
+				</td>
+			</tr>
+		</table>
+		<table border="1">
+			<tr>2.1 考察指标项</tr>
+			<thead>
+				<td>序号</td>
+				<td>考核周期</td>
+				<td>考核周期细项</td>
+				<td>月</td>
+				<td>考核开始日</td>
+				<td>考核截止日</td>
+				<td>指标项</td>
+				<td>度量</td>
+				<td>要求</td>
+				<td>目标值</td>
+				<td>协同责任人</td>
+			</thead>
+			<tr>
+				<td><input type="text"></td>
+				<td>
+					<select name="khzq">
+					</select>
+				</td>
+				<td>
+					<select name="khzqxx">
+					</select>
+					<script>init_khzq()</script>
+				</td>
+				<td>
+					<select id="month" name="month">
+						<option value="">请选择</option>
+						<option value="1">1月</option>
+						<option value="2">2月</option>
+						<option value="3">3月</option>
+						<option value="4">4月</option>
+						<option value="5">5月</option>
+						<option value="6">6月</option>
+						<option value="7">7月</option>
+						<option value="8">8月</option>
+						<option value="9">9月</option>
+						<option value="10">10月</option>
+						<option value="11">11月</option>
+						<option value="12">12月</option>
+					</select>
+				</td>
+				<td><input type="date"></td>
+				<td><input type="date"></td>
+				<td><input type="text"></td>
+				<td><input type="text"></td>
+				<td>
+					<select name="yq">
+						<option value="0">请选择</option>
+						<option value="1">大于</option>
+						<option value="2">小于</option>
+						<option value="3">等于</option>
+						<option value="4">大于等于</option>
+						<option value="5">小于等于</option>
+						<option value="6">有无</option>
+					</select>
+				</td>
+				<td><input type="text"></td>
+				<td>
+					<input type="text" id="userName" class="validate" validate="type:'string',name:'协同责任人',notNull:true,maxLength:50,avoidChar:'!@#$%^&amp;*+|,'" style="width:200px" readonly unselectable="on"/>
+                    <span name="selectPeople" class="ico16 radio_people_16 _autoBtn"></span>
+				</td>
+			</tr>
+		</table>
+		<table border="1">
+			<tr>2.2 考察目标项</tr>
+			<thead>
+				<td>序号</td>
+				<td>考核周期</td>
+				<td>考核周期细项</td>
+				<td>月</td>
+				<td>考核开始日</td>
+				<td>考核截止日</td>
+				<td>目标项</td>
+				<td>工作目标完成标准</td>
+				<td>协同责任人</td>
+			</thead>
+			<tr>
+				<td><input type="text"></td>
+				<td>
+					<select name="khzq">
+					</select>
+				</td>
+				<td>
+					<select name="khzqxx">
+					</select>
+					<script>init_khzq()</script>
+				</td>
+				<td>
+					<select id="month" name="month">
+						<option value="">请选择</option>
+						<option value="1">1月</option>
+						<option value="2">2月</option>
+						<option value="3">3月</option>
+						<option value="4">4月</option>
+						<option value="5">5月</option>
+						<option value="6">6月</option>
+						<option value="7">7月</option>
+						<option value="8">8月</option>
+						<option value="9">9月</option>
+						<option value="10">10月</option>
+						<option value="11">11月</option>
+						<option value="12">12月</option>
+					</select>
+				</td>
+				<td><input type="date" id="khksrq"></td>
+				<td><input type="date" id="khjzrq"></td>
+				<td><input type="text" id="mbx"></td>
+				<td><input type="text" id="gzmbwcbz"></td>
+				<td>
+					<input type="text" id="userName" class="validate" validate="type:'string',name:'协同责任人',notNull:true,maxLength:50,avoidChar:'!@#$%^&amp;*+|,'" style="width:200px" readonly unselectable="on"/>
+                    <span name="selectPeople" class="ico16 radio_people_16 _autoBtn"></span>
+				</td>
+			</tr>
+		</table>
+		<table>
+			<tr>目标向下分解</tr>
+			<thead>
+				<td>序号</td>
+				<td>目标描述</td>
+				<td>目标承接人</td>
+			</thead>
+			<tr>
+				<td><input type="text"></td>
+				<td><textarea></textarea></td>
+				<td>
+					<input type="text" id="userName" class="validate" validate="type:'string',name:'协同责任人',notNull:true,maxLength:50,avoidChar:'!@#$%^&amp;*+|,'" style="width:200px" readonly unselectable="on"/>
+                    <span name="selectPeople" class="ico16 radio_people_16 _autoBtn"></span>
 				</td>
 			</tr>
 		</table>
