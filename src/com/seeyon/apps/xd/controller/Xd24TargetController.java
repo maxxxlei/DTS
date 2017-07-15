@@ -1,8 +1,6 @@
 package com.seeyon.apps.xd.controller;
 
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

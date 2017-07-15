@@ -11,14 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import www.seeyon.com.utils.UUIDUtil;
 
-import com.seeyon.apps.xd.constants.Xd24Enum;
 import com.seeyon.apps.xd.manager.Xd24QuotaManager;
-import com.seeyon.apps.xd.manager.Xd24TargetManager;
 import com.seeyon.apps.xd.po.QuotaPo;
-import com.seeyon.apps.xd.po.TargetPo;
 import com.seeyon.ctp.common.controller.BaseController;
 import com.seeyon.ctp.common.exceptions.BusinessException;
-import com.seeyon.ctp.util.DateUtil;
 
 /**
  * 鑫达24字方针指标库Controller

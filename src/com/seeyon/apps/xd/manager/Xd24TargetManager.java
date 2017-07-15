@@ -9,7 +9,7 @@ import com.seeyon.ctp.util.FlipInfo;
 public interface Xd24TargetManager {
 
 	/**
-	 * 后去目标任务列表
+	 * 获取目标任务列表
 	 * @param flipInfo
 	 * @param query
 	 * @return
