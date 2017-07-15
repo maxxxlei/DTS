@@ -5,7 +5,7 @@
 
 <hibernate-mapping>
 
-	<class entity-name="TargetItemPo" table="xd24_target_item">
+	<class entity="TargetItemPo" table="xd24_target_item">
 		<id name="id" type="long" column="id" length="21">
 			<generator class="assigned" />
 		</id>

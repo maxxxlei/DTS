@@ -45,12 +45,23 @@ public class ZzjhlxController extends BaseController{
  * @throws Exception
  */
 	public ModelAndView xdcd24SendList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView view = new ModelAndView("apps/xd24zzjhlx/xdZzjhlxadd");
+		ModelAndView view = new ModelAndView("apps/xd24zzjhlx/xdZzjhlxZzjh");
 		return view;
 	}
 	
 	
-	
+	/**
+	 * 二级菜单2
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+		public ModelAndView newaddRow(HttpServletRequest request, HttpServletResponse response) throws Exception {
+			ModelAndView view = new ModelAndView("apps/xd24zzjhlx/xdZzjhlxadd");
+			return view;
+		}
+		
 	
 	
 	

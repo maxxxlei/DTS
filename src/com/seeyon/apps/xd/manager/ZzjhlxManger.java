@@ -6,6 +6,6 @@ import com.seeyon.ctp.util.FlipInfo;
 
 public interface ZzjhlxManger {
 
-	public FlipInfo selectUser(FlipInfo fi, Map<String, Object> map);
+	public FlipInfo getUser(FlipInfo fi, Map<String, Object> map);
 
 }

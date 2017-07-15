@@ -8,22 +8,23 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.seeyon.apps.xd.po.ZzjhlxPo;
+import com.seeyon.apps.xd.vo.ZzjhlxVo;
 import com.seeyon.ctp.common.dao.BaseHibernateDao;
 import com.seeyon.ctp.util.DBAgent;
 import com.seeyon.ctp.util.FlipInfo;
 
-public class ZzjhlxDaoImpl extends BaseHibernateDao implements ZzjhlxDao{
+public class ZzjhlxDaoImpl implements ZzjhlxDao{
 	private static Log log=LogFactory.getLog(ZzjhlxDaoImpl.class);
 	
 	
 	@Override
-	public List getUser(FlipInfo fi, Map<String, Object> map) {
-
+	public FlipInfo getUser(FlipInfo fi, Map<String, Object> map) {
 		Map<String,Object> params = new HashMap<String,Object>();
-		List list=new ArrayList();
-		String sql="FROM xd24_zzjhlx";
-		list=DBAgent.find(sql, params, fi);
-		return list;
+		List<ZzjhlxPo> list=new ArrayList<ZzjhlxPo>();
+		String sql="select z.id,z.name,z.isEnable,z.updateTime,z.createTime FROM ZzjhlxPo z order by z.updateTime desc";
+		DBAgent.find(sql, params, fi);
+		return fi;
 	}
 
 	@Override
@@ -34,7 +35,7 @@ public class ZzjhlxDaoImpl extends BaseHibernateDao implements ZzjhlxDao{
 		String rr=value;
 		params.put("value1", "%"+value+"%");
 		StringBuffer b=new StringBuffer();
-		b.append("FROM xd24_zzjhlx where ");
+		b.append("FROM ZzjhlxPo where ");
 		b.append(key);
 		b.append(" like :value1");
 		System.out.println(b.toString());

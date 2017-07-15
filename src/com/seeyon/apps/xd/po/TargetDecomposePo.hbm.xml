@@ -5,7 +5,7 @@
 
 <hibernate-mapping>
 
-	<class entity-name="TargetDecomposePo" table="xd24_target_decompose">
+	<class entity="TargetDecomposePo" table="xd24_target_decompose">
 		<id name="id" type="long" column="id" length="21">
 			<generator class="assigned" />
 		</id>

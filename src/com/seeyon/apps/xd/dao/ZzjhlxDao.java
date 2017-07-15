@@ -13,7 +13,7 @@ public interface ZzjhlxDao {
 	 * @param map
 	 * @return
 	 */
-	public List getUser(FlipInfo fi, Map<String, Object> map);
+	public FlipInfo getUser(FlipInfo fi, Map<String, Object> map);
 	
 	/**
 	 * 模糊查询当前数据中的用户

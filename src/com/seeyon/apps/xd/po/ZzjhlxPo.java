@@ -1,4 +1,4 @@
-package com.seeyon.apps.xd.vo;
+package com.seeyon.apps.xd.po;
 
 import java.util.Date;
 
@@ -32,7 +32,7 @@ public class ZzjhlxPo extends BasePO {
 	/**
 	 * 启用状态
 	 */
-	private Integer state;
+	private int state;
 	
 	/**
 	 * 创建时间
@@ -47,7 +47,7 @@ public class ZzjhlxPo extends BasePO {
 	/**
 	 * 是否删除
 	 */
-	private Integer isDelete;
+	private int isDelete;
 	
 	/**
 	 * 描述
@@ -59,7 +59,7 @@ public class ZzjhlxPo extends BasePO {
 	}
 
 	public ZzjhlxPo(Long id, String name, int isEnable, Long versionId,
-			Integer state, Date createTime, Date updateTime, Integer isDelete,
+			int state, Date createTime, Date updateTime, int isDelete,
 			String desc) {
 		super();
 		this.id = id;
@@ -105,11 +105,11 @@ public class ZzjhlxPo extends BasePO {
 		this.versionId = versionId;
 	}
 
-	public Integer getState() {
+	public int getState() {
 		return state;
 	}
 
-	public void setState(Integer state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 
@@ -129,11 +129,11 @@ public class ZzjhlxPo extends BasePO {
 		this.updateTime = updateTime;
 	}
 
-	public Integer getIsDelete() {
+	public int getIsDelete() {
 		return isDelete;
 	}
 
-	public void setIsDelete(Integer isDelete) {
+	public void setIsDelete(int isDelete) {
 		this.isDelete = isDelete;
 	}
 
@@ -148,6 +148,8 @@ public class ZzjhlxPo extends BasePO {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	
 
 	
 
