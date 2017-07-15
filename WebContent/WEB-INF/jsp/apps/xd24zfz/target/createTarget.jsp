@@ -5,7 +5,36 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="${path }/apps_res/xd24zfz/js/khzq.js"></script>
 <title>目标录入页面</title>
+<script>
+$(document).ready(function() {
+	//选择人员
+	$("#selectPeople").click(function selectPeopleAuth(auth,authValue){
+		$.selectPeople({
+			text : auth,
+			value : authValue,
+			params: {
+			   value: authValue
+			},
+			isNeedCheckLevelScope:false,
+			type : 'selectPeople',
+			panels : "Department,Team,Post,Level,Outworker,Account",
+			selectType : "Member",
+			maxSize : 10,
+			onlyLoginAccount : false,
+			hiddenPostOfDepartment:true,
+			minSize: 0,
+			callback : function(ret) {
+				$("#userName").val(ret.text);
+				var memberCode = ret.value;
+				var code = memberCode.substring(7);
+				$("#userCode").val(code);
+			}
+		});
+	});
+});
+</script>
 </head>
 <body>
 	<form method="post">
@@ -117,15 +146,45 @@
 				<td>
 					<select id="khzqxx" name="khzqxx">
 					</select>
+					<script>init_khzq()</script>
 				</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td>
+					<select id="month" name="month">
+						<option value="">请选择</option>
+						<option value="1">1月</option>
+						<option value="2">2月</option>
+						<option value="3">3月</option>
+						<option value="4">4月</option>
+						<option value="5">5月</option>
+						<option value="6">6月</option>
+						<option value="7">7月</option>
+						<option value="8">8月</option>
+						<option value="9">9月</option>
+						<option value="10">10月</option>
+						<option value="11">11月</option>
+						<option value="12">12月</option>
+					</select>
+				</td>
+				<td><input type="date" id="khksrq"></td>
+				<td><input type="date" id="khjzrq"></td>
+				<td><input type="text" id="zbx"></td>
+				<td><input type="text" id="dl"></td>
+				<td>
+					<select id="yq" name="yq">
+						<option value="0">请选择</option>
+						<option value="1">大于</option>
+						<option value="2">小于</option>
+						<option value="3">等于</option>
+						<option value="4">大于等于</option>
+						<option value="5">小于等于</option>
+						<option value="6">有无</option>
+					</select>
+				</td>
+				<td><input type="text" id="mbz"></td>
+				<td>
+					<input type="text" id="userName" class="validate" validate="type:'string',name:'协同责任人',notNull:true,maxLength:50,avoidChar:'!@#$%^&amp;*+|,'" style="width:200px" readonly unselectable="on"/>
+                    <span id="selectPeople" class="ico16 radio_people_16 _autoBtn"></span>
+				</td>
 			</tr>
 		</table>
 	</form>
