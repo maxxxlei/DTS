@@ -13,10 +13,19 @@ public class QuotaVo implements Serializable {
 	
 	private static final long serialVersionUID = -6708333852054165703L;
 	private Long id;
+	/**
+	 * 版本号id
+	 */
+	private Long versionId;
+	/**启用状态
+	 * 
+	 */
+	private Integer v_state;
 	/** 
 	 * 指标分类
 	 */
 	private int quotaClass;
+	
 	/** 
 	 * 指标编号
 	 */
@@ -35,6 +44,18 @@ public class QuotaVo implements Serializable {
 	private String quotaType;
 	public Long getId() {
 		return id;
+	}
+	public Long getVersionId() {
+		return versionId;
+	}
+	public void setVersionId(Long versionId) {
+		this.versionId = versionId;
+	}
+	public Integer getV_state() {
+		return v_state;
+	}
+	public void setV_state(Integer v_state) {
+		this.v_state = v_state;
 	}
 	public void setId(Long id) {
 		this.id = id;

@@ -5,11 +5,12 @@
 
 <hibernate-mapping>
 
-	<class entity-name="QuotaPo" table="xd24_quota">
+	<class entity-name="com.seeyon.apps.xd.po.QuotaPo" table="xd24_quota">
 		<id name="id" type="long" column="id" length="21">
 			<generator class="assigned" />
 		</id>
-
+		<property name="versionId" type="long" column="versionId" not-null="false" length="21" />
+		<property name="v_state" type="integer" column="v_state" not-null="false" length="2" />
 		<property name="quotaCode" type="long" column="quotaCode" not-null="false" length="21" />
 		<property name="quotaClass" type="integer" column="quotaClass" not-null="false" />
 		<property name="quotaName" type="string" column="quotaName" not-null="false" length="255" />

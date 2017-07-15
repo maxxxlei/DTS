@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.h2.engine.Session;
 
+import com.seeyon.apps.xd.po.QuotaPo;
 import com.seeyon.ctp.common.exceptions.BusinessException;
 import com.seeyon.ctp.util.FlipInfo;
 
@@ -24,7 +25,7 @@ public interface Xd24QuotaDao {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public int saveQuota(Map<String, String> quota) throws BusinessException;
+	public void saveQuota(QuotaPo qp) throws BusinessException;
 	/**
 	 * 修改指标库数据
 	 * @param quotal

@@ -135,22 +135,23 @@
             		return txt;
             }
             function showInfo(row, rowIndex, colIndex) {
-                $('#summary').attr("src",_ctxPath + "/permission/permission.do?method=edit&operType=change&id="+row.flowPermId);
+                $('#quotaDetailId').attr("src",_ctxPath + "/permission/permission.do?method=edit&operType=change&id="+row.flowPermId);
             }
             //双击事件
             function dbclickRow(){
                 //updateRow();
             }
             
-            //新建节点权限
+            //新建节点
             function addRow(){
                 //将新建页面显示
-                $('#summary').attr("src",_ctxPath + "/permission/permission.do?method=newPermission&operType=add&category="+$('#category').val());
                 grid.grid.resizeGridUpDown('middle');
+                $('#quotaDetailId').attr("src",_ctxPath + "/xd24quota/xd24quotaController.do?method=newQuota");
+                
             }
            
             
-            //修改节点权限
+            //修改节点
             function updateRow(){
                 var rows = grid.grid.getSelectRows();
                 if(rows.length === 0){
@@ -162,10 +163,10 @@
                     return;
                 }
                 grid.grid.resizeGridUpDown('middle');
-                $('#summary').attr("src",_ctxPath + "/permission/permission.do?method=edit&operType=change&flag=edit&id="+rows[0].flowPermId);
+                $('#quotaDetailId').attr("src",_ctxPath + "/xd24quota/xd24quotaController.do?method=updateQuota");
             }
             
-            //删除节点权限
+            //删除节点
             function deleteRow(){
                 var rows = grid.grid.getSelectRows();
                 if(rows.length === 0){
@@ -211,53 +212,7 @@
                     }
                 });
             }
-            //设置为默认节点权限
-            function setDefaultNode(){
-                var rows = grid.grid.getSelectRows();
-                if(rows.length === 0){
-                    $.alert("${ctp:i18n('permission.list.selectOneData')}"); //请选择一条节点权限记录！ 
-                    return;
-                }
-                if(rows.length > 1){
-                    $.alert("${ctp:i18n('permission.list.selectOnlyOneData')}"); //只能选择一条节点权限的记录！
-                    return;
-                }
-                var isEnabled =  rows[0].isEnabled;
-                
-                if(isEnabled != 1){
-                    $.alert("${ctp:i18n('permission.list.isEnabledNoSetDe')}"); //停用的节点权限不能设置默认
-                    return;
-                }
-                var nodeName = rows[0].name;
-                if (nodeName == "newCol" || nodeName == "formaudit" 
-                		|| nodeName=="vouch" || nodeName=="newsaudit"
-                		||	nodeName=="bulletionaudit") {
-                	$.alert("${ctp:i18n('permission.list.notSetDe')}"); //新建、表单审核、核定、新闻审批、公告审批不能置为默认节点权限！
-                	return;
-                }
-                if (nodeName == "niwen" || nodeName == "dengji" ) {
-                	$.alert("${ctp:i18n('permission.list.edocNotSetDe')}"); //"拟文、登记不能置为默认节点权限！"
-                	return;
-                }
-                var isDefaultNode = rows[0].isDefaultNode;
-                if (isDefaultNode != 1) {
-	                var id = rows[0].flowPermId;
-	                var pm = new permissionManager();
-	                var confirm = $.confirm({
-	                    'msg': "${ctp:i18n('permission.list.isSureSetDe')}",　//是否设置当前节点为默认节点！
-	                    ok_fn: function () { 
-	                        pm.setIsDefaultNode(id,{
-	                            success : function(msg){
-	                               searchFunc();
-	                            }
-	                         });
-	                    },
-	                    cancel_fn:function(){
-	                        confirm.close();
-	                    }
-	                });
-                }
-            }
+           
         });
     </script>
 </head>

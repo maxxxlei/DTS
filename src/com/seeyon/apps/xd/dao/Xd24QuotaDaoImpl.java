@@ -6,6 +6,7 @@ import org.h2.engine.Session;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 
+import com.seeyon.apps.xd.po.QuotaPo;
 import com.seeyon.ctp.common.exceptions.BusinessException;
 import com.seeyon.ctp.util.DBAgent;
 import com.seeyon.ctp.util.FlipInfo;
@@ -16,14 +17,14 @@ public class Xd24QuotaDaoImpl implements Xd24QuotaDao {
 	@Override
 	public FlipInfo getQuotaList(FlipInfo flipInfo, Map<String, String> query)
 			throws BusinessException {
-		String hql = "from QuotaPo ";
+		String hql = "select a.quotaCode,a.quotaName,a.quotaUnit,a.quotaType from QuotaPo a where a.quotaName order by a.quotaCode desc";
 		DBAgent.find(hql, query, flipInfo);
 		return flipInfo;
 	}
 
-	@Override
-	public int saveQuota(Map<String, String> quota) throws BusinessException {
-		return 0;
+	@Override//保存
+	public void saveQuota(QuotaPo qp) throws BusinessException {
+		     DBAgent.save(qp);
 	}
 
 	@Override
