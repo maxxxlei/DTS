@@ -17,6 +17,7 @@ create table xd24_target
    is_Core            SMALLINT,
    desciption         CLOB,
    version_Id         NUMBER(21),
+   version_state      SMALLINT,
    is_delete          SMALLINT,
    update_time        DATE,
    ghjh_state         SMALLINT,
