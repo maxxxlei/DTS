@@ -71,7 +71,7 @@ public class Xd24QuotaController extends BaseController {
 	 * @param response
 	 * @throws Exception
 	 */
-	public void saveTarget(HttpServletRequest request,HttpServletResponse response) throws Exception{
+	public void saveQuota(HttpServletRequest request,HttpServletResponse response) throws Exception{
 		LOGGER.info("====进入保存目标方法======");
 		PrintWriter out = response.getWriter();
 		try {
