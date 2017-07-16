@@ -332,3 +332,106 @@ comment on column xd24_quota.quotaType is
 '指标控件类型
 ';
 
+/**
+ * 菜单表
+ */
+drop table xd24_menu cascade constraints;
+
+/*==============================================================*/
+/* Table: "xd24_menu"                                           */
+/*==============================================================*/
+create table xd24_menu 
+(
+   ID                   NUMBER(21),
+   name               VARCHAR2(255),
+   resource_navurl    VARCHAR2(2000),
+   category           SMALLINT,
+   resource_code      VARCHAR2(255),
+   sort_code          NUMBER(4),
+   createtime         DATE,
+   updatetime         DATE,
+   is_delete          SMALLINT,
+   isEnable           SMALLINT,
+   menuLevle          SMALLINT
+);
+
+comment on table xd24_menu is
+'鑫达24字菜单表';
+
+comment on column xd24_menu.name is
+'菜单名称';
+
+comment on column xd24_menu.resource_navurl is
+'资源链接';
+
+comment on column xd24_menu.category is
+'菜单分类，规划计划、执行统计、对比分析。。。';
+
+comment on column xd24_menu.resource_code is
+'资源编号';
+
+comment on column xd24_menu.sort_code is
+'排序号';
+
+comment on column xd24_menu.is_delete is
+'是否删除';
+
+comment on column xd24_menu.isEnable is
+'是否启用';
+
+comment on column xd24_menu.menuLevle is
+'菜单级别';
+
+/**
+ * 角色表
+ */
+drop table xd24_role cascade constraints;
+
+/*==============================================================*/
+/* Table: "xd24_role"                                           */
+/*==============================================================*/
+create table xd24_role 
+(
+   ID                   NUMBER(21),
+   name               VARCHAR2(255),
+   code               VARCHAR2(255),
+   sortcode           SMALLINT,
+   isenable           SMALLINT,
+   isdelete           SMALLINT,
+   createtime         DATE,
+   updatetime         DATE
+);
+
+comment on table xd24_role is
+'鑫达角色';
+
+comment on column xd24_role.name is
+'角色名称';
+
+comment on column xd24_role.code is
+'角色编号';
+
+comment on column xd24_role.sortcode is
+'排序号';
+
+comment on column xd24_role.isenable is
+'是否启用';
+
+/**
+ * 角色与菜单关系表
+ */
+drop table xd24_role_menu cascade constraints;
+
+/*==============================================================*/
+/* Table: "xd24_role_menu"                                      */
+/*==============================================================*/
+create table xd24_role_menu 
+(
+   ID                   NUMBER(21),
+   roleId             NUMBER(21),
+   menuId             NUMBER(21)
+);
+
+comment on table xd24_role_menu is
+'角色与菜单关系';
+
