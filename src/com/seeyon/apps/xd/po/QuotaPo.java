@@ -1,6 +1,7 @@
 package com.seeyon.apps.xd.po;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 
@@ -8,6 +9,7 @@ import java.io.Serializable;
  * @author fengkai
  *
  */
+@SuppressWarnings("serial")
 public class QuotaPo implements Serializable {
 
 	
@@ -41,6 +43,15 @@ public class QuotaPo implements Serializable {
 	 * 指标控件类型
 	 */
 	private String quotaType;
+
+	/**
+	 * 创建时间
+	 */
+	private Date create_Time;
+	/**
+	 * 修改时间
+	 */
+	private Date update_Time;
 	public Long getId() {
 		return id;
 	}
@@ -88,6 +99,18 @@ public class QuotaPo implements Serializable {
 	}
 	public void setQuotaType(String quotaType) {
 		this.quotaType = quotaType;
+	}
+	public Date getCreate_Time() {
+		return create_Time;
+	}
+	public void setCreate_Time(Date create_Time) {
+		this.create_Time = create_Time;
+	}
+	public Date getUpdate_Time() {
+		return update_Time;
+	}
+	public void setUpdate_Time(Date update_Time) {
+		this.update_Time = update_Time;
 	}
 
 }

@@ -4,11 +4,11 @@
 	<!--目 标 -->
 	<bean name="/xd24/targetController.do" class="com.seeyon.apps.xd.controller.Xd24TargetController"/>
 	<!-- 指标库管理 -->
-	<bean name="/xd24quota/xd24quotaController.do" class="com.seeyon.apps.xd.controller.Xd24QuotaController"/>
+	<bean name="/xd24/quotaController.do" class="com.seeyon.apps.xd.controller.Xd24QuotaController"/>
     <!-- 版本控制 -->
     <bean name="/versionController.do" class="com.seeyon.apps.xd.controller.VersionController"></bean>
         <!-- 权限校验 -->
-    <bean name="/xd24/checkController.do" class="com.seeyon.apps.xd.controller.Xd24CheckController"/>
+    <!--  <bean name="/xd24/checkController.do" class="com.seeyon.apps.xd.controller.Xd24CheckController"/>-->
     
     
     <!-- 战略地图维度 -->

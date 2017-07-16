@@ -2,18 +2,20 @@ package com.seeyon.apps.xd.dao;
 
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.h2.engine.Session;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 
 import com.seeyon.apps.xd.po.QuotaPo;
+import com.seeyon.apps.xd.po.VersionPo;
 import com.seeyon.ctp.common.exceptions.BusinessException;
 import com.seeyon.ctp.util.DBAgent;
 import com.seeyon.ctp.util.FlipInfo;
 
 public class Xd24QuotaDaoImpl implements Xd24QuotaDao {
 
-
+	private Logger LOGGER = Logger.getLogger(Xd24QuotaDaoImpl.class);
 	@Override
 	public FlipInfo getQuotaList(FlipInfo flipInfo, Map<String, String> query)
 			throws BusinessException {
@@ -23,8 +25,13 @@ public class Xd24QuotaDaoImpl implements Xd24QuotaDao {
 	}
 
 	@Override//保存
-	public void saveQuota(QuotaPo qp) throws BusinessException {
-		     DBAgent.save(qp);
+	public Boolean saveQuotaPo(QuotaPo po) throws BusinessException{
+	   Object  obj = DBAgent.save(po);
+	   LOGGER.info("obj==="+obj);
+	   if(obj != null){
+		   return true;
+	   }
+	   return false;
 	}
 
 	@Override
