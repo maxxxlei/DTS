@@ -13,20 +13,17 @@ $(document).ready(function() {
 	$("#submit")
 			.click(
 					function() {
-						$
-								.ajax({
-									type : "post",
-									dataType : "json",
-									url : _ctxPath
-											+ '/xd24quota/xd24quotaController.do?method=saveQuota',
-									async : false,
-									data : getFormData(),
-									success : function(result) {
-										if (result) {
-											$.alert("目标录入成功！");
-											window.close();
-											window.location.href = _ctxPath
-													+ '/xd24quota/xd24quotaController.do?method=quotaList';
+						$.ajax({
+						    type : "post",
+						    dataType : "json",
+							url : _ctxPath+ '/xd24quota/xd24quotaController.do?method=saveQuota',
+							async : false,
+							data : getFormData(),
+							success : function(result) {
+								if (result) {
+									$.alert("目标录入成功！");
+									window.close();
+									window.location.href = _ctxPath+ '/xd24quota/xd24quotaController.do?method=quotaList';
 										} else {
 											$.alert("保存数据失败！");
 										}
@@ -34,9 +31,8 @@ $(document).ready(function() {
 									error : function() {
 										$.alert("服务器异常！");
 									}
-								});
+							});
 					});
-	$(document).ready(function() {
 		function getFormData() {
 			var year = $("#name").val();
 			var bzsj = $("#code").val();
