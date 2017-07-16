@@ -44,7 +44,7 @@
             toolbar.push({id: "update",name: "修改",className: "ico16 editor_16",click:updateRow });
            
             //删除
-            toolbar.push({ id: "delete",name: "删除",className: "ico16 del_16",click:dbclickRow });
+            toolbar.push({ id: "delete",name: "删除",className: "ico16 del_16",click:deleteRow });
             
             $("#toolbars").toolbar({
                 borderLeft:false,
@@ -202,7 +202,7 @@
                     tranObj[i] = rows[i].flowPermId;
                 }
                 var confirm = $.confirm({
-                    'msg': "${ctp:i18n('permission.operation.confirm.delete')}",//确定删除该权限，该操作无法恢复
+                	 'msg': "${ctp:i18n('permission.operation.confirm.delete')}",//确定删除该权限，该操作无法恢复
                     ok_fn: function () { 
                         pm.deletePermissions(tranObj,{
                             success : function(msg){
@@ -219,8 +219,9 @@
                     },
                     cancel_fn:function(){
                         confirm.close();
-                    }
+                    } 
                 });
+                $('#summary').attr("src",_ctxPath + "/xdcd24/xdcd24.do?method=newaddRow&flag=update&rowsId="+rows[0].id);
             }
             var skinPathKey = getCtpTop().skinPathKey == null ? "harmony" : getCtpTop().skinPathKey;
             var html = '<span class="nowLocation_ico"><img src="'+_ctxPath+'/main/skin/frame/'+skinPathKey+'/menuIcon/'+getCtpTop().currentSpaceType+'.png"></span>';
