@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <%@ include file="/WEB-INF/jsp/common/common.jsp"%>
 <html>
 <head>
@@ -37,7 +37,21 @@ $(document).ready(function() {
 	});
 	//提交表单
 	$("#submit").click(function(){
-		$.ajax({
+		var targetForm = $("#targetForm");
+		var path = _ctxPath + '/xd24/targetController.do?method=saveTarget';
+		targetForm.attr("action",path);
+		$("#submit")[0].disabled = false;
+		targetForm.jsonSubmit({
+			validate:true,
+			errorIcon:true,
+			callbackError:function(){
+				subCount = 0;
+			},
+			callback:function(args){
+				$.alert("ok");
+			}
+		});
+		/* $.ajax({
             type:"post",
             dataType:"json",
             url:_ctxPath + '/xd24/targetController.do?method=saveTarget',
@@ -45,9 +59,16 @@ $(document).ready(function() {
             data: getFormData(),
             success:function(result){
                 if(result){
+                	debugger;
                 	$.alert("目标录入成功！");
-                	window.close();
-                    window.location.href = _ctxPath + '/xd24/targetController.do?method=listTarget';
+                	 // 刷新父页面列表
+                    if(window.opener.reFreshBizMapList){
+                        window.opener.reFreshBizMapList();
+                    }
+                    // 关闭当前页面
+                    window.close();
+                	//window.close();
+                    //window.location.href = _ctxPath + '/xd24/targetController.do?method=listTarget';
                 }else{
                 	$.alert("保存数据失败！");
                 }
@@ -55,7 +76,7 @@ $(document).ready(function() {
             error:function(){
             	$.alert("服务器异常！");
             } 
-        });
+        }); */
 	});
 	function getFormData(){
 		var year = $("#year").val();
@@ -98,15 +119,17 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
+	<input type="submit" id="submit" value="保存">
+	<input type="reset" id="reset" value="重置">
 	<form method="post" id="targetForm">
-		<input type="submit" id="submit" value="保存">
-		<input type="reset" id="reset" value="重置">
 		<table border="1">
 			<tr>
 				<td>年度</td>
 				<td><input type="text" id="year"></td>
 				<td>编制时间</td>
-				<td><input type="date" id="bzsj"></td>
+				<td>
+				   <input id="bzsj" type="text"  class="comp" comp="type:'calendar',dateString:'2012-12-16 17:59',onUpdate:checkfrom,ifFormat:'%Y-%m-%d %H:%M',showsTime:true,cache:false"/>
+				</td>
 				<td>生效时间</td>
 				<td><input type="date" id="sxsj"></td>
 				<td>文件号</td>
@@ -200,7 +223,7 @@ $(document).ready(function() {
 			</tr>
 			<tr>
 				<td>目标描述</td>
-				<td><textarea id="desciption" rows="1" cols="3"></textarea></td>
+				<td><textarea id="description" rows="1" cols="3"></textarea></td>
 			</tr>
 		</table>
 		<table border="1">
@@ -286,11 +309,11 @@ $(document).ready(function() {
 			<tr>
 				<td><input type="text"></td>
 				<td>
-					<select name="khzq">
+					<select id="khzq" name="khzq">
 					</select>
 				</td>
 				<td>
-					<select name="khzqxx">
+					<select id="khzqxx" name="khzqxx">
 					</select>
 					<script>init_khzq()</script>
 				</td>
@@ -339,11 +362,11 @@ $(document).ready(function() {
 			<tr>
 				<td><input type="text"></td>
 				<td>
-					<select name="khzq">
+					<select id="khzq" name="khzq">
 					</select>
 				</td>
 				<td>
-					<select name="khzqxx">
+					<select id="khzqxx" name="khzqxx">
 					</select>
 					<script>init_khzq()</script>
 				</td>
