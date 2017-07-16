@@ -22,7 +22,7 @@
                     <!-- 菜单图标 -->
                     <property name="icon" value="todoevent.png" />
                     <!-- 菜单地址，出于安全方面考虑此url必须是协同内部界面，如果想跳转请在内部界面实现跳转 -->
-                    <property name="url" value="/xd24/menuRoleController.do?method=listMenu" />
+                    <property name="url" value="/xd24/menuRoleController.do?method=indexFrame" />
                     <!-- 菜单访问权限的验证类 -->
                     <property name="menuCheck">
                         <bean class="com.seeyon.apps.xd.menu.MenuCheck4XdGroupAdmin" />
