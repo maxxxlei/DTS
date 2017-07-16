@@ -39,7 +39,7 @@
     <!-- 排序号-->
     <property
       name="sortCode"
-      column="sort_code"
+      column="sortcode"
       type="integer"
       not-null="false"
       length="4"
@@ -54,14 +54,14 @@
     <!-- 修改时间 -->
     <property
       name="updateTime"
-      column="updateTime"
+      column="updatetime"
       type="timestamp"
       not-null="false"
     />
     <!-- 是否删除-->
     <property
       name="isDelete"
-      column="is_delete"
+      column="isdelete"
       type="integer"
       not-null="false"
     />
