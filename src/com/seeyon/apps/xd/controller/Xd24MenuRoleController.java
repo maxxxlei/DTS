@@ -20,7 +20,24 @@ public class Xd24MenuRoleController extends BaseController {
 	private static final Logger LOGGER = Logger.getLogger(Xd24MenuRoleController.class);
 	
 	/**
-	 * 指标库列表页面
+	 * 菜单角色管理框架页面
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws BusinessException
+	 */
+	public ModelAndView indexFrame(HttpServletRequest request,
+			HttpServletResponse response) throws BusinessException {
+
+		ModelAndView view = new ModelAndView("/apps/xd24zfz/menurole/indexFrame");
+		return view;
+
+	}
+	
+	
+	/**
+	 * 菜单管理页面
 	 * 
 	 * @param request
 	 * @param response
@@ -30,11 +47,24 @@ public class Xd24MenuRoleController extends BaseController {
 	public ModelAndView listMenu(HttpServletRequest request,
 			HttpServletResponse response) throws BusinessException {
 
-		ModelAndView view = new ModelAndView("/apps/xd24zfz/menurole/menulist");
+		ModelAndView view = new ModelAndView("/apps/xd24zfz/menurole/listMenu");
 		return view;
 
 	}
 	
-	
+	/**
+	 * 角色管理页面
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws BusinessException
+	 */
+	public ModelAndView listRole(HttpServletRequest request,
+			HttpServletResponse response) throws BusinessException {
 
+		ModelAndView view = new ModelAndView("/apps/xd24zfz/menurole/listRole");
+		return view;
+
+	}
 }
