@@ -12,7 +12,7 @@ import com.seeyon.ctp.common.controller.BaseController;
  * @author 许永恕
  *
  */
-public class ZzjhlxController extends BaseController{
+public class Xd24ZzjhlxController extends BaseController{
 	private Xd24Manger xd24Manger;
 
 	public Xd24Manger getXd24Manger() {
@@ -37,21 +37,8 @@ public class ZzjhlxController extends BaseController{
 	}
 	
 	
-/**
- * 二级菜单2
- * @param request
- * @param response
- * @return
- * @throws Exception
- */
-	public ModelAndView xdcd24SendList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView view = new ModelAndView("apps/xd24zzjhlx/xdZzjhlxZzjh");
-		return view;
-	}
-	
-	
 	/**
-	 * 二级菜单2
+	 * 新建页面
 	 * @param request
 	 * @param response
 	 * @return
@@ -59,6 +46,10 @@ public class ZzjhlxController extends BaseController{
 	 */
 		public ModelAndView newaddRow(HttpServletRequest request, HttpServletResponse response) throws Exception {
 			ModelAndView view = new ModelAndView("apps/xd24zzjhlx/xdZzjhlxadd");
+			String flag = request.getParameter("flag");
+			view.addObject("flag", flag);
+			String rowsId = request.getParameter("rowsId");
+			view.addObject("rowsId", rowsId);
 			return view;
 		}
 		

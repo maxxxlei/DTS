@@ -3,7 +3,10 @@
 <bean>
 	<serviceName>zzjhlxManger</serviceName>
 		<operations>
-			<op>selectUser</op>
+			<op>getUser</op>
+			<op>saveZzjhlx</op>
+			<op>getZzjhlxById</op>
+			<op>getNameAndId</op>
 		</operations>
 	</bean>
 </beans>

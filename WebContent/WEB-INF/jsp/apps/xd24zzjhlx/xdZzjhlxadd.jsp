@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8" isELIgnored="false"%>
 <%@ include file="/WEB-INF/jsp/common/common.jsp"%>
-<script type="text/javascript" src="${path}/ajax.do?managerName=xd24Manager"></script>
+<script type="text/javascript" src="${path}/ajax.do?managerName=zzjhlxManger"></script>
 <html>
 <head>
 <title>底部菜单</title>
@@ -25,6 +25,18 @@
             $("#isEnable").val("0"); 
             $("#description").val("编辑");
             $("#id").val("111");
+            
+            var rowsId = "${rowsId}";
+            debugger;
+            var manager = new zzjhlxManger();
+            var zzjhlxVo = manager.getZzjhlxById(rowsId);
+            debugger;
+            $("#mapName").val(zzjhlxVo.name);
+            $("#isEnable").val(zzjhlxVo.isEnable); 
+            $("#descr").val(zzjhlxVo.desc);
+            /* parent.location.href = _ctxPath + "/xdcd24/xdcd24.do?method=xdcd24SearchList" */
+            return;
+                
         }
         if(flag=="new"){
             $("#bottomButton").show();
@@ -38,10 +50,9 @@
         var flag = "${flag}";
         if(flag=="new"){
             var o = new Object();
-            $("#bottomButton").show();
             o.name = $("#mapName").val();
             o.isEnable= $("#isEnable").val(); 
-            o.descr = $("#descr").val();
+            o.desc = $("#descr").val();
             if(o.name==""){
                 $.alert("请输入组织计划名称！");
                 return;
@@ -50,15 +61,57 @@
                 $.alert("请选择启用状态！");
                 return;
             }
-            if(o.description==""){
+            if(o.desc==""){
                 $.alert("请输入组织计划描述！");
                 return;
             }
-            var manager = new xd24Manager();
-            manager.saveZldtwd(o);
-            parent.location.href = _ctxPath + "/test/xd24ZldtwdController.do?method=zldtwdList"
+            var manager = new zzjhlxManger();//Manager类bean,id
+            var ne = o.name;
+             var flag = manager.getNameAndId(ne,rowsId);
+            alert("false"+flag);
+            if(!flag){
+                $.alert("输入内容有误，可能出现重复值！");
+                return;
+            } 
+            manager.saveZzjhlx(o);//保存的方法名
+            parent.location.href = _ctxPath + "/xdcd24/xdcd24.do?method=xdcd24SearchList"//controller里的方法名，进行页面跳转
+            return;		
         }
+        var rowsId = "${rowsId}";
+        var o = new Object();
+        o.name = $("#mapName").val();
+        o.isEnable= $("#isEnable").val(); 
+        o.desc = $("#descr").val();
+        if(o.name == ""){
+            $.alert("请输入组织计划名称！!");
+            return;
+        }
+        if(o.isEnable == ""){
+            $.alert("请点击是否启用菜单！!");
+            return;
+        }
+        if(o.desc == ""){
+            $.alert("请输入组织计划类型描述！!");
+            return;
+        }//判断是否为重复数据或者为自己
+        var manager = new zzjhlxManger();//Manager类bean,id
+        alert("判断开始");
+        var ne = o.name;
+        alert(ne);
+        alert(rowsId);
+         var flag = manager.getNameAndId(ne,rowsId);
+        alert("false"+flag);
+        if(!flag){
+        	$.alert("输入内容有误，可能出现重复值！");
+        	return;
+        } 
+        alert("判断结束");
+        manager.saveZzjhlx(o);//保存的方法名
+        alert("进行跳转");
+        parent.location.href = _ctxPath + "/xdcd24/xdcd24.do?method=xdcd24SearchList"
     }
+    
+   
 </script>
 <body>
     <div>
@@ -77,7 +130,7 @@
                 </td>
               </tr>
               <tr>
-              <th><font color="red">*</font><label class="margin_r_10" for="text">是否启用:</label></th>
+              <th><font color="red">*</font><label class="margin_r_10" for="text" readonly=”true”>是否启用:</label></th>
                 <td>
                   <div>
                     <select id ="isEnable">

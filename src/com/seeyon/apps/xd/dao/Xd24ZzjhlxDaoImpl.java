@@ -8,14 +8,15 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.seeyon.apps.xd.po.ZldtwdPo;
 import com.seeyon.apps.xd.po.ZzjhlxPo;
 import com.seeyon.apps.xd.vo.ZzjhlxVo;
 import com.seeyon.ctp.common.dao.BaseHibernateDao;
 import com.seeyon.ctp.util.DBAgent;
 import com.seeyon.ctp.util.FlipInfo;
 
-public class ZzjhlxDaoImpl implements ZzjhlxDao{
-	private static Log log=LogFactory.getLog(ZzjhlxDaoImpl.class);
+public class Xd24ZzjhlxDaoImpl implements Xd24ZzjhlxDao{
+	private static Log log=LogFactory.getLog(Xd24ZzjhlxDaoImpl.class);
 	
 	
 	@Override
@@ -43,5 +44,36 @@ public class ZzjhlxDaoImpl implements ZzjhlxDao{
 		return list;
 		
 	}
+/**
+ * 保存新建的组织计划类型
+ */
+	@Override
+	public void saveZzjhlx(ZzjhlxPo po) {
+		DBAgent.save(po);
+	}
+
+	/**
+	 * 通过id查询组织计划
+	 */
+@Override
+public List getZzjhlxById(String id) {
+	String hql = "select z.id,z.name,z.isEnable,z.createTime,z.desc FROM ZzjhlxPo z where z.id=:id";
+	Map<String,Object> params = new HashMap<String,Object>();
+	params.put("id", Long.valueOf(id));
+	return DBAgent.find(hql,params);
+					
+}
+
+	@Override
+	public List getNameAndId(String id, String name) {
+		String hql = "select z.id, z.name FROM ZzjhlxPo z where z.name=:name";
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("name", String.valueOf(name));
+		List find = DBAgent.find(hql,params);
+		return find;
+	}
+
+
+
 	
 }

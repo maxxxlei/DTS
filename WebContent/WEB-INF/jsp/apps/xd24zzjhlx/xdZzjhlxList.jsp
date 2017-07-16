@@ -41,7 +41,7 @@
             //新建
             toolbar.push({id: "newCreate",name: "新建",className: "ico16",click:addRow });
             //修改
-            toolbar.push({id: "update",name: "修改",className: "ico16 editor_16",click:dbclickRow });
+            toolbar.push({id: "update",name: "修改",className: "ico16 editor_16",click:updateRow });
            
             //删除
             toolbar.push({ id: "delete",name: "删除",className: "ico16 del_16",click:dbclickRow });
@@ -144,21 +144,91 @@
             
             //双击事件
             function dbclickRow(){
-                //updateRow();
+            	//$('#summary').attr("src",_ctxPath + "/xdcd24/xdcd24.do?method=newaddRow&flag=update");
+            	updateRow();
             }
             //单机事件
             function showInfo(){
+            	//$('#summary').attr("src",_ctxPath + "/xdcd24/xdcd24.do?method=newaddRow&flag=show");
+            	updateRow();
             	
             }
             
             //新建节点权限
             function addRow(){
                 //将新建页面显示
-                $('#summary').attr("src",_ctxPath + "/xdcd24/xdcd24.do?method=newaddRow&operType=add&category="+$('#category').val());
+                $('#summary').attr("src",_ctxPath + "/xdcd24/xdcd24.do?method=newaddRow&flag=new");
                 grid.grid.resizeGridUpDown('middle');
             }
-           
-           
+           //修改权限
+            //修改节点权限
+            function updateRow(){
+                var rows = grid.grid.getSelectRows();
+                if(rows.length === 0){
+                    $.alert("${ctp:i18n('permission.operation.choose.one')}!");//请选择一条记录
+                    return;
+                }
+                if(rows.length>1){
+                    $.alert("${ctp:i18n('permission.operation.choose.onlyone')}!");//只能选择一条记录进行修改
+                    return;
+                }
+                grid.grid.resizeGridUpDown('middle');
+                debugger;
+                $('#summary').attr("src",_ctxPath + "/xdcd24/xdcd24.do?method=newaddRow&flag=update&rowsId="+rows[0].id);
+            }
+            //删除节点权限
+            function deleteRow(){
+                var rows = grid.grid.getSelectRows();
+                if(rows.length === 0){
+                    $.alert("${ctp:i18n('permission.operation.choose.delete.records')}"); //请选择要删除的记录
+                    return;
+                }
+                var pm = new permissionManager();
+                var tranObj = new Array();
+                for(i=0;i<rows.length;i++){
+                    if(rows[i].type == '0'){
+                        $.alert("${ctp:i18n('permission.right.not.delete')}");//系统权限无法被删除
+                        return;
+                    }
+                    //判断是否被引用
+                    if(rows[i].isRef == '1'){
+                        $.alert("${ctp:i18n('permission.operation.isRef')}");//权限已被引用，无法被删除
+                        return;
+                    }
+                    if(rows[i].isDefaultNode == '1'){
+                        $.alert("${ctp:i18n('permission.list.deleteDefaultNode')}");//权限被设置默认，请更新其他节点为默认后删除！
+                        return;
+                    }
+                    tranObj[i] = rows[i].flowPermId;
+                }
+                var confirm = $.confirm({
+                    'msg': "${ctp:i18n('permission.operation.confirm.delete')}",//确定删除该权限，该操作无法恢复
+                    ok_fn: function () { 
+                        pm.deletePermissions(tranObj,{
+                            success : function(msg){
+                                if(msg === ""){
+                                    searchFunc();
+                                }else{
+                                    $.alert(msg);
+                                }
+                            }, 
+                            error : function(request, settings, e){
+                                    $.alert(e);
+                            }
+                         });
+                    },
+                    cancel_fn:function(){
+                        confirm.close();
+                    }
+                });
+            }
+            var skinPathKey = getCtpTop().skinPathKey == null ? "harmony" : getCtpTop().skinPathKey;
+            var html = '<span class="nowLocation_ico"><img src="'+_ctxPath+'/main/skin/frame/'+skinPathKey+'/menuIcon/'+getCtpTop().currentSpaceType+'.png"></span>';
+            html += '<span class="nowLocation_content">24字方针系统设置 > ';
+            html += '<a>角色及菜单管理</a>';
+            html += '</span>';
+            getCtpTop().showLocation(html);
+
         });
     </script>
 </head>
