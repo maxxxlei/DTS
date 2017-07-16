@@ -29,7 +29,6 @@ public class Xd24MenuRoleController extends BaseController {
 	 */
 	public ModelAndView indexFrame(HttpServletRequest request,
 			HttpServletResponse response) throws BusinessException {
-
 		ModelAndView view = new ModelAndView("/apps/xd24zfz/menurole/indexFrame");
 		return view;
 
@@ -46,7 +45,6 @@ public class Xd24MenuRoleController extends BaseController {
 	 */
 	public ModelAndView listMenu(HttpServletRequest request,
 			HttpServletResponse response) throws BusinessException {
-
 		ModelAndView view = new ModelAndView("/apps/xd24zfz/menurole/listMenu");
 		return view;
 

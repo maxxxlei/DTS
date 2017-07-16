@@ -7,8 +7,7 @@
     <!-- 角色管理表 -->
   <class
     name="RoleMenuPo"
-    table="xd24_role_menu"
-  >
+    table="xd24_role_menu">
     <!-- ID -->
     <id
       name="id"
