@@ -52,7 +52,7 @@ $(function(){
      //目标名称
      condition.push({id: 'subject',name: 'subject',type: 'input',text: "目标名称",value: 'subject',maxLength:20,validate:false});
      //责任人
-     condition.push({id: 'memberId',name: 'memberId',type: 'input',text: "责任人",value: 'memberId'});
+     condition.push({id: 'memberId',name: 'memberId',type: 'selectPeople',text: "责任人",value: 'memberId',comp:"type:'selectPeople',mode:'open',panels:'Department,Team,Post,Level',selectType:'Member',maxSize:1"});
      //目标开始时间
      condition.push({id: 'startTime',name: 'startTime',type: 'datemulti',text: "目标开始时间",value: 'startTime',dateTime:true});
      //目标结束时间
@@ -72,21 +72,22 @@ $(function(){
      function searchFunc(){
          var o = new Object();
          var choose = $('#'+searchobj.p.id).find("option:selected").val();
+             o.condition = choose;
          if(choose === 'subject'){
-             o.subject = $('#subject').val();
+             o.value = $('#subject').val();
          }else if(choose === 'memberId'){
-             o.memberId = $('#memberId').val();
+             o.value = $('#memberId').val();
          }else if(choose === 'startTime'){
              var sDate = $('#from_startTime').val();
              var eDate = $('#to_startTime').val();
-             o.startTime = sDate +"#"+eDate;
+             o.value = sDate +"#"+eDate;
+             alert(o.value);
          }else if(choose === 'endTime'){
         	 var sDate = $('#from_endTime').val();
              var eDate = $('#to_endTime').val();
-        	 o.endTime = sDate +"#"+eDate;
+        	 o.value = sDate +"#"+eDate;
          }
          var val = searchobj.g.getReturnValue();
-         alert("val is ==="+val);
          if(val !== null){
              $("#targetList").ajaxgridLoad(o);
          }
