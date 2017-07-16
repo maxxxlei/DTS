@@ -8,10 +8,12 @@
 	<bean id="xd24QuotaDao" class="com.seeyon.apps.xd.dao.Xd24QuotaDaoImpl"/>
 
 	<!--目标Dao  -->
-	<bean name="xd24TargetDao" class="com.seeyon.apps.xd.dao.Xd24TargetDaoImpl"/>
+	<bean id="xd24TargetDao" class="com.seeyon.apps.xd.dao.Xd24TargetDaoImpl"/>
 
-	<bean name="xd24TargetManager" class="com.seeyon.apps.xd.manager.Xd24TargetManagerImpl"/>
+	<bean id="xd24TargetManager" class="com.seeyon.apps.xd.manager.Xd24TargetManagerImpl"/>
      
     <bean id="versionDao" class="com.seeyon.apps.xd.dao.VersionDaoImpl"></bean>
-     
-     </beans>
+    <!-- 战略地图维度 -->
+    <bean name="xd24ZldtwdManager" class="com.seeyon.apps.xd.manager.Xd24ZldtwdManagerImpl"/>
+    <bean name="xd24ZldtwdDao" class="com.seeyon.apps.xd.dao.Xd24ZldtwdDaoImpl"/>
+</beans>

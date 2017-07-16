@@ -10,13 +10,23 @@ import com.seeyon.ctp.util.FlipInfo;
 public interface Xd24TargetDao {
 
 	/**
-	 * 后去目标任务列表
+	 * 获取目标任务列表
 	 * @param flipInfo
 	 * @param query
 	 * @return
 	 * @throws BusinessException
 	 */
-	public List getTargetList(FlipInfo flipInfo, Map<String, String> params) throws BusinessException;
+	public List<Object[]> getTargetList(FlipInfo flipInfo, Map<String, String> params) throws BusinessException;
+	/**
+	 * 获取目标任务列表
+	 * @param flipInfo
+	 * @param params
+	 * @param key 搜索框key
+	 * @param value 搜索框value
+	 * @return
+	 * @throws BusinessException
+	 */
+	public List<Object[]> getTargetList(FlipInfo flipInfo, Map<String, String> params,String key,String value) throws BusinessException;
 	/**
 	 * 保存目标
 	 * @param tp
