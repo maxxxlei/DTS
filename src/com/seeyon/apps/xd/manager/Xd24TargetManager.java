@@ -2,7 +2,6 @@ package com.seeyon.apps.xd.manager;
 
 import java.util.Map;
 
-import com.seeyon.apps.xd.po.TargetPo;
 import com.seeyon.ctp.common.exceptions.BusinessException;
 import com.seeyon.ctp.util.FlipInfo;
 
@@ -21,5 +20,12 @@ public interface Xd24TargetManager {
 	 * @param tp
 	 * @throws BusinessException
 	 */
-	public void saveTarget(TargetPo tp) throws BusinessException;
+	public void saveTarget(Object entity) throws BusinessException;
+	/**
+	 * 批量删除
+	 * @param ids
+	 * @return
+	 * @throws BusinessException
+	 */
+	public String deleteTargets(String[] ids) throws BusinessException;
 }

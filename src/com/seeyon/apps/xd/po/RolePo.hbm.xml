@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.seeyon.apps.xd.po">
+    <!-- 角色管理表 -->
+  <class
+    name="RolePo"
+    table="xd24_Role"
+  >
+    <!-- ID -->
+    <id
+      name="id"
+      type="long"
+      column="ID"
+      length="21"
+    >
+      <generator class="assigned"/>
+    </id>
+    <!-- 角色名称 -->
+    <property
+      name="name"
+      column="name"
+      type="string"
+      not-null="false"
+      length="255"
+    />
+
+
+    <!-- 编号-->
+    <property
+      name="code"
+      column="code"
+      type="string"
+      not-null="false"
+      length="255"
+    />
+    <!-- 排序号-->
+    <property
+      name="sortCode"
+      column="sortcode"
+      type="integer"
+      not-null="false"
+      length="4"
+    />
+    <!-- 创建时间 -->
+    <property
+      name="createTime"
+      column="createtime"
+      type="timestamp"
+      not-null="false"
+    />
+    <!-- 修改时间 -->
+    <property
+      name="updateTime"
+      column="updatetime"
+      type="timestamp"
+      not-null="false"
+    />
+    <!-- 是否删除-->
+    <property
+      name="isDelete"
+      column="isdelete"
+      type="integer"
+      not-null="false"
+    />
+   
+    <!-- 版本状态，是否启用、停用，
+        0：停用
+        1：启用 -->
+    <property
+      name="isEnable"
+      column="isenable"
+      type="integer"
+      not-null="false"
+      length="2"
+    />
+   
+  </class>
+</hibernate-mapping>

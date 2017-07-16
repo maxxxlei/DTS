@@ -9,6 +9,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.apache.logging.log4j.util.Strings;
 
+import com.seeyon.apps.xd.constants.Xd24Enum;
 import com.seeyon.apps.xd.dao.Xd24TargetDao;
 import com.seeyon.apps.xd.po.TargetPo;
 import com.seeyon.apps.xd.vo.TargetVo;
@@ -40,42 +41,79 @@ public class Xd24TargetManagerImpl implements Xd24TargetManager{
 		//获取搜索框中的值
 		String key = (String) params.get("condition");
 		String value = (String) params.get("value");
+		List<Object[]> targetList = new ArrayList<Object[]>();
 		if(Strings.isNotBlank(key)){
-			if(key.equals("createDate")){
-				return null;
-			}else{
-				
+			//搜索框条件查询
+			targetList = xd24TargetDao.getTargetList(flipInfo, params, key, value);
+			if(targetList.size() > 0){
+				for(Object[] o : targetList){
+					TargetVo target = new TargetVo();
+					target.setId(Long.valueOf(o[0].toString()));
+					target.setSubject(o[1].toString());
+					Timestamp ts = (Timestamp) o[2];
+					target.setCreateTime(new Date(ts.getTime()));
+					ts = (Timestamp) o[3];
+					target.setEffectTime(new Date(ts.getTime()));
+					Long memberId = Long.valueOf(o[4].toString());
+					V3xOrgMember member = orgManager.getMemberById(memberId);
+					target.setMemberName(member.getName());
+					ts = (Timestamp) o[5];
+					target.setStartTime(new Date(ts.getTime()));
+					ts = (Timestamp) o[6];
+					target.setEndTime(new Date(ts.getTime()));
+					tvList.add(target);
+				}
+				LOGGER.info("搜索框条件查询返回结果个数==============="+tvList.size());
+				flipInfo.setData(tvList);
 			}
 		}else{
-			@SuppressWarnings("unchecked")
-			List<Object[]> targetList = xd24TargetDao.getTargetList(flipInfo, params);
-			for(Object[] o : targetList){
-				TargetVo target = new TargetVo();
-				target.setId(Long.valueOf(o[0].toString()));
-				target.setSubject(o[1].toString());
-				Timestamp ts = (Timestamp) o[2];
-				target.setCreateTime(new Date(ts.getTime()));
-				ts = (Timestamp) o[3];
-				target.setEffectTime(new Date(ts.getTime()));
-				Long memberId = Long.valueOf(o[4].toString());
-				V3xOrgMember member = orgManager.getMemberById(memberId);
-				target.setMemberName(member.getName());
-				ts = (Timestamp) o[5];
-				target.setStartTime(new Date(ts.getTime()));
-				ts = (Timestamp) o[6];
-				target.setEndTime(new Date(ts.getTime()));
-				tvList.add(target);
+			//默认查询
+			targetList = xd24TargetDao.getTargetList(flipInfo, params);
+			if(targetList.size() > 0){
+				for(Object[] o : targetList){
+					TargetVo target = new TargetVo();
+					target.setId(Long.valueOf(o[0].toString()));
+					target.setSubject(o[1].toString());
+					Timestamp ts = (Timestamp) o[2];
+					target.setCreateTime(new Date(ts.getTime()));
+					ts = (Timestamp) o[3];
+					target.setEffectTime(new Date(ts.getTime()));
+					Long memberId = Long.valueOf(o[4].toString());
+					V3xOrgMember member = orgManager.getMemberById(memberId);
+					target.setMemberName(member.getName());
+					ts = (Timestamp) o[5];
+					target.setStartTime(new Date(ts.getTime()));
+					ts = (Timestamp) o[6];
+					target.setEndTime(new Date(ts.getTime()));
+					tvList.add(target);
+				}
 			}
+			LOGGER.info("默认查询返回结果个数==============="+tvList.size());
+			flipInfo.setData(tvList);
 		}
-		LOGGER.info("查询返回结果个数==============="+tvList.size());
-		flipInfo.setData(tvList);
 		return flipInfo;
 	}
 
 	@Override
-	public void saveTarget(TargetPo tp) throws BusinessException {
-		xd24TargetDao.saveTarget(tp);
+	public void saveTarget(Object entity) throws BusinessException {
+		xd24TargetDao.saveTarget(entity);
 		
+	}
+	@AjaxAccess
+	@Override
+	public String deleteTargets(String[] ids) throws BusinessException {
+		LOGGER.info("进入批量删除目标方法====");
+		if(ids.length > 0){
+			for(int i = 0;i<ids.length;i++){
+				TargetPo targetPo = xd24TargetDao.getTargetPoById(Long.valueOf(ids[i].toString()));
+				targetPo.setIsDelete(Integer.valueOf(Xd24Enum.Target.DELETE_Y.getKey()));
+				xd24TargetDao.updateTarget(targetPo);
+			}
+			LOGGER.info("共删除目标 "+ids.length+" 条记录");
+			return "SUCCESS";
+		}else{
+			return "FALSE";
+		}
 	}
 
 }
