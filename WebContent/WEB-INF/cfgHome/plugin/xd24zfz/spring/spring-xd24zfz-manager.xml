@@ -16,4 +16,7 @@
     <!-- 战略地图维度 -->
     <bean name="xd24ZldtwdManager" class="com.seeyon.apps.xd.manager.Xd24ZldtwdManagerImpl"/>
     <bean name="xd24ZldtwdDao" class="com.seeyon.apps.xd.dao.Xd24ZldtwdDaoImpl"/>
+    <!-- 菜单角色管理 -->
+    <bean name="menuRoleManager" class="com.seeyon.apps.xd.manager.MenuRoleManagerImpl"/>
+    <bean name="menuRoleDao" class="com.seeyon.apps.xd.dao.MenuRoleDaoImpl"/>
 </beans>
