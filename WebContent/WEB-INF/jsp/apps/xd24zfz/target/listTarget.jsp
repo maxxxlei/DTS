@@ -54,7 +54,7 @@ $(function(){
      //责任人
      condition.push({id: 'memberId',name: 'memberId',type: 'input',text: "责任人",value: 'memberId'});
      //目标开始时间
-     condition.push({id: 'startTime',name: 'starttime',type: 'datemulti',text: "目标开始时间",value: 'startTime',dateTime:true});
+     condition.push({id: 'startTime',name: 'startTime',type: 'datemulti',text: "目标开始时间",value: 'startTime',dateTime:true});
      //目标结束时间
      condition.push({id: 'endTime',name: 'endTime',type: 'datemulti',text: "目标结束时间",value: 'endTime',dateTime:true});
      
@@ -77,11 +77,16 @@ $(function(){
          }else if(choose === 'memberId'){
              o.memberId = $('#memberId').val();
          }else if(choose === 'startTime'){
-             o.startTime = $('#startTime').val();
+             var sDate = $('#from_startTime').val();
+             var eDate = $('#to_startTime').val();
+             o.startTime = sDate +"#"+eDate;
          }else if(choose === 'endTime'){
-             o.endTime = $('#endTime').val();
+        	 var sDate = $('#from_endTime').val();
+             var eDate = $('#to_endTime').val();
+        	 o.endTime = sDate +"#"+eDate;
          }
          var val = searchobj.g.getReturnValue();
+         alert("val is ==="+val);
          if(val !== null){
              $("#targetList").ajaxgridLoad(o);
          }
@@ -110,7 +115,6 @@ $(function(){
          isHaveIframe:true,
          slideToggleBtn:true,
          onSuccess:function(){
-         	$.alert("abc");
          },
          managerName : "xd24TargetManager",
          managerMethod : "getTargetList"
@@ -126,7 +130,9 @@ $(function(){
      }
      
      function  addTarget(){
- 		var dialog = $.dialog({
+    	  var url = _ctxPath + '/xd24/targetController.do?method=newTarget';
+    	  openCtpWindow({"url":url});   
+    	 /* var dialog = $.dialog({
  			id	: 'url',
  			url : _ctxPath + '/xd24/targetController.do?method=newTarget',
  			width : $(window).width(),
@@ -134,13 +140,49 @@ $(function(){
  			isDrag : true,
  			targetWindow : getCtpTop(),
  			title : "新建目标"
- 		});
+ 		}); */
+ 		/* *var url = _ctxPath + '/xd24/targetController.do?method=newTarget';
+ 		var width = $(window).width();
+        var height = $(window).height();
+ 		window.open(url, 'newwindow', height, width, 'top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no'); */
      }
      function updateTarget(){
     	 
      }
      function deleteTarget(){
-    	 
+    	 var rows = grid.grid.getSelectRows();
+         if(rows.length === 0){
+             $.alert("请选择要删除的记录"); //请选择要删除的记录
+             return;
+         }
+         var tManager = new xd24TargetManager();
+         debugger;
+         var tranObj = new Array();
+         for(i=0;i<rows.length;i++){
+            //进行数据验证，是否可以进行删除操作
+             tranObj[i] = rows[i].id;
+         }
+         var confirm = $.confirm({
+             'msg': "确定删除该数据，该操作无法恢复",//确定删除该权限，该操作无法恢复
+             ok_fn: function () { 
+            	 tManager.deleteTargets(tranObj,{
+                     success : function(msg){
+                         if("SUCCESS" === msg){
+                             $.alert("删除成功！");
+                             var o = new Object();
+                             //$('#versionList').ajaxgrid();
+                             $("#targetList").ajaxgridLoad(o);
+                         }
+                     }, 
+                     error : function(request, settings, e){
+                         $.alert(e);
+                     }
+                  });
+             },
+             cancel_fn:function(){
+                 confirm.close();
+             }
+         });
      }
 });
 </script>

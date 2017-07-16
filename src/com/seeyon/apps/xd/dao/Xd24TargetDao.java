@@ -32,5 +32,19 @@ public interface Xd24TargetDao {
 	 * @param tp
 	 * @throws BusinessException
 	 */
-	public void saveTarget(TargetPo tp) throws BusinessException;
+	public void saveTarget(Object entity) throws BusinessException;
+	/**
+	 * 删除目标--实际为修改is_delete 的状态值
+	 * @param targetPo
+	 * @return
+	 * @throws BusinessException
+	 */
+	public void updateTarget(TargetPo targetPo) throws BusinessException;
+	/**
+	 * 根据ID获取对象
+	 * @param id
+	 * @return
+	 * @throws BusinessException
+	 */
+	public TargetPo getTargetPoById(Long id) throws BusinessException;
 }
