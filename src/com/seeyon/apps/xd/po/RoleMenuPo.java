@@ -13,7 +13,7 @@ public class RoleMenuPo extends BasePO {
 	/**
 	 * 菜单ID
 	 */
-	private Long menuID;
+	private Long menuId;
 
 
 	public Long getRoleId() {
@@ -26,15 +26,16 @@ public class RoleMenuPo extends BasePO {
 	}
 
 
-	public Long getMenuID() {
-		return menuID;
+	public Long getMenuId() {
+		return menuId;
 	}
 
 
-	public void setMenuID(Long menuID) {
-		this.menuID = menuID;
+	public void setMenuId(Long menuId) {
+		this.menuId = menuId;
 	}
-	
+
+
 	
 	
 	
