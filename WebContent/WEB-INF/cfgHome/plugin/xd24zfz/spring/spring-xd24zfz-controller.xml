@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans default-autowire="byName">
-	<bean name="/test/xd24TargetController.do" class="com.seeyon.apps.xd.controller.Xd24TargetController"/>
 	<bean name="/xdcd24/xdcd24.do" class="com.seeyon.apps.xd.controller.ZzjhlxController"/>
+	<!--目 标 -->
+	<bean name="/xd24/targetController.do" class="com.seeyon.apps.xd.controller.Xd24TargetController"/>
+	<!-- 指标库管理 -->
+	<bean name="/xd24quota/xd24quotaController.do" class="com.seeyon.apps.xd.controller.Xd24QuotaController"/>
+    <!-- 版本控制 -->
+    <bean name="/versionController.do" class="com.seeyon.apps.xd.controller.VersionController"></bean>
 </beans>
     

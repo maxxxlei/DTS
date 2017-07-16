@@ -1,17 +1,9 @@
-package com.seeyon.apps.xd.po;
+package com.seeyon.apps.xd.vo;
 
 import java.util.Date;
 
-import com.seeyon.ctp.common.po.BasePO;
-/**
- * 目标录入主表 entity
- * @author heliang.wang
- *
- * @time 2017年7月14日
- */
-public class TargetPo extends BasePO{
+public class TargetVo {
 
-	private static final long serialVersionUID = -5147350311650086895L;
 	private Long 		id;
 	private String 		year;
 	private String		fileCode;	//文件号
@@ -39,24 +31,13 @@ public class TargetPo extends BasePO{
 	private int 		gxjyState;//更新决议 审批状态
 	private int 		khpjState;//考核评价 审批状态
 	private int 		qmzjState;//全面总结状态
+	private String 		memberName;//责任人姓名
 	
-	public int getVersionState() {
-		return versionState;
+	public String getMemberName() {
+		return memberName;
 	}
-	public void setVersionState(int versionState) {
-		this.versionState = versionState;
-	}
-	public String getFileCode() {
-		return fileCode;
-	}
-	public void setFileCode(String fileCode) {
-		this.fileCode = fileCode;
-	}
-	public String getTargetCode() {
-		return targetCode;
-	}
-	public void setTargetCode(String targetCode) {
-		this.targetCode = targetCode;
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 	public Long getId() {
 		return id;
@@ -69,6 +50,24 @@ public class TargetPo extends BasePO{
 	}
 	public void setYear(String year) {
 		this.year = year;
+	}
+	public String getFileCode() {
+		return fileCode;
+	}
+	public void setFileCode(String fileCode) {
+		this.fileCode = fileCode;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 	public Date getEffectTime() {
 		return effectTime;
@@ -94,11 +93,11 @@ public class TargetPo extends BasePO{
 	public void setpTargetId(Long pTargetId) {
 		this.pTargetId = pTargetId;
 	}
-	public String getCode() {
-		return code;
+	public String getTargetCode() {
+		return targetCode;
 	}
-	public void setCode(String code) {
-		this.code = code;
+	public void setTargetCode(String targetCode) {
+		this.targetCode = targetCode;
 	}
 	public int getDimension() {
 		return dimension;
@@ -118,6 +117,18 @@ public class TargetPo extends BasePO{
 	public void setAttr(int attr) {
 		this.attr = attr;
 	}
+	public Date getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+	public Date getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
 	public int getIsCore() {
 		return isCore;
 	}
@@ -135,6 +146,12 @@ public class TargetPo extends BasePO{
 	}
 	public void setVersionId(Long versionId) {
 		this.versionId = versionId;
+	}
+	public int getVersionState() {
+		return versionState;
+	}
+	public void setVersionState(int versionState) {
+		this.versionState = versionState;
 	}
 	public int getIsDelete() {
 		return isDelete;
@@ -184,22 +201,6 @@ public class TargetPo extends BasePO{
 	public void setQmzjState(int qmzjState) {
 		this.qmzjState = qmzjState;
 	}
-	public Date getCreateTime() {
-		return createTime;
-	}
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-	public Date getStartTime() {
-		return startTime;
-	}
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
-	}
-	public Date getEndTime() {
-		return endTime;
-	}
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
-	}
+	
+	
 }

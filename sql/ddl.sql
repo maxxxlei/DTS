@@ -3,6 +3,8 @@ create table xd24_target
 (
    ID                   NUMBER(21)           not null,
    year               VARCHAR2(4),
+   file_code          VARCHAR2(255),
+   target_code        VARCHAR2(255),
    create_time        DATE,
    effect_Time        DATE,
    account_Id         NUMBER(21),
@@ -15,8 +17,9 @@ create table xd24_target
    start_time         DATE,
    end_time           DATE,
    is_Core            SMALLINT,
-   desciption         CLOB,
+   description         CLOB,
    version_Id         NUMBER(21),
+   version_state      SMALLINT,
    is_delete          SMALLINT,
    update_time        DATE,
    ghjh_state         SMALLINT,
@@ -204,7 +207,7 @@ create table xd24_target_decompose
 (
    id                 NUMBER(21)           not null,
    target_Id          NUMBER(21),
-   target_desc        VARCHAR2(500),
+   target_desc        CLOB,
    target_recipientId NUMBER(21),
    constraint PK_XD24_TARGET_DECOMPOSE primary key (id)
 );
@@ -303,6 +306,7 @@ comment on column xd24_version.is_delete is
 comment on column xd24_version.description is
 '描述';
 
+<<<<<<< HEAD
 
 -- 规划表
 
@@ -422,3 +426,32 @@ comment on column "xd24_zzjhlx"."isDelete" is
 comment on column "xd24_zzjhlx"."description" is
 '描述';
 
+=======
+-- 指标库管理表
+
+create table xd24_quota 
+(
+   id                 NUMBER(21) PRIMARY KEY,
+   quotaClass         SMALLINT not null,
+   quotaName          VARCHAR2(255) not null,
+   quotaUnit          SMALLINT not null,
+   quotaType          VARCHAR2(255) not null
+);
+
+comment on table xd24_quota is
+'指标库';
+
+comment on column xd24_quota.quotaClass is
+'指标分类名称';
+
+comment on column xd24_quota.quotaName is
+'指标项名称';
+
+comment on column xd24_quota.quotaUnit is
+'度量';
+
+comment on column xd24_quota.quotaType is
+'指标控件类型
+';
+
+>>>>>>> branch 'master' of https://github.com/sjzy-gitHub/xd24zfz.git

@@ -3,36 +3,39 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping>
+<hibernate-mapping package="com.seeyon.apps.xd.po">
 
-	<class entity="TargerPo" table="xd24_target">
-		<id name="id" type="long" column="id" length="21">
+	<class name="TargerPo" table="xd24_target">
+		<id name="id" type="long" column="ID" length="21">
 			<generator class="assigned" />
 		</id>
 
-		<property name="year" type="string" column="year" not-null="false" length="4" />
-		<property name="createTime" type="date" column="create_time" not-null="false" />
-		<property name="effectTime" type="date" column="effect_Time" not-null="false" />
-		<property name="accountId" type="long" column="account_Id" length="21" />
-		<property name="memberId" type="long" column="member_Id" length="21" />
-		<property name="pTargetId" type="long" column="pTarget_Id" length="21" />
-		<property name="code" type="string" column="code" length="255" />
-		<property name="dimension" type="integer" column="dimension" />
-		<property name="subject" type="string" column="subject" length="255" />
-		<property name="attr" type="integer" column="attr" />
-		<property name="startTime" type="date" column="start_time" />
-		<property name="endTime" type="date" column="end_time" />
-		<property name="isCore" type="integer" column="is_Core" />
-		<property name="description" type="string" column="description" />
-		<property name="versionId" type="long" column="version_Id" length="21" />
-		<property name="isDelete" type="integer" column="is_delete" />
-		<property name="updateTime" type="date" column="update_time" />
-		<property name="ghjhState" type="integer" column="ghjh_state"  />
-		<property name="zxtjState" type="integer" column="zxtj_state"  />
-		<property name="dbfxState" type="integer" column="dbfx_state"  />
-		<property name="gxjyState" type="integer" column="gxjy_state"  />
-		<property name="khpjState" type="integer" column="khpj_state"  />
-		<property name="qmzjState" type="integer" column="qmzj_state"  />
+		<property name="year" type="string" column="YEAR" not-null="false" length="4" />
+		<property name="fileCode" type="string" column="FILE_CODE" not-null="false" length="255" />
+		<property name="code" type="string" column="CODE" not-null="false" length="255" />
+		<property name="createTime" type="timestamp" column="CREATE_TIME" not-null="false" />
+		<property name="effectTime" type="timestamp" column="EFFECT_TIME" not-null="false" />
+		<property name="accountId" type="long" column="ACCOUNT_ID" length="21" />
+		<property name="memberId" type="long" column="MEMBER_ID" length="21" />
+		<property name="pTargetId" type="long" column="PTARGET_ID" length="21" />
+		<property name="targetCode" type="string" column="target_code" length="255" />
+		<property name="dimension" type="integer" column="DIMENSION" />
+		<property name="subject" type="string" column="SUBJECT" length="255" />
+		<property name="attr" type="integer" column="ATTR" />
+		<property name="startTime" type="timestamp" column="START_TIME" />
+		<property name="endTime" type="timestamp" column="END_TIME" />
+		<property name="isCore" type="integer" column="IS_CORE" />
+		<property name="description" type="clob" column="DESCRIPTION" />
+		<property name="versionId" type="long" column="VERSION_ID" length="21" />
+		<property name="versionState" type="integer" column="VERSION_STATE" />
+		<property name="isDelete" type="integer" column="IS_DELETE" />
+		<property name="updateTime" type="timestamp" column="UPDATE_TIME" />
+		<property name="ghjhState" type="integer" column="GHJH_STATE"  />
+		<property name="zxtjState" type="integer" column="ZXTJ_STATE"  />
+		<property name="dbfxState" type="integer" column="DBFX_STATE"  />
+		<property name="gxjyState" type="integer" column="GXJY_STATE"  />
+		<property name="khpjState" type="integer" column="KHPJ_STATE"  />
+		<property name="qmzjState" type="integer" column="QMZJ_STATE"  />
 
 	</class>
 </hibernate-mapping>
