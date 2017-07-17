@@ -140,7 +140,6 @@ $(function(){
              $.alert("只能选择一条记录进行修改!");//只能选择一条记录进行修改
              return;
          }
-         alert(rows[0].isEnable);
          if("启用" == rows[0].isEnable){
         	 $.alert("该版本已启用!");
              return;
