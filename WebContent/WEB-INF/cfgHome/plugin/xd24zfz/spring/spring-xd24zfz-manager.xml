@@ -15,13 +15,13 @@
     <!-- 战略地图维度 -->
 
     <!-- 组织计划类型 -->
-    <bean name="zzjhlxManger" class="com.seeyon.apps.xd.manager.Xd24ZzjhlxMangerImpl"/>
+    <bean id="xd24ZzjhlxManger" class="com.seeyon.apps.xd.manager.Xd24ZzjhlxMangerImpl"/>
    
     <bean id="xd24ZldtwdManager" class="com.seeyon.apps.xd.manager.Xd24ZldtwdManagerImpl"/>
     <bean id="xd24ZldtwdDao" class="com.seeyon.apps.xd.dao.Xd24ZldtwdDaoImpl"/>
     <!-- 菜单角色管理 -->
-    <bean name="menuRoleManager" class="com.seeyon.apps.xd.manager.MenuRoleManagerImpl"/>
-    <bean name="menuRoleDao" class="com.seeyon.apps.xd.dao.MenuRoleDaoImpl"/>
+    <bean id="menuRoleManager" class="com.seeyon.apps.xd.manager.MenuRoleManagerImpl"/>
+    <bean id="menuRoleDao" class="com.seeyon.apps.xd.dao.MenuRoleDaoImpl"/>
 
     <!-- 人员基础信息 -->
     <bean id="xdUserManager" class="com.seeyon.apps.xd.manager.XdUserManagerImpl"/>

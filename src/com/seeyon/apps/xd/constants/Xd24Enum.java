@@ -329,5 +329,7 @@ public class Xd24Enum {
             this.text = text;
         }
 	}
+	
+	
 
 }

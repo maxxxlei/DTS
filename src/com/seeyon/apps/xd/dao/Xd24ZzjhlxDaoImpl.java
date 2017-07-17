@@ -30,8 +30,8 @@ public class Xd24ZzjhlxDaoImpl implements Xd24ZzjhlxDao{
 	public FlipInfo getZzjhList(FlipInfo fi, Map<String, Object> map) throws BusinessException{
 		Map<String,Object> params = new HashMap<String,Object>();
 		StringBuffer sb = new StringBuffer();
-		sb.append("select z.id,z.name,z.isEnable,z.updateTime,z.createTime FROM ZzjhlxPo z where 1=1 ");
-		
+		sb.append("select z.id,z.name,z.isEnable,z.updateTime,z.createTime FROM ZzjhlxPo z where 1=1 and z.isDelete=:isDelete and z.state=:vstate");
+		params.put("isDelete", );
 		if(map != null && map.get("condition") != null){
 			String condition = (String) map.get("condition");
 			String value = (String) map.get("value");
@@ -96,17 +96,14 @@ public class Xd24ZzjhlxDaoImpl implements Xd24ZzjhlxDao{
 	/**
 	 * 通过id查询组织计划
 	 */
-@Override
-public List getZzjhlxById(String id) {
-	String hql = "select z.id,z.name,z.isEnable,z.createTime,z.desc FROM ZzjhlxPo z where z.id=:id";
-	Map<String,Object> params = new HashMap<String,Object>();
-	params.put("id", Long.valueOf(id));
-	return DBAgent.find(hql,params);
-					
-}
+	@Override
+	public ZzjhlxPo getZzjhlxById(Long id) {
+		return DBAgent.get(ZzjhlxPo.class, id);
+						
+	}
 
 	@Override
-	public List getNameAndId(String id, String name) {
+	public List getZzjhlxByName(String name) {
 		String hql = "select z.id, z.name FROM ZzjhlxPo z where z.name=:name";
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("name", String.valueOf(name));

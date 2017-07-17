@@ -48,7 +48,7 @@ public interface Xd24ZzjhlxDao {
 	 * @param id
 	 * @return
 	 */
-	public List getZzjhlxById(String id) throws BusinessException;
+	public ZzjhlxPo getZzjhlxById(Long id) throws BusinessException;
 
 	/**
 	 * 
@@ -57,7 +57,7 @@ public interface Xd24ZzjhlxDao {
 	 * @param name
 	 * @return
 	 */
-	public List getNameAndId(String id, String name)throws BusinessException;
+	public List getZzjhlxByName(String name)throws BusinessException;
 
 	/**
 	 * 根据ID获取对象

@@ -66,10 +66,13 @@ public class Xd24ZzjhlxMangerImpl implements Xd24ZzjhlxManger{
 	 */
 	@Override
 	@AjaxAccess
-	public Boolean getNameAndId(String name, String id) throws BusinessException{
+	public boolean checkZzjhlxByName(String name, String id) throws BusinessException{
 		Boolean flag = false;
-		List list = zzjhlxDao.getNameAndId(id,name);
+		List list = zzjhlxDao.getZzjhlxByName(name);
 		List<ZzjhlxVo> zv = new ArrayList<ZzjhlxVo>();
+		if(Strings.isEmpty(list)){
+			return false;
+		}
 		if(Strings.isNotEmpty(list)){
 			for (int i = 0; i < list.size(); i++) {
 				ZzjhlxVo  vo = new ZzjhlxVo();
@@ -85,19 +88,22 @@ public class Xd24ZzjhlxMangerImpl implements Xd24ZzjhlxManger{
 				}
 				zv.add(vo);
 			}
-			for(ZzjhlxVo zjv : zv){
-				if(name.equals(zjv.getName()) && id == zjv.getId().toString()){
-					return false;//姓名相同，相同
-				}else if((!name.equals(zjv.getName()) && (id != zjv.getId().toString()))){
-					return true;//姓名不同，id不同
-				}else if((!name.equals(zjv.getName()) && (id == zjv.getId().toString()))){
-					return true;//不同名字，相同的id
-				}else if((name.equals(zjv.getName()) && (id != zjv.getId().toString()))){
-					return false;//相同的名字，不同的id
+			if(Strings.isBlank(id)){
+				for(ZzjhlxVo zjv : zv){
+					if(name.equals(zjv.getName())){
+						flag = true;
+					}
+				}
+			}else{
+				for(ZzjhlxVo zjv : zv){
+					if(name.equals(zjv.getName()) && !zjv.getId().toString().equals(id)){
+						flag = true;
+					}
 				}
 			}
-			}
-		return true;
+			
+		}
+			return flag;
 		}
 	
 	
@@ -109,37 +115,10 @@ public class Xd24ZzjhlxMangerImpl implements Xd24ZzjhlxManger{
 	@Override
 	@AjaxAccess
 	public ZzjhlxVo getZzjhlxById(String id) throws BusinessException{
-
-		List list = zzjhlxDao.getZzjhlxById(id);
-		ZzjhlxVo  vo = new ZzjhlxVo();
-		if(Strings.isNotEmpty(list)){
-			for (int i = 0; i < list.size(); i++) {
-				Object[] obj = (Object[]) list.get(i);
-				int j = 0;
-				
-				Object id1 = obj[j++];
-				if(id1 != null){
-				    vo.setId(Long.parseLong(id1.toString()));
-				}
-				Object name = obj[j++];
-				if(name != null){
-				    vo.setName(name.toString());
-				}
-				Object isEnable = obj[j++];
-				if(isEnable != null){
-				    vo.setIsEnable(Integer.parseInt(isEnable.toString()));
-				}
-				Object createTime = obj[j++];
-				if(createTime != null){
-					Timestamp ts = (Timestamp) createTime;
-					vo.setCreateTime(new Date(ts.getTime()));
-				}
-				Object desc = obj[j++];
-				if(desc != null){
-				    vo.setDesc(desc.toString());
-				}
-				return vo;
-			}
+		ZzjhlxVo vo = new ZzjhlxVo();
+		if(Strings.isNotBlank(id)){
+			ZzjhlxPo po = zzjhlxDao.getZzjhlxById(Long.parseLong(id));
+			BeanUtils.convert(vo, po);
 		}
 		return vo;
 	}

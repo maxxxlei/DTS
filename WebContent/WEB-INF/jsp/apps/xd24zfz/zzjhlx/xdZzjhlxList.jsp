@@ -15,7 +15,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>组织计划</title>
-    <script type="text/javascript" src="${path}/ajax.do?managerName=zzjhlxManger"></script>
+    <script type="text/javascript" src="${path}/ajax.do?managerName=xd24ZzjhlxManger"></script>
     <script type="text/javascript">
         var grid;
         $(function () {
@@ -128,7 +128,7 @@
                 vChange: true,
                 isHaveIframe:true,
                 slideToggleBtn:true,
-                managerName : "zzjhlxManger",
+                managerName : "xd24ZzjhlxManger",
                 managerMethod : "getZzjhList"
             });
              var o = new Object();
@@ -142,21 +142,27 @@
             
             //双击 编辑组织计划
             function dbclickRow(){
-            	//$('#summary').attr("src",_ctxPath + "/xdcd24/zzjhController.do?method=zzjhAdd&flag=update");
+            	//$('#summary').attr("src",_ctxPath + "/xd24/zzjhController.do?method=zzjhAdd&flag=update");
             	updateRow();
             }
             //显示组织计划详情
             function showInfo(){
             	debugger;
+            	var rows = grid.grid.getSelectRows();
+                if(rows.length === 0){
+                    $.alert("${ctp:i18n('permission.operation.choose.one')}!");//请选择一条记录
+                    return;
+                }
+                
                 grid.grid.resizeGridUpDown('middle');
-                $('#summary').attr("src",_ctxPath + "/xdcd24/zzjhController.do?method=edit&flag=show&"+row[0].id);
+                $('#summary').attr("src",_ctxPath + "/xd24/zzjhController.do?method=zzjhEdit&flag=show&id="+rows[0].id);
             	
             }
             
             //新建组织计划
             function addRow(){
                 //将新建页面显示
-                $('#summary').attr("src",_ctxPath + "/xdcd24/zzjhController.do?method=zzjhAdd&flag=new");
+                $('#summary').attr("src",_ctxPath + "/xd24/zzjhController.do?method=zzjhAdd&flag=new");
                 grid.grid.resizeGridUpDown('middle');
             }
             //修改组织计划
@@ -172,7 +178,7 @@
                 }
                 grid.grid.resizeGridUpDown('middle');
                 debugger;                                                                               //获取点击修改的id
-                $('#summary').attr("src",_ctxPath + "/xdcd24/zzjhController.do?method=zzjhAdd&flag=update&rowsId="+rows[0].id);
+                $('#summary').attr("src",_ctxPath + "/xd24/zzjhController.do?method=zzjhAdd&flag=update&rowsId="+rows[0].id);
             }
             //删除组织计划
             function deleteRow(){
@@ -181,7 +187,7 @@
                      $.alert("请选择要删除的记录"); //请选择要删除的记录
                      return;
                  }
-            	 var manager = new zzjhlxManger();
+            	 var manager = new xd24ZzjhlxManger();
             	 debugger;
             	 var tranObj = new Array();
             	 for(i=0;i<rows.length;i++){

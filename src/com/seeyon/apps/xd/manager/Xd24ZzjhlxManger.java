@@ -20,7 +20,7 @@ public interface Xd24ZzjhlxManger {
 
 	public ZzjhlxVo getZzjhlxById(String id)throws BusinessException;
 
-	Boolean getNameAndId(String id, String name)throws BusinessException;
+	public boolean checkZzjhlxByName(String id, String name)throws BusinessException;
 	/**
 	 * 批量删除
 	 * @param ids

@@ -30,7 +30,7 @@ public class ZzjhlxPo extends BasePO {
 	private Long versionId;
 	
 	/**
-	 * 启用状态
+	 * 版本有效状态
 	 */
 	private int state;
 	
