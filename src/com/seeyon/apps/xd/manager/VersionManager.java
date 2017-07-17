@@ -39,7 +39,7 @@ public interface VersionManager {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public Boolean getVersionByVcodeAndVyear(String vYear,String vCode) throws BusinessException;
+	public Boolean getVersionByVcodeAndVyear(Map<String, Object> params) throws BusinessException;
 	/**
 	 * 
 	 * @param id
@@ -56,4 +56,11 @@ public interface VersionManager {
 	 * @throws BusinessException
 	 */
 	public String updateVersionDesc(Long id,String desc) throws BusinessException;
+	
+	/**
+	 * 根据verionId查询记录数判断版本是否被使用
+	 * @param id
+	 * @return
+	 */
+	public Boolean getTargetByVersionId(String[] ids) throws BusinessException; 
 }

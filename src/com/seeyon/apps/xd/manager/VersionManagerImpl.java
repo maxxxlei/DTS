@@ -128,9 +128,9 @@ public class VersionManagerImpl implements VersionManager{
 	 * 判断新增时是否有重复数据
 	 */
 	@AjaxAccess
-	public Boolean getVersionByVcodeAndVyear(String vYear, String vCode)
+	public Boolean getVersionByVcodeAndVyear(Map<String, Object> params)
 			throws BusinessException {
-		Integer size = versionDao.getVersionByYearAndCode(vYear, vCode);
+		Integer size = versionDao.getVersionCounts(params);
 		if(size > 0){
 			return true;
 		}
@@ -148,5 +148,11 @@ public class VersionManagerImpl implements VersionManager{
 			throws BusinessException {
 		
 		return versionDao.updateVersionDesc(id, desc);
+	}
+
+	@AjaxAccess
+	public Boolean getTargetByVersionId(String[] ids) throws BusinessException {
+		
+		return versionDao.getTargetCountByVersionId(ids);
 	}
 }

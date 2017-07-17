@@ -140,11 +140,18 @@ $(function(){
              $.alert("只能选择一条记录进行修改!");//只能选择一条记录进行修改
              return;
          }
-         if(1 == rows[0].isEnable){
+         alert(rows[0].isEnable);
+         if("启用" == rows[0].isEnable){
         	 $.alert("该版本已启用!");
              return;
          }
          var vsManager = new versionManager();
+         var o = new Object();
+         o.isEnable = 1;
+         if(vsManager.getVersionByVcodeAndVyear(o)){
+             $.alert("已有版本启用！");
+             return;
+         }
          tranObj[0] = rows[0].id;
          var confirm = $.confirm({
              'msg': "确定启用该版本？",//确定删除该权限，该操作无法恢复
@@ -187,7 +194,7 @@ $(function(){
              $.alert("只能选择一条记录进行修改!");//只能选择一条记录进行修改
              return;
          }
-         if(0 == rows[0].isEnable){
+         if("停用" == rows[0].isEnable){
              $.alert("该版本已停用!");
              return;
          }
@@ -236,12 +243,18 @@ $(function(){
               $.alert("只能选择一条记录进行修改!");//只能选择一条记录进行修改
               return;
           }
+          var tranObj = new Array();
+          tranObj[0] = rows[0].id;
+          var vsManager = new versionManager();
+          //if(vsManager.getTargetByVersionId(tranObj)){
+        	//  $.alert("该条版本信息已被使用不进行修改操作！");
+        	//  return;
+         // }
           grid.grid.resizeGridUpDown('middle');
           $('#summary').attr("src",_ctxPath + "/xd24/versionController.do?method=editVersion&type=change&id="+rows[0].id);
     
       }
       function deleteRow(){
-    	  debugger;
     	  var type = "del";
     	  var rows = grid.grid.getSelectRows();
           if(rows.length === 0){
@@ -249,11 +262,16 @@ $(function(){
               return;
           }
           var vsManager = new versionManager();
+          
           var tranObj = new Array();
           for(i=0;i<rows.length;i++){
              //进行数据验证，是否可以进行删除操作
               tranObj[i] = rows[i].id;
           }
+          //if(vsManager.getTargetByVersionId(tranObj)){
+          //    $.alert("该条版本信息已被使用不进行删除！");
+          //   return;
+          //}
           var confirm = $.confirm({
               'msg': "确定删除该数据，该操作无法恢复",//确定删除该权限，该操作无法恢复
               ok_fn: function () { 

@@ -11,14 +11,17 @@
 $(function(){
 	//表单提交
 	 $("#versionSubmit").click(function(){
-		 var vYear = $("#v_Year").val();
-		 var vCode = $("#vCode").val();
-		 if(vYear == null || vCode == null || vYear == "" || vCode == ""){
+		 var year =  $("#v_Year").val();
+		 var code =  $("#vCode").val();
+		 if(year == null || code == null || year == "" || code == ""){
 			 $.alert("年度或版本编号不能为空！");
 			 return;
 		 }
+		 var o = new Object();
+		 o.vYear = year;
+		 o.vCode = code;
 		 var vsManager = new versionManager();
-		 if(vsManager.getVersionByVcodeAndVyear(vYear,vCode)){
+		 if(vsManager.getVersionByVcodeAndVyear(o)){
 			 $.alert("该数据已存在，请重新输入！");
 			 return;
 		 }

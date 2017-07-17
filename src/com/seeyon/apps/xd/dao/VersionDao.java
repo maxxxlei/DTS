@@ -14,10 +14,22 @@ public interface VersionDao {
 	 */
 	public Boolean saveVersion(VersionPo versionPo) throws BusinessException;
 	
-	
+	/**
+	 * 分页查询所有
+	 * @param fi
+	 * @param map
+	 * @return
+	 * @throws BusinessException
+	 */
 	public FlipInfo getVersion(FlipInfo fi,Map<String, Object> map) throws BusinessException;
 	
-	
+	/**
+	 * 待条件的分页查询
+	 * @param id
+	 * @param type
+	 * @return
+	 * @throws BusinessException
+	 */
 	public String updateVersions(String[] id,String type) throws BusinessException;
 	
 	/**
@@ -38,11 +50,25 @@ public interface VersionDao {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public Integer getVersionByYearAndCode(String vYear,String vCode) throws BusinessException;
+	public Integer getVersionCounts(Map<String, Object> params) throws BusinessException;
 	/**
 	 * 根据id获取修改页面展示数据
 	 */
 	public VersionPo getVersionById(Long id)throws BusinessException;
 	
+	/**
+	 * 修改表单数据
+	 * @param id
+	 * @param desc
+	 * @return
+	 * @throws BusinessException
+	 */
 	public String updateVersionDesc(Long id,String desc) throws BusinessException;
+	/**
+	 * 根据id获取目标表中是否引用该版本
+	 * @param id   版本id
+	 * @return
+	 * @throws BusinessException
+	 */
+	public Boolean getTargetCountByVersionId(String[] ids) throws BusinessException;
 }

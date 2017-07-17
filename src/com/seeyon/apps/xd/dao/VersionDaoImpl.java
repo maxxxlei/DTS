@@ -16,6 +16,7 @@ import com.seeyon.ctp.util.DBAgent;
 import com.seeyon.ctp.util.DateUtil;
 import com.seeyon.ctp.util.FlipInfo;
 import com.seeyon.ctp.util.Strings;
+import com.sun.jna.platform.win32.WinDef.LONG;
 
 public class VersionDaoImpl  implements VersionDao {
 
@@ -38,8 +39,9 @@ public class VersionDaoImpl  implements VersionDao {
 	 */
 	@Override
 	public FlipInfo getVersion(FlipInfo fi,Map<String, Object> map) throws BusinessException {
-		String hql = "select v.id ,v.vCode ,v.vYear ,v.createTime ,v.isEnable ,v.state  from VersionPo v where v.isDelete = 0 order by v.updateTime desc";
+		String hql = "select v.id ,v.vCode ,v.vYear ,v.createTime ,v.isEnable ,v.state  from VersionPo v where v.isDelete = :isDelete order by v.updateTime desc";
 		LOGGER.info("查询版本信息hql===" + hql);
+		map.put("isDelete", 0);
 		DBAgent.find(hql, map, fi);
 		return fi;
 	}
@@ -53,8 +55,9 @@ public class VersionDaoImpl  implements VersionDao {
 		Map<String,Object> params = new HashMap<String,Object>();
 		for(String id : ids){
 			params.put("id", Long.parseLong(id));
-			String hql ="FROM VersionPo where id =:id";
-
+			params.put("isDelete", 0);
+			String hql ="FROM VersionPo where id =:id and isDelete =:isDelete";
+            
 			vspo.addAll(DBAgent.find(hql, params));
 		}
 		LOGGER.info("要删除的数据===" + vspo);
@@ -66,6 +69,7 @@ public class VersionDaoImpl  implements VersionDao {
 			}else if("disenable".equals(type)){
 				v.setIsEnable(0);
 			}
+			v.setUpdateTime(new Date());
 			DBAgent.update(v);	
 		}
 		return "SUCCESS";
@@ -130,21 +134,27 @@ public class VersionDaoImpl  implements VersionDao {
 	
 	
 	
-	public Integer getVersionByYearAndCode(String vYear, String vCode)
+	public Integer getVersionCounts(Map<String, Object> params)
 			throws BusinessException {
-		Map<String,Object> params = new HashMap<String,Object>();
-	    params.put("vYear", vYear);
-	    params.put("vCode", vCode);
-	    String hql ="select count(*) from VersionPo where vYear =:vYear and vCode = :vCode";
-	    List list = DBAgent.find(hql,params);
+		
+	    StringBuffer hql = new StringBuffer("select count(*) from VersionPo");
+	    hql.append(" where isDelete =:isDelete");
+	    if(params.size() == 1){
+	    	hql.append(" and isEnable =:isEnable");
+	    }else{
+	    	hql.append(" and vYear =:vYear and vCode = :vCode");
+	    }
+	    params.put("isDelete", 0);
+	    List list = DBAgent.find(hql.toString(),params);
 	    
-		String a = list.get(0).toString();
+		LOGGER.info("hql==" + hql +";params" + params);
 		return Integer.parseInt(list.get(0).toString());
 	}
 	
 	public VersionPo getVersionById(Long id) throws BusinessException {
 		return DBAgent.get(VersionPo.class, id);
 	}
+	
 	@Override
 	public String updateVersionDesc(Long id, String desc)
 			throws BusinessException {
@@ -153,10 +163,33 @@ public class VersionDaoImpl  implements VersionDao {
 		
 		LOGGER.info("要修改的数据===" + vspo);
 		vspo.setDesc(desc);
+		vspo.setUpdateTime(new Date());
 	    DBAgent.update(vspo);	
 		
 		return "SUCCESS";
 	}
-
 	
+	@Override
+	public Boolean getTargetCountByVersionId(String[] ids) throws BusinessException {
+		Boolean exist = false;
+		for (String id : ids) {
+			Map<String,Object> params = new HashMap<String,Object>();
+			StringBuffer hql = new StringBuffer("select count(*) from TargetPo");
+		    hql.append(" where isDelete =:isDelete");
+		    params.put("isDelete", 0);
+		    hql.append(" and versionId = :versionId");
+		    params.put("versionId", Long.valueOf(id));
+		    
+		    LOGGER.info("hql==" + hql +";params" + params);
+		    List list = DBAgent.find(hql.toString(),params);
+		    int isExist = Integer.parseInt(list.get(0).toString());
+		    if(isExist > 0){
+		    	exist = true;
+		    	break;
+		    }
+		}
+		LOGGER.info("getTargetCountByVersionId操作结果===" + exist);
+		
+		return exist;
+	}
 }
