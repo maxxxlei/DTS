@@ -3,9 +3,9 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping>
+<hibernate-mapping package="com.seeyon.apps.xd.po">
 
-	<class entity-name="com.seeyon.apps.xd.po.TargetQuotaPo" table="xd24_target_quota">
+	<class name="TargetQuotaPo" table="xd24_target_quota">
 		<id name="id" type="long" column="id" length="21">
 			<generator class="assigned" />
 		</id>

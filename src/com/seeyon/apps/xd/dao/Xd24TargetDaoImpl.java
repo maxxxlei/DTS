@@ -52,7 +52,7 @@ public class Xd24TargetDaoImpl implements Xd24TargetDao {
 		Map<String,Object> params = new HashMap<String,Object>();
 		List<Object[]> list = new ArrayList<Object[]>();
 		StringBuffer hql = new StringBuffer("select t.id,t.subject,t.createTime,t.effectTime,t.memberId,t.startTime,");
-		hql.append("t.endTime from TargetPo t where t.isDelete =:isDelete");
+		hql.append("t.endTime from TargetPo t where t.isDelete =:isDelete and t.versionId =:versionId");
 		params.put("isDelete", Integer.valueOf(Xd24Enum.Target.DELETE_N.getKey()));
 		try {
 			if("subject".equals(key) && Strings.isNotBlank(value)){

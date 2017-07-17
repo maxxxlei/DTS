@@ -187,6 +187,12 @@ public class Xd24ZldtwdManagerImpl implements Xd24ZldtwdManager {
 		return xd24ZldtwdDao.getSumZldtwName(name, id, isNew);
 	}
 
+	@Override
+	public List<ZldtwdPo> getAllZldtwd(Integer isEnable, Integer isDelete,
+			Integer isVersionEnable) throws BusinessException {
+		return xd24ZldtwdDao.getAllZldtwd(isEnable, isDelete, isVersionEnable);
+	}
+
 
 
 }

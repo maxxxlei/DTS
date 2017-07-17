@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import com.seeyon.apps.xd.constants.Xd24Enum;
 import com.seeyon.apps.xd.po.ZldtwdPo;
 import com.seeyon.ctp.common.exceptions.BusinessException;
 import com.seeyon.ctp.util.DBAgent;
@@ -147,6 +148,28 @@ public class Xd24ZldtwdDaoImpl implements Xd24ZldtwdDao {
 			LOGGER.error(e.getMessage(), e);
 			throw new BusinessException(e);
 		}
+	}
+
+	@Override
+	public List<ZldtwdPo> getAllZldtwd(Integer isEnable,Integer isDelete,Integer isVersionEnable) throws BusinessException {
+		StringBuffer hql = new StringBuffer("select z.id,z.name from ZldtwdPo z where 1=1");
+		Map<String,Object> params = new HashMap<String, Object>();
+		if(isEnable != null){
+			hql.append(" and z.isEnable =:isEnable");
+			params.put("isEnable",isEnable);
+		}
+		if(isDelete != null){
+			hql.append(" and z.isDelete =:isDelete");
+			params.put("isDelete",isDelete);
+		}
+		if(isVersionEnable != null){
+			hql.append(" and z.versionId =:versionId");
+			params.put("versionId",isVersionEnable);
+		}
+		hql.append(" order by z.createTime desc");
+		LOGGER.info("查询所有战略地图的sql=========="+hql.toString());
+		
+		return DBAgent.find(hql.toString(), params);
 	}
 
 

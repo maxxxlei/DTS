@@ -1,7 +1,9 @@
 package com.seeyon.apps.xd.manager;
 
+import java.util.List;
 import java.util.Map;
 
+import com.seeyon.apps.xd.po.ZldtwdPo;
 import com.seeyon.apps.xd.vo.ZldtwdVo;
 import com.seeyon.ctp.common.exceptions.BusinessException;
 import com.seeyon.ctp.util.FlipInfo;
@@ -58,4 +60,10 @@ public interface Xd24ZldtwdManager {
 	 * @throws BusinessException
 	 */
 	public boolean getSumZldtwName(String name,String id,boolean isNew) throws BusinessException;
+	/**
+	 * 获取所有战略地图维度
+	 * @return
+	 * @throws BusinessException
+	 */
+	public List<ZldtwdPo> getAllZldtwd(Integer isEnable,Integer isDelete,Integer isVersionEnable) throws BusinessException;
 }

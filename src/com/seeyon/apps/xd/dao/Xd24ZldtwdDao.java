@@ -55,4 +55,10 @@ public interface Xd24ZldtwdDao {
 	 * @throws BusinessException
 	 */
 	public boolean getSumZldtwName(String name,String id,boolean isNew) throws BusinessException;
+	/**
+	 * 根据状态获取所有战略地图维度
+	 * @return
+	 * @throws BusinessException
+	 */
+	public List<ZldtwdPo> getAllZldtwd(Integer isEnable,Integer isDelete,Integer isVersionEnable) throws BusinessException;
 }

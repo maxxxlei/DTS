@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import www.seeyon.com.utils.UUIDUtil;
 
 import com.seeyon.apps.xd.constants.Xd24Enum;
+import com.seeyon.apps.xd.manager.UserManager;
 import com.seeyon.apps.xd.manager.Xd24TargetManager;
 import com.seeyon.apps.xd.po.TargetPo;
 import com.seeyon.apps.xd.vo.UserVo;
@@ -35,14 +36,14 @@ import com.seeyon.ctp.util.ParamUtil;
 public class Xd24TargetController extends BaseController{
 
 	private static final Logger LOGGER = Logger.getLogger(Xd24TargetController.class);
-	private OrgManager orgManager;
 	private Xd24TargetManager xd24TargetManager;
+	private UserManager   userManager;
 
+	public void setUserManager(UserManager userManager) {
+		this.userManager = userManager;
+	}
 	public void setXd24TargetManager(Xd24TargetManager xd24TargetManager) {
 		this.xd24TargetManager = xd24TargetManager;
-	}
-	public void setOrgManager(OrgManager orgManager) {
-		this.orgManager = orgManager;
 	}
 	/**
 	 * 跳转新增目标页面
@@ -175,28 +176,8 @@ public class Xd24TargetController extends BaseController{
 	public ModelAndView transTargetForm(HttpServletRequest request,HttpServletResponse response) throws BusinessException{
 		ModelAndView mav = new ModelAndView("apps/xd24zfz/target/targetForm");
 		User user = AppContext.getCurrentUser();
-		UserVo uv = new UserVo();
-		uv.setId(user.getId());
-		uv.setName(user.getName());
-		Long accountId = user.getAccountId();
-		uv.setAccountId(accountId);
-		Long postId = user.getPostId();
-		uv.setPostId(postId);
-		V3xOrgPost post = orgManager.getPostById(postId);
-		uv.setPostName(post.getName());
-		Long groupId = user.getDepartmentId();
-		uv.setGroupId(groupId);
-		V3xOrgDepartment group = orgManager.getDepartmentById(groupId);
-		uv.setGroupName(group.getName());
-		V3xOrgAccount orgAccount = orgManager.getAccountById(accountId);
-		uv.setAccountName(orgAccount.getName());
-		V3xOrgDepartment departMent = orgManager.getDepartmentByPath(group.getParentPath());
-		uv.setDepartMentId(departMent.getId());
-		uv.setDepartMentName(departMent.getName());
-		V3xOrgDepartment center = orgManager.getDepartmentByPath(departMent.getParentPath());
-		uv.setCenterId(center.getId());
-		uv.setCenterName(center.getName());
-		mav.addObject("user", uv);
+		UserVo userInfo = userManager.getUserInfo(user.getId());
+		mav.addObject("user", userInfo);
 		return mav;
 	}
 }
