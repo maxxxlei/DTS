@@ -12,9 +12,15 @@ public class UserVo {
 	private String postName;//岗位
 	private Long departMentId;
 	private String departMentName;//部门
-	private Long centreId;
-	private String centreName;//中心
+	private Long centerId;
+	private String centerName;//中心
 
+	public Long getCenterId() {
+		return centerId;
+	}
+	public void setCenterId(Long centerId) {
+		this.centerId = centerId;
+	}
 	public Long getGroupId() {
 		return groupId;
 	}
@@ -27,17 +33,11 @@ public class UserVo {
 	public void setGroupName(String groupName) {
 		this.groupName = groupName;
 	}
-	public Long getCentreId() {
-		return centreId;
+	public String getCenterName() {
+		return centerName;
 	}
-	public void setCentreId(Long centreId) {
-		this.centreId = centreId;
-	}
-	public String getCentreName() {
-		return centreName;
-	}
-	public void setCentreName(String centreName) {
-		this.centreName = centreName;
+	public void setCenterName(String centerName) {
+		this.centerName = centerName;
 	}
 	public Long getId() {
 		return id;
