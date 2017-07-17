@@ -30,7 +30,7 @@ public class DimensionCategoryEnum implements CustomCode {
 			List<ZldtwdPo> list = xd24ZldtwdManager.getZldtwdList4Enum();
 			if(Strings.isNotEmpty(list)){
 				for(ZldtwdPo zp : list){
-					myMap.put(zp.getId(), zp.getName());
+					myMap.put(zp.getId()+"", zp.getName());
 				}
 			}
 		} catch (BusinessException e) {

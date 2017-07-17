@@ -8,14 +8,14 @@ public class Xd24Enum {
 	 *
 	 * @time 2017年7月16日
 	 */
-	public enum Target{
+	public enum IsDelete{
 	    DELETE_Y("1","删除"),
 	    DELETE_N("0","未删除");
 	    
 	    private String key;
 	    private String text;
 	    
-	    Target(String key,String text){
+	    IsDelete(String key,String text){
 	        this.setKey(key);
 	        this.setText(text);
 	    }

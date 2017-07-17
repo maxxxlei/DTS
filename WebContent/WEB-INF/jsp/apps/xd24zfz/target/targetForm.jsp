@@ -10,6 +10,10 @@
 <title>录入</title>
 <link rel="stylesheet" type="text/css" href="${path }/apps_res/xd24zfz/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="${path }/apps_res/xd24zfz/css/css.css">
+    <link rel="stylesheet" type="text/css" href="${path }/apps_res/xd24zfz/js/datepicker/css/bootstrap-datepicker.css">
+<script src="${path }/apps_res/xd24zfz/js/bootstrap.js"></script>
+<script src="${path }/apps_res/xd24zfz/js/bootstrap-datepicker.js"></script>
+<script src="${path }/apps_res/xd24zfz/js/datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
 <script src="${path }/apps_res/xd24zfz/js/target.js"></script>
 <script src="${path }/apps_res/xd24zfz/js/formatDate.js"></script>
 </head>
@@ -25,7 +29,7 @@
 						</div>
 						<label class="col-md-1 form-label">编制时间</label>
 						<div class="col-md-2">
-							<input class="form-control" id="bzsj" placeholder="编制时间">
+							<input class="datepicker" id="bzsj" placeholder="编制时间">
 						</div>
 						<label class="col-md-1 form-label">生效时间</label>
 						<div class="col-md-2">

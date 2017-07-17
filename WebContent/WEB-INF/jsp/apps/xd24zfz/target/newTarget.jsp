@@ -14,7 +14,7 @@
 <body class="h100b over_hidden">
 	<div class="goal-layout">
 		<div class="goal-header">
-			<button class="btn btn-default goal-btn">保存</button>
+			<button class="btn btn-default goal-btn" id="submit">保存</button>
 			<button class="btn btn-primary">提交审批</button>
 		</div>
 	</div>

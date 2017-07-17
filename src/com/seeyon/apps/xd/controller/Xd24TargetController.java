@@ -146,7 +146,7 @@ public class Xd24TargetController extends BaseController{
 			tp.setVersionId(1L);
 			tp.setVersionState(1);
 			//新增计划，是否删除状态
-			tp.setIsDelete(Integer.valueOf(Xd24Enum.Target.DELETE_N.getKey()));
+			tp.setIsDelete(Integer.valueOf(Xd24Enum.IsDelete.DELETE_N.getKey()));
 			//目标录入保存时，设置当前规划计划阶段状态为未审批
 			tp.setGhjhState(Integer.valueOf(Xd24Enum.PlanEnum.PLAN_DISAPPROVE.getKey()));
 			//TODO 执行阶段审批状态、对比分析状态、更新决议 审批状态、考核评价 审批状态、全面总结状态 需要确定好枚举进行初始值保存

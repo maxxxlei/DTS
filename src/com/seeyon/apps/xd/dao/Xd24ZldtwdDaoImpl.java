@@ -158,7 +158,7 @@ public class Xd24ZldtwdDaoImpl implements Xd24ZldtwdDao {
 		hql.append(" order by z.createTime desc");
 		Map<String,Object> params = new HashMap<String, Object>();
 		Integer isEnable = Integer.valueOf(Xd24Enum.Zldtwd.ENABLE_Y.getKey());
-		Integer isDelete = Integer.valueOf(Xd24Enum.Target.DELETE_N.getKey());
+		Integer isDelete = Integer.valueOf(Xd24Enum.IsDelete.DELETE_N.getKey());
 		params.put("isEnable",isEnable);
 		params.put("isDelete",isDelete);
 		LOGGER.info("查询所有战略地图的sql=========="+hql.toString());
