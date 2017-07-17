@@ -111,7 +111,7 @@
             //组织计划名称
             colModel.push({display: "组织计划名称",name: 'name',width: "60%"});
             //是否启用
-            colModel.push({display: "是否启用",name: 'isEnable',width: "17%"});
+            colModel.push({display: "是否启用",name: 'isEnableName',width: "17%"});
             
             //是否默认
             colModel.push({display: "创建时间",name: 'createTime',width: "17%"});
@@ -140,26 +140,26 @@
             		return txt;
             }
             
-            //双击事件
+            //双击 编辑组织计划
             function dbclickRow(){
-            	//$('#summary').attr("src",_ctxPath + "/xdcd24/xdcd24.do?method=newaddRow&flag=update");
+            	//$('#summary').attr("src",_ctxPath + "/xdcd24/zzjhController.do?method=zzjhAdd&flag=update");
             	updateRow();
             }
-            //单机事件
+            //显示组织计划详情
             function showInfo(){
-            	//$('#summary').attr("src",_ctxPath + "/xdcd24/xdcd24.do?method=newaddRow&flag=show");
-            	updateRow();
+            	debugger;
+                grid.grid.resizeGridUpDown('middle');
+                $('#summary').attr("src",_ctxPath + "/xdcd24/zzjhController.do?method=edit&flag=show&"+row[0].id);
             	
             }
             
-            //新建节点权限
+            //新建组织计划
             function addRow(){
                 //将新建页面显示
-                $('#summary').attr("src",_ctxPath + "/xdcd24/xdcd24.do?method=newaddRow&flag=new");
+                $('#summary').attr("src",_ctxPath + "/xdcd24/zzjhController.do?method=zzjhAdd&flag=new");
                 grid.grid.resizeGridUpDown('middle');
             }
-           //修改权限
-            //修改节点权限
+            //修改组织计划
             function updateRow(){
                 var rows = grid.grid.getSelectRows();
                 if(rows.length === 0){
@@ -171,10 +171,10 @@
                     return;
                 }
                 grid.grid.resizeGridUpDown('middle');
-                debugger;
-                $('#summary').attr("src",_ctxPath + "/xdcd24/xdcd24.do?method=newaddRow&flag=update&rowsId="+rows[0].id);
+                debugger;                                                                               //获取点击修改的id
+                $('#summary').attr("src",_ctxPath + "/xdcd24/zzjhController.do?method=zzjhAdd&flag=update&rowsId="+rows[0].id);
             }
-            //删除节点权限
+            //删除组织计划
             function deleteRow(){
             	 var rows = grid.grid.getSelectRows();
             	 if(rows.length === 0){
@@ -211,6 +211,7 @@
                      }
                  });
             }
+            //添加组织计划面包屑
             var skinPathKey = getCtpTop().skinPathKey == null ? "harmony" : getCtpTop().skinPathKey;
             var html = '<span class="nowLocation_ico"><img src="'+_ctxPath+'/main/skin/frame/'+skinPathKey+'/menuIcon/'+getCtpTop().currentSpaceType+'.png"></span>';
             html += '<span class="nowLocation_content">24字方针系统设置 > ';

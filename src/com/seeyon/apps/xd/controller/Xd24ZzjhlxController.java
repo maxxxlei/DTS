@@ -25,14 +25,14 @@ public class Xd24ZzjhlxController extends BaseController{
 	
 	
 	/**
-	 * 二级菜单1
+	 * 组织计划列表
 	 * @param request
 	 * @param response
 	 * @return
 	 * @throws Exception
 	 */
-	public ModelAndView xdcd24SearchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView view = new ModelAndView("apps/xd24zfz/xd24zzjhlx/xdZzjhlxList");
+	public ModelAndView zzjhList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView view = new ModelAndView("apps/xd24zfz/zzjhlx/xdZzjhlxList");
 		return view;
 	}
 	
@@ -44,16 +44,16 @@ public class Xd24ZzjhlxController extends BaseController{
 	 * @return
 	 * @throws Exception
 	 */
-		public ModelAndView newaddRow(HttpServletRequest request, HttpServletResponse response) throws Exception {
-			ModelAndView view = new ModelAndView("apps/xd24zfz/xd24zzjhlx/xdZzjhlxadd");
-			String flag = request.getParameter("flag");
-			view.addObject("flag", flag);
-			String rowsId = request.getParameter("rowsId");
-			view.addObject("rowsId", rowsId);
-			return view;
-		}
+	public ModelAndView zzjhAdd(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView view = new ModelAndView("apps/xd24zfz/zzjhlx/xdZzjhlxadd");
+		String flag = request.getParameter("flag");
+		view.addObject("flag", flag);
+		String rowsId = request.getParameter("rowsId");
+		view.addObject("rowsId", rowsId);
+		return view;
+	}
 		
-	
+
 	
 	
 }

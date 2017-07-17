@@ -169,6 +169,37 @@ public class Xd24Enum {
 	}
 	
 	/**
+	 * 版本是否启用
+	 * @author Administrator
+	 *
+	 */
+	public enum IsEnable{
+		ENABLE("1","启用"),
+		DISENABLE("0","停用");
+		 
+		private String key;
+		private String text;
+		
+		IsEnable(String key,String text){
+	        this.setKey(key);
+	        this.setText(text);
+	    }
+		public String getKey() {
+			return key;
+		}
+		public void setKey(String key) {
+			this.key = key;
+		}
+		public String getText() {
+			return text;
+		}
+		public void setText(String text) {
+			this.text = text;
+		}
+	}
+	
+	
+	/**
 	 * 菜单分类
 	 * @author zhaifeng
 	 *

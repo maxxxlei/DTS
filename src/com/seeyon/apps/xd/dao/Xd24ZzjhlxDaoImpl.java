@@ -37,7 +37,7 @@ public class Xd24ZzjhlxDaoImpl implements Xd24ZzjhlxDao{
 			String value = (String) map.get("value");
 			if("name".equals(condition) && Strings.isNotBlank(value)){
 				sb.append(" and z.name like :name");
-				params.put("name", SQLWildcardUtil.escape(value));
+				params.put("name", "%"+SQLWildcardUtil.escape(value) +"%");
 			}
 			if("isEnable".equals(condition) && Strings.isNotBlank(value)){
 				sb.append(" and z.isEnable=:isEnable");

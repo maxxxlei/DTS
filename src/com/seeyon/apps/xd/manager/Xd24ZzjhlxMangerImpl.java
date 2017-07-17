@@ -11,6 +11,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.seeyon.apps.xd.constants.Xd24Enum;
+import com.seeyon.apps.xd.constants.Xd24Enum.IsEnable;
 import com.seeyon.apps.xd.dao.Xd24ZzjhlxDao;
 import com.seeyon.apps.xd.po.TargetPo;
 import com.seeyon.apps.xd.po.ZldtwdPo;
@@ -203,10 +204,10 @@ public class Xd24ZzjhlxMangerImpl implements Xd24ZzjhlxManger{
 				Object isEnable = obj[j++];
 				if(isEnable != null){
 				    vo.setIsEnable(Integer.parseInt(isEnable.toString()));
-				    if("1".equals(isEnable.toString())){
+				    if(IsEnable.ENABLE.getKey().equals(isEnable.toString())){
 				    	vo.setIsEnableName("启用");
 				    }
-				    if("0".equals(isEnable.toString())){
+				    if(IsEnable.DISENABLE.getKey().equals(isEnable.toString())){
 				    	vo.setIsEnableName("停用");
 				    }
 				}

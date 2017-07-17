@@ -10,14 +10,16 @@
         var flag="${flag}";
         debugger;
         if(flag=="show"){
+        	alert(1)
             $("#bottomButton").hide();
             $("#mapName").val("1");
             $("#isEnable").val("1"); 
             $("#description").val("浏览");
-            $("#mapName").prop("disabled", true);
+            $("#name").atrr("disabled", true);
             $("#isEnable").prop("disabled", true);
             $("#description").prop("disabled", true);
             $("#id").val("111");
+            
         }
         if(flag=="update"){
             $("#bottomButton").show();
@@ -26,8 +28,7 @@
             $("#description").val("编辑");
             $("#id").val("111");
             
-            var rowsId = "${rowsId}";
-            debugger;
+            var rowsId = "${rowsId}";//获取选中id
             var manager = new zzjhlxManger();
             var zzjhlxVo = manager.getZzjhlxById(rowsId);
             debugger;
@@ -38,7 +39,7 @@
             return;
                 
         }
-        if(flag=="new"){
+        if(flag=="new"){//新建
             $("#bottomButton").show();
             $("#mapName").val("");
             $("#isEnable").val("3"); 
@@ -46,6 +47,8 @@
         }
         debugger;
     });
+    
+    
     function OK() {
         var flag = "${flag}";
         if(flag=="new"){
@@ -57,9 +60,19 @@
                 $.alert("请输入组织计划名称！");
                 return;
             }
+            var isName=$("#mapName").validate();
+            if(isName == false){
+            	$.alert("组织计划名称长度不能超过50");
+            	return; 
+            }
             if(o.isEnable==""){
                 $.alert("请选择启用状态！");
                 return;
+            }
+            var isName=$("#isEnable").validate();
+            if(isName == false){
+                $.alert("请选择");
+                return; 
             }
             if(o.desc==""){
                 $.alert("请输入组织计划描述！");
@@ -68,11 +81,16 @@
             var manager = new zzjhlxManger();//Manager类bean,id
             var ne = o.name;
              var flag = manager.getNameAndId(ne,rowsId);
-            alert("false"+flag);
             if(!flag){
                 $.alert("输入内容有误，可能出现重复值！");
                 return;
             } 
+            var isName=$("#descr").validate();
+            if(isName == false){
+                $.alert("组织计划描述长度不能超过5000");
+                return; 
+            }
+            
             manager.saveZzjhlx(o);//保存的方法名
             parent.location.href = _ctxPath + "/xdcd24/xdcd24.do?method=xdcd24SearchList"//controller里的方法名，进行页面跳转
             return;		
@@ -95,12 +113,8 @@
             return;
         }//判断是否为重复数据或者为自己
         var manager = new zzjhlxManger();//Manager类bean,id
-        alert("判断开始");
         var ne = o.name;
-        alert(ne);
-        alert(rowsId);
          var flag = manager.getNameAndId(ne,rowsId);
-        alert("false"+flag);
         if(!flag){
         	$.alert("输入内容有误，可能出现重复值！");
         	return;
@@ -109,6 +123,7 @@
         manager.saveZzjhlx(o);//保存的方法名
         alert("进行跳转");
         parent.location.href = _ctxPath + "/xdcd24/xdcd24.do?method=xdcd24SearchList"
+        		
     }
     
    
@@ -145,7 +160,7 @@
                 <th><font color="red">*</font><label class="margin_r_10" for="text">组织计划描述:</label></th>
                 <td>
                   <div ><!-- checked="true" -->
-                    <textarea id ="descr" name="战略地图描述" style="width:350px;height:80px;"></textarea>
+                    <textarea id ="descr" validate="type:'string',name:'组织计划描述',notNull:true,maxLength:5070,avoidChar:'!@#$%^&amp;*+|,'" name="组织计划描述" style="width:350px;height:80px;"></textarea>
                   </div>
                 </td>
               </tr>
