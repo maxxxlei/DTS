@@ -13,6 +13,8 @@ import com.seeyon.apps.xd.constants.Xd24Enum;
 import com.seeyon.apps.xd.dao.Xd24TargetDao;
 import com.seeyon.apps.xd.po.TargetPo;
 import com.seeyon.apps.xd.vo.TargetVo;
+import com.seeyon.ctp.common.AppContext;
+import com.seeyon.ctp.common.authenticate.domain.User;
 import com.seeyon.ctp.common.exceptions.BusinessException;
 import com.seeyon.ctp.organization.bo.V3xOrgMember;
 import com.seeyon.ctp.organization.manager.OrgManager;

@@ -19,7 +19,9 @@ public class Xd24ZldtwdController extends BaseController{
 	public ModelAndView edit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView view = new ModelAndView("apps/xd24zfz/zldtwd/edit");
 		String flag = request.getParameter("flag");
+		String id = request.getParameter("id");
 		view.addObject("flag", flag);
+		view.addObject("id", id);
 		return view;
 	}
 }

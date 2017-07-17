@@ -265,4 +265,38 @@ public class Xd24Enum {
 			return null;
 		}
 	}
+	/**
+	 * 战略地图维度_是否启用枚举
+	 * @author 继往开来
+	 *
+	 */
+	public enum Zldtwd{
+	    ENABLE_Y("1","是"),
+	    ENABLE_N("0","否");
+	    
+	    private String key;
+	    private String text;
+	    
+	    Zldtwd(String key,String text){
+	        this.setKey(key);
+	        this.setText(text);
+	    }
+
+        public String getKey() {
+            return key;
+        }
+
+        public void setKey(String key) {
+            this.key = key;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public void setText(String text) {
+            this.text = text;
+        }
+	}
+
 }

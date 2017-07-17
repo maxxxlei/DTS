@@ -12,7 +12,7 @@
         <property name="isEnable" type="integer" column="ISENABLE" not-null="false" />
         <property name="versionId" type="java.lang.Long" column="VERSIONID" length="21" />
         <property name="verState" type="integer" column="V_STATE" />
-        <property name="createTime" type="timestamp" column="CREATETIME" not-null="false" />
+        <property name="createTime" type="timestamp" column="CREATETIME" update="false" not-null="false" />
         <property name="updateTime" type="timestamp" column="UPDATETIME" not-null="false" />
         <property name="isDelete" type="integer" column="ISDELETE"/>
         <property name="description" type="string" column="DESCRIPTION"/>
