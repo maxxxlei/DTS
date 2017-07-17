@@ -57,7 +57,7 @@ public class Xd24TargetDaoImpl implements Xd24TargetDao {
 		try {
 			if("subject".equals(key) && Strings.isNotBlank(value)){
 				hql.append(" and t.subject like :subject");
-				params.put("subject", SQLWildcardUtil.escape(value));
+				params.put("subject", "%"+SQLWildcardUtil.escape(value)+"%");
 			}else if("memberId".equals(key) && Strings.isNotBlank(value)){
 				hql.append(" and t.memberId =:memberId");
 				params.put("memberId", Long.valueOf(value.substring(7)));

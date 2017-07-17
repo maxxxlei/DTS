@@ -10,13 +10,6 @@
 <title>录入</title>
 <link rel="stylesheet" type="text/css" href="${path }/apps_res/xd24zfz/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="${path }/apps_res/xd24zfz/css/css.css">
-<style type="text/css">
-	body{
-		width:100%;
-		height:100%;
-		margin:auto;
-	}
-</style>
 </head>
 <body>
 	<div class="goal-layout">
