@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.seeyon.apps.xd.manager.Xd24ZzjhlxManger;
-import com.seeyon.apps.xd.vo.ZzjhlxVo;
+//github.com/sjzy-gitHub/xd24zfz.git
 import com.seeyon.ctp.common.controller.BaseController;
 /**
  * 组织计划类型控制类
@@ -18,6 +18,7 @@ public class Xd24ZzjhlxController extends BaseController{
 	public void setXd24ZzjhlxManger(Xd24ZzjhlxManger xd24ZzjhlxManger) {
 		this.xd24ZzjhlxManger = xd24ZzjhlxManger;
 	}
+
 
 
 	/**

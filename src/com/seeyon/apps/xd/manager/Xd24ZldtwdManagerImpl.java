@@ -96,7 +96,7 @@ public class Xd24ZldtwdManagerImpl implements Xd24ZldtwdManager {
 			po.setUpdateTime(new Date());
 			po.setIsDelete(0);
 			// TODO 版本号需要调接口查询
-			po.setVersionId(123l);
+			po.setVersionId(1l);
 			po.setVerState(1);
 			po.setDescription(zldtwd.get("description"));
 			xd24ZldtwdDao.saveZldtwd(po);
@@ -188,9 +188,8 @@ public class Xd24ZldtwdManagerImpl implements Xd24ZldtwdManager {
 	}
 
 	@Override
-	public List<ZldtwdPo> getAllZldtwd(Integer isEnable, Integer isDelete,
-			Integer isVersionEnable) throws BusinessException {
-		return xd24ZldtwdDao.getAllZldtwd(isEnable, isDelete, isVersionEnable);
+	public List<ZldtwdPo> getZldtwdList4Enum() throws BusinessException {
+		return xd24ZldtwdDao.getZldtwdList4Enum();
 	}
 
 

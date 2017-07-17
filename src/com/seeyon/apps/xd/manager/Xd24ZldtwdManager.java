@@ -65,5 +65,5 @@ public interface Xd24ZldtwdManager {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public List<ZldtwdPo> getAllZldtwd(Integer isEnable,Integer isDelete,Integer isVersionEnable) throws BusinessException;
+	public List<ZldtwdPo> getZldtwdList4Enum() throws BusinessException;
 }

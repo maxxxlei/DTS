@@ -11,6 +11,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.logging.log4j.util.Strings;
 
+import com.seeyon.apps.xd.constants.Xd24Enum.IsDelete;
+import com.seeyon.apps.xd.constants.Xd24Enum.VersionIs;
 import com.seeyon.apps.xd.po.TargetPo;
 import com.seeyon.apps.xd.po.ZldtwdPo;
 import com.seeyon.apps.xd.po.ZzjhlxPo;
@@ -31,7 +33,8 @@ public class Xd24ZzjhlxDaoImpl implements Xd24ZzjhlxDao{
 		Map<String,Object> params = new HashMap<String,Object>();
 		StringBuffer sb = new StringBuffer();
 		sb.append("select z.id,z.name,z.isEnable,z.updateTime,z.createTime FROM ZzjhlxPo z where 1=1 and z.isDelete=:isDelete and z.state=:vstate");
-		params.put("isDelete", );
+		params.put("isDelete", IsDelete.DELETE_N.getKey());
+		params.put("isDelete", VersionIs.USEFUL.getKey());
 		if(map != null && map.get("condition") != null){
 			String condition = (String) map.get("condition");
 			String value = (String) map.get("value");

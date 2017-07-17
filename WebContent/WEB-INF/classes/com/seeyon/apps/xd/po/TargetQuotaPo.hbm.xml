@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.seeyon.apps.xd.po">
+
+	<class name="TargetQuotaPo" table="xd24_target_quota">
+		<id name="id" type="long" column="id" length="21">
+			<generator class="assigned" />
+		</id>
+
+		<property name="targetId" type="long" column="target_Id" length="21" />
+		<property name="type" type="integer" column="type" />
+		<property name="khzq" type="integer" column="khzq" />
+		<property name="khzqxx" type="integer" column="khzqxx" />
+		<property name="month" type="long" column="month" length="2" />
+		<property name="startTime" type="timestamp" column="start_time" />
+		<property name="endTime" type="timestamp" column="end_time" />
+		<property name="quotaId" type="long" column="quota_Id" length="21" />
+		<property name="quotaName" type="string" column="quota_Name" length="255" />
+		<property name="quotaUnit" type="string" column="quota_Unit" />
+		<property name="quotaOperator" type="integer" column="quota_Operator" />
+		<property name="targetValue" type="string" column="target_Value" length="500"/>
+		<property name="otherMember" type="string" column="other_Member" length="500"/>
+		<property name="actualValue" type="string" column="actual_Value" length="500"/>
+
+	</class>
+</hibernate-mapping>

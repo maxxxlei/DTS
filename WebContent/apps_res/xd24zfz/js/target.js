@@ -24,5 +24,11 @@
 			$("#pid").hide();
 			$("#jtmc_div").hide();
 		}
+		//iframe 获取父窗口属性
+		var args = window.parent.document;
+		alert(args);
+		$("#submit",args).click(function(){
+			alert(11);
+		});
     });
 })();

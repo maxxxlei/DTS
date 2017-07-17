@@ -151,25 +151,30 @@ public class Xd24ZldtwdDaoImpl implements Xd24ZldtwdDao {
 	}
 
 	@Override
-	public List<ZldtwdPo> getAllZldtwd(Integer isEnable,Integer isDelete,Integer isVersionEnable) throws BusinessException {
+	public List<ZldtwdPo> getZldtwdList4Enum() throws BusinessException {
 		StringBuffer hql = new StringBuffer("select z.id,z.name from ZldtwdPo z where 1=1");
-		Map<String,Object> params = new HashMap<String, Object>();
-		if(isEnable != null){
-			hql.append(" and z.isEnable =:isEnable");
-			params.put("isEnable",isEnable);
-		}
-		if(isDelete != null){
-			hql.append(" and z.isDelete =:isDelete");
-			params.put("isDelete",isDelete);
-		}
-		if(isVersionEnable != null){
-			hql.append(" and z.versionId =:versionId");
-			params.put("versionId",isVersionEnable);
-		}
+		hql.append(" and z.isEnable =:isEnable");
+		hql.append(" and z.isDelete =:isDelete");
 		hql.append(" order by z.createTime desc");
+		Map<String,Object> params = new HashMap<String, Object>();
+		Integer isEnable = Integer.valueOf(Xd24Enum.Zldtwd.ENABLE_Y.getKey());
+		Integer isDelete = Integer.valueOf(Xd24Enum.IsDelete.DELETE_N.getKey());
+		params.put("isEnable",isEnable);
+		params.put("isDelete",isDelete);
 		LOGGER.info("查询所有战略地图的sql=========="+hql.toString());
-		
-		return DBAgent.find(hql.toString(), params);
+		List<Object[]> list = DBAgent.find(hql.toString(), params);
+		List<ZldtwdPo> dataList = new ArrayList<ZldtwdPo>();
+		if(list.size()>0){
+			for(int i = 0;i < list.size();i++){
+				Object[] o = list.get(i);
+				ZldtwdPo zp = new ZldtwdPo();
+				zp.setId(Long.valueOf(o[0].toString()));
+				zp.setName(o[1].toString());
+				dataList.add(zp);
+			}
+		}
+		LOGGER.info("查询到符合条件的枚举数量："+dataList.size());
+		return dataList;
 	}
 
 

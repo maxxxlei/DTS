@@ -49,7 +49,7 @@ public class Xd24ZzjhlxMangerImpl implements Xd24ZzjhlxManger{
 		if(ids.length > 0){
 			for(int i = 0;i<ids.length;i++){
 				ZzjhlxPo zzjhlxPo = zzjhlxDao.getZzjhlxPoById(Long.valueOf(ids[i].toString()));
-				zzjhlxPo.setIsDelete(Integer.valueOf(Xd24Enum.Target.DELETE_Y.getKey()));
+				zzjhlxPo.setIsDelete(Integer.valueOf(Xd24Enum.IsDelete.DELETE_Y.getKey()));
 				zzjhlxDao.updateZzjhlx(zzjhlxPo);
 			}
 			log.info("共删除目标 "+ids.length+" 条记录");

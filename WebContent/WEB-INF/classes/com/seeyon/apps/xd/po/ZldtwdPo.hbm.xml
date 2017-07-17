@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.seeyon.apps.xd.po">
+   <class name="ZldtwdPo" table="xd24_zldtwd">
+    <!-- 战略地图维护 -->
+        <id name="id" type="long" column="ID" length="21">
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string" column="NAME" not-null="false" length="255" />
+        <property name="isEnable" type="integer" column="ISENABLE" not-null="false" />
+        <property name="versionId" type="java.lang.Long" column="VERSIONID" length="21" />
+        <property name="verState" type="integer" column="V_STATE" />
+        <property name="createTime" type="timestamp" column="CREATETIME" update="false" not-null="false" />
+        <property name="updateTime" type="timestamp" column="UPDATETIME" not-null="false" />
+        <property name="isDelete" type="integer" column="ISDELETE"/>
+        <property name="description" type="string" column="DESCRIPTION"/>
+    </class>
+    
+</hibernate-mapping>

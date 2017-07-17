@@ -10,6 +10,10 @@
 <title>录入</title>
 <link rel="stylesheet" type="text/css" href="${path }/apps_res/xd24zfz/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="${path }/apps_res/xd24zfz/css/css.css">
+    <link rel="stylesheet" type="text/css" href="${path }/apps_res/xd24zfz/js/datepicker/css/bootstrap-datepicker.css">
+<script src="${path }/apps_res/xd24zfz/js/bootstrap.js"></script>
+<script src="${path }/apps_res/xd24zfz/js/bootstrap-datepicker.js"></script>
+<script src="${path }/apps_res/xd24zfz/js/datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
 <script src="${path }/apps_res/xd24zfz/js/target.js"></script>
 <script src="${path }/apps_res/xd24zfz/js/formatDate.js"></script>
 </head>
@@ -25,7 +29,7 @@
 						</div>
 						<label class="col-md-1 form-label">编制时间</label>
 						<div class="col-md-2">
-							<input class="form-control" id="bzsj" placeholder="编制时间">
+							<input class="datepicker" id="bzsj" placeholder="编制时间">
 						</div>
 						<label class="col-md-1 form-label">生效时间</label>
 						<div class="col-md-2">
@@ -204,20 +208,33 @@
 												<div class="common_selectbox_wrap">
 													<select id="khzb_monthId" name="khzb_monthId"
 														class="codecfg"
-														codecfg="codeType:'java',codeId:'com.seeyon.apps.xd.constants.MonthEnum'">
+														codecfg="codeType:'java',codeId:'com.seeyon.apps.xd.constants.MonthCategoryEnum'">
 														<option value="">${ctp:i18n('level.select.choose')}</option>
 													</select>
 												</div>
 											</td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
+											<td>
+												<input class="comp"
+													comp="type:'calendar',ifFormat:'%Y-%m-%d %H:%M',showsTime:true,cache:false"
+													id="khzb_startDate" placeholder="开始时间">
+											</td>
+											<td>
+												<input class="comp"
+													comp="type:'calendar',ifFormat:'%Y-%m-%d %H:%M',showsTime:true,cache:false"
+													id="khzb_endDate" placeholder="结束时间">
+											</td>
+											<td>
+												<input class="form-control" placeholder="指标项" id="khzb_zbx">
+												<span class="ico16 relate_file_16"></span>
+											</td>
+											<td>
+												<input class="form-control" placeholder="度量" id="khzb_dl">
+											</td>
 											<td>
 												<div class="common_selectbox_wrap">
 													<select id="khzb_claimId" name="khzb_claimId"
 														class="codecfg"
-														codecfg="codeType:'java',codeId:'com.seeyon.apps.xd.constants.TargetClaimEnum'">
+														codecfg="codeType:'java',codeId:'com.seeyon.apps.xd.constants.ClaimCategoryEnum'">
 														<option value="">${ctp:i18n('level.select.choose')}</option>
 													</select>
 												</div>
@@ -260,7 +277,7 @@
 												<div class="common_selectbox_wrap">
 													<select id="khmb_monthId" name="khmb_monthId"
 														class="codecfg"
-														codecfg="codeType:'java',codeId:'com.seeyon.apps.xd.constants.MonthEnum'">
+														codecfg="codeType:'java',codeId:'com.seeyon.apps.xd.constants.MonthCategoryEnum'">
 														<option value="">${ctp:i18n('level.select.choose')}</option>
 													</select>
 												</div>
@@ -316,7 +333,7 @@
 												<div class="common_selectbox_wrap">
 													<select id="kczb_monthId" name="kczb_monthId"
 														class="codecfg"
-														codecfg="codeType:'java',codeId:'com.seeyon.apps.xd.constants.MonthEnum'">
+														codecfg="codeType:'java',codeId:'com.seeyon.apps.xd.constants.MonthCategoryEnum'">
 														<option value="">${ctp:i18n('level.select.choose')}</option>
 													</select>
 												</div>
@@ -333,6 +350,7 @@
 											</td>
 											<td>
 												<input class="form-control" placeholder="指标项" id="kczb_zbx">
+												<span class="ico16 relate_file_16"></span>
 											</td>
 											<td>
 												<input class="form-control" placeholder="度量" id="kczb_zbx">
@@ -341,7 +359,7 @@
 												<div class="common_selectbox_wrap">
 													<select id="kczb_claimId" name="kczb_claimId"
 														class="codecfg"
-														codecfg="codeType:'java',codeId:'com.seeyon.apps.xd.constants.TargetClaimEnum'">
+														codecfg="codeType:'java',codeId:'com.seeyon.apps.xd.constants.ClaimCategoryEnum'">
 														<option value="">${ctp:i18n('level.select.choose')}</option>
 													</select>
 												</div>
@@ -379,21 +397,29 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td></td>
-											<td></td>
-											<td></td>
+											<td><input class="form-control" placeholder="序号"></td>
+											<td><input class="form-control" placeholder="目标周期" id="kcmb_mbzq"></td>
+											<td><input class="form-control" placeholder="周期细项" id="kcmb_mbzqxx"></td>
 											<td>
 												<div class="common_selectbox_wrap">
-													<select id="kczb_monthId" name="kczb_monthId"
+													<select id="kcmb_monthId" name="kczb_monthId"
 														class="codecfg"
-														codecfg="codeType:'java',codeId:'com.seeyon.apps.xd.constants.MonthEnum'">
+														codecfg="codeType:'java',codeId:'com.seeyon.apps.xd.constants.MonthCategoryEnum'">
 														<option value="">${ctp:i18n('level.select.choose')}</option>
 													</select>
 												</div>
 											</td>
-											<td></td>
-											<td></td>
-											<td></td>
+											<td>
+												<input class="comp"
+														comp="type:'calendar',ifFormat:'%Y-%m-%d %H:%M',showsTime:true,cache:false"
+														id="kcmb_startDate" placeholder="开始时间">
+											</td>
+											<td>
+												<input class="comp"
+														comp="type:'calendar',ifFormat:'%Y-%m-%d %H:%M',showsTime:true,cache:false"
+														id="kcmb_endDate" placeholder="结束时间">
+											</td>
+											<td><input class="form-control" placeholder="工作目标完成标准" id="kcmb_gzmuwcbz"></td>
 											<td><input id="kczb_memberId" name="kczb_userName"
 												class="comp form-control"
 												comp="type:'selectPeople',mode:'open',panels:'Department,Team,Post,Level',selectType:'Member',maxSize:10" />

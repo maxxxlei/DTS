@@ -108,7 +108,7 @@ public class Xd24TargetManagerImpl implements Xd24TargetManager{
 		if(ids.length > 0){
 			for(int i = 0;i<ids.length;i++){
 				TargetPo targetPo = xd24TargetDao.getTargetPoById(Long.valueOf(ids[i].toString()));
-				targetPo.setIsDelete(Integer.valueOf(Xd24Enum.Target.DELETE_Y.getKey()));
+				targetPo.setIsDelete(Integer.valueOf(Xd24Enum.IsDelete.DELETE_Y.getKey()));
 				xd24TargetDao.updateTarget(targetPo);
 			}
 			LOGGER.info("共删除目标 "+ids.length+" 条记录");

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.seeyon.apps.xd.po">
+    <!-- 角色管理表 -->
+  <class
+    name="RoleMenuPo"
+    table="xd24_role_menu">
+    <!-- ID -->
+    <id
+      name="id"
+      type="long"
+      column="ID"
+      length="21"
+    >
+      <generator class="assigned"/>
+    </id>
+    <!-- 角色ID-->
+    <property
+      name="roleId"
+      column="roleId"
+      type="long"
+      not-null="false"
+      length="21"
+    />
+
+    <!-- 菜单ID-->
+    <property
+      name="menuId"
+      column="menuId"
+      type="long"
+      not-null="false"
+      length="21"
+    />
+
+  </class>
+</hibernate-mapping>

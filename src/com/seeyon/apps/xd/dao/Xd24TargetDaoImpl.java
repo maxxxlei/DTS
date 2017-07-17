@@ -33,7 +33,7 @@ public class Xd24TargetDaoImpl implements Xd24TargetDao {
 		StringBuffer hql = new StringBuffer("select t.id,t.subject,t.createTime,t.effectTime,t.memberId,t.startTime,");
 		hql.append("t.endTime from TargetPo t where ");
 		hql.append("t.isDelete =:isDelete and t.memberId =:memberId order by t.createTime desc");
-		map.put("isDelete", Integer.valueOf(Xd24Enum.Target.DELETE_N.getKey()));
+		map.put("isDelete", Integer.valueOf(Xd24Enum.IsDelete.DELETE_N.getKey()));
 		User user = AppContext.getCurrentUser();
 		map.put("memberId", user.getId());
 		return DBAgent.find(hql.toString(), map, flipInfo);
@@ -52,8 +52,9 @@ public class Xd24TargetDaoImpl implements Xd24TargetDao {
 		Map<String,Object> params = new HashMap<String,Object>();
 		List<Object[]> list = new ArrayList<Object[]>();
 		StringBuffer hql = new StringBuffer("select t.id,t.subject,t.createTime,t.effectTime,t.memberId,t.startTime,");
-		hql.append("t.endTime from TargetPo t where t.isDelete =:isDelete and t.versionId =:versionId");
-		params.put("isDelete", Integer.valueOf(Xd24Enum.Target.DELETE_N.getKey()));
+		hql.append("t.endTime from TargetPo t where t.isDelete =:isDelete and t.versionState =:versionState");
+		params.put("isDelete", Integer.valueOf(Xd24Enum.IsDelete.DELETE_N.getKey()));
+		params.put("versionState", Integer.valueOf(Xd24Enum.VersionEnable.ENABLE.getKey()));
 		try {
 			if("subject".equals(key) && Strings.isNotBlank(value)){
 				hql.append(" and t.subject like :subject");
