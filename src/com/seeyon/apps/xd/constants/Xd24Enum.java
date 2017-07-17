@@ -106,5 +106,66 @@ public class Xd24Enum {
             this.text = text;
         }
 	}
+	/**
+	 * 版本管理版本是否生效
+	 * @author weiminliu
+	 *
+	 */
+	public enum VersionIs{
+		NOTUSEFUL("1","未生效"),
+		USEFUL("0","生效");
+		 
+		private String key;
+		private String text;
+		
+		VersionIs(String key,String text){
+	        this.setKey(key);
+	        this.setText(text);
+	    }
+		public String getKey() {
+			return key;
+		}
+		public void setKey(String key) {
+			this.key = key;
+		}
+		public String getText() {
+			return text;
+		}
+		public void setText(String text) {
+			this.text = text;
+		}
+		 
+		 
+		 
+	}
+	/**
+	 * 版本是否启用
+	 * @author Administrator
+	 *
+	 */
+	public enum VersionEnable{
+		ENABLE("1","启用"),
+		DISENABLE("0","停用");
+		 
+		private String key;
+		private String text;
+		
+		VersionEnable(String key,String text){
+	        this.setKey(key);
+	        this.setText(text);
+	    }
+		public String getKey() {
+			return key;
+		}
+		public void setKey(String key) {
+			this.key = key;
+		}
+		public String getText() {
+			return text;
+		}
+		public void setText(String text) {
+			this.text = text;
+		}
+	}
 	
 }

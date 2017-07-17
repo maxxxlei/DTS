@@ -35,9 +35,9 @@ $(function(){
      //删除
      toolbar.push({ id: "delete",name: "删除",className: "ico16 del_16",click:deleteRow });
      //启用
-     toolbar.push({ id: "enableVersion",name: "启用",className: "ico16 editor_16",click:updateRow });
+     toolbar.push({ id: "enableVersion",name: "启用",className: "ico16 editor_16",click:enableRow });
      //停用
-     toolbar.push({ id: "disableVersion",name: "停用",className: "ico16 editor_16",click:updateRow });
+     toolbar.push({ id: "disableVersion",name: "停用",className: "ico16 editor_16",click:disenableRow });
     
      
      $("#toolbars").toolbar({
@@ -48,29 +48,12 @@ $(function(){
      });
    //定义搜索条件选项
      var condition = new Array();
-     //名称
-     condition.push({id: 'name',name: 'name',type: 'input',text: "${ctp:i18n('permission.name')}",value: 'name',maxLength:20,validate:false});
+     //版本名称
+     condition.push({id: 'vCode',name: 'vCode',type: 'input',text: "版本编号",value: 'vCode' });
      //引用状态
-     condition.push({id: 'isRef',name: 'isRef',type: 'select',text: "${ctp:i18n('permission.auth.isref')}",value: 'isRef',
-         items: [{
-             text: "${ctp:i18n('systemswitch.yes.lable')}",//是
-             value: '1'
-         }, {
-             text: "${ctp:i18n('systemswitch.no.lable')}",//否
-             value: '0'
-         }]
-     });
-     //启用状态
-     condition.push({id: 'isEnabled',name: 'isEnabled',type: 'select',text: "${ctp:i18n('permission.auth.isenabled')}",value: 'isEnabled',
-         items: [{
-             text: "${ctp:i18n('common.state.normal.label')}",//启用
-             value: '1'
-         }, {
-             text: "${ctp:i18n('common.state.invalidation.label')}",//停用
-             value: '0'
-         }]
-     });
+     condition.push({id: 'createTime',name: 'createTime',type: 'datemulti',text: "创建时间",value: 'createTime', dateTime:true });
      
+                
    //搜索框
      var searchobj = $.searchCondition({
          top:7,
@@ -82,25 +65,23 @@ $(function(){
      });
     //搜索框执行的动作
      function searchFunc(){
-         var o = new Object();
-         o.configCategory = $('#category').val();
+    	 var o = new Object();
          var choose = $('#'+searchobj.p.id).find("option:selected").val();
-         if(choose === 'name'){
-             o.name = $('#name').val();
-         }else if(choose === 'isRef'){
-             o.isRef = $('#isRef').val();
-         }else if(choose === 'isEnabled'){
-             o.isEnabled = $('#isEnabled').val();
-         }else if(choose === 'expressionType'){
-             o.configCategory = $('#expressionType').val();
+         o.condition = choose;
+         if(choose === 'vCode'){
+             o.value = $('#vCode').val();
+         }else if(choose === 'createTime'){
+        	 var startTime = $('#from_createTime').val();
+        	 var endTime = $('#to_createTime').val();
+             o.value  = startTime +"#"+ endTime;
          }
          
          var val = searchobj.g.getReturnValue();
          if(val !== null){
-             $("#permissionList").ajaxgridLoad(o);
+             $("#versionList").ajaxgridLoad(o);
          }
      }
-     var width = '10%';
+     var width = '20%';
      var nameWidth = '20%';
    //定义列表框选项栏目名称
      var colModel = new Array();
@@ -132,33 +113,176 @@ $(function(){
      //初始化列表
      var o = new Object();
      //$('#versionList').ajaxgrid();
-     debugger;
      $("#versionList").ajaxgridLoad(o);
      
      function showInfo(){
-    	 
+    	 var rows = grid.grid.getSelectRows();
+         
+         grid.grid.resizeGridUpDown('middle');
+         $('#summary').attr("src",_ctxPath + "/xd24/versionController.do?method=editVersion&type=search&id="+rows[0].id);
+   
+   
      }
      function dbclickRow(){
-    	 
+    	 updateRow();
      }
+     function enableRow(){
+    	 var type = "enable";
+    	 var rows = grid.grid.getSelectRows();
+    	 
+    	 var tranObj = new Array();
+        
+         if(rows.length === 0){
+             $.alert("请选择一条记录!");//请选择一条记录
+             return;
+         }
+         if(rows.length>1){
+             $.alert("只能选择一条记录进行修改!");//只能选择一条记录进行修改
+             return;
+         }
+         if(1 == rows[0].isEnable){
+        	 $.alert("该版本已启用!");
+             return;
+         }
+         var vsManager = new versionManager();
+         tranObj[0] = rows[0].id;
+         var confirm = $.confirm({
+             'msg': "确定启用该版本？",//确定删除该权限，该操作无法恢复
+             ok_fn: function () { 
+                 vsManager.updateVersions(tranObj,type,{
+                     success : function(msg){
+                         if("SUCCESS" === msg){
+                             $.alert("修改成功！");
+                             var o = new Object();
+                             //$('#versionList').ajaxgrid();
+                             $("#versionList").ajaxgridLoad(o);
+                         }
+                        
+                     }, 
+                     error : function(request, settings, e){
+                         $.alert(e);
+                     }
+                  });
+             },
+             cancel_fn:function(){
+                 confirm.close();
+             }
+         });
+        
+     }
+     
+     
+     function disenableRow(){
+    	 var type = "disenable";
+    	 
+    	 var rows = grid.grid.getSelectRows();
+    	 
+    	 var tranObj = new Array();
+         
+         if(rows.length === 0){
+             $.alert("请选择一条记录!");//请选择一条记录
+             return;
+         }
+         if(rows.length>1){
+             $.alert("只能选择一条记录进行修改!");//只能选择一条记录进行修改
+             return;
+         }
+         if(0 == rows[0].isEnable){
+             $.alert("该版本已停用!");
+             return;
+         }
+         var vsManager = new versionManager();
+         tranObj[0] = rows[0].id;
+         var confirm = $.confirm({
+             'msg': "确定停用该版本？",//确定删除该权限，该操作无法恢复
+             ok_fn: function () { 
+                 vsManager.updateVersions(tranObj,type,{
+                     success : function(msg){
+                         if("SUCCESS" === msg){
+                             $.alert("修改成功！");
+                             var o = new Object();
+                             //$('#versionList').ajaxgrid();
+                             $("#versionList").ajaxgridLoad(o);
+                         }
+                        
+                     }, 
+                     error : function(request, settings, e){
+                         $.alert(e);
+                     }
+                  });
+             },
+             cancel_fn:function(){
+                 confirm.close();
+             }
+         });
+     }
+     
      
      function  addRow(){
      	//将新建页面显示
-     	edocDialog = $.dialog({
-                     url:"${path}/versionController.do?method=newVersion",
-                     width: 800,
-                     height: 400,
-                     title: "新增版本信息",
-                     targetWindow:getCtpTop()
-                   });
+     	grid.grid.resizeGridUpDown('middle');
+        $('#summary').attr("src",_ctxPath + "/xd24/versionController.do?method=newVersion&type=open");
+
           
       }
+     
       function updateRow(){
-     	 
+    	  var rows = grid.grid.getSelectRows();
+          if(rows.length === 0){
+              $.alert("请选择一条记录!");//请选择一条记录
+              return;
+          }
+          if(rows.length>1){
+              $.alert("只能选择一条记录进行修改!");//只能选择一条记录进行修改
+              return;
+          }
+          grid.grid.resizeGridUpDown('middle');
+          $('#summary').attr("src",_ctxPath + "/xd24/versionController.do?method=editVersion&type=change&id="+rows[0].id);
+    
       }
       function deleteRow(){
-     	 
+    	  debugger;
+    	  var type = "del";
+    	  var rows = grid.grid.getSelectRows();
+          if(rows.length === 0){
+              $.alert("请选择要删除的记录"); //请选择要删除的记录
+              return;
+          }
+          var vsManager = new versionManager();
+          var tranObj = new Array();
+          for(i=0;i<rows.length;i++){
+             //进行数据验证，是否可以进行删除操作
+              tranObj[i] = rows[i].id;
+          }
+          var confirm = $.confirm({
+              'msg': "确定删除该数据，该操作无法恢复",//确定删除该权限，该操作无法恢复
+              ok_fn: function () { 
+            	  vsManager.updateVersions(tranObj,type,{
+                      success : function(msg){
+                    	  if("SUCCESS" === msg){
+                    		  $.alert("删除成功！");
+                              var o = new Object();
+                              //$('#versionList').ajaxgrid();
+                              $("#versionList").ajaxgridLoad(o);
+                    	  }
+                    	 
+                      }, 
+                      error : function(request, settings, e){
+                    	  $.alert(e);
+                      }
+                   });
+              },
+              cancel_fn:function(){
+                  confirm.close();
+              }
+          });
       }
+      var skinPathKey = getCtpTop().skinPathKey == null ? "harmony" : getCtpTop().skinPathKey;
+      var html = '<span class="nowLocation_ico"><img src="'+_ctxPath+'/main/skin/frame/'+skinPathKey+'/menuIcon/'+getCtpTop().currentSpaceType+'.png"></span>';
+      html += '<span class="nowLocation_content">24字方针系统设置 > ';
+      html += '<a>版本管理列表</a>';
+      html += '</span>';
+      getCtpTop().showLocation(html);
 });
 </script>
 </head>
@@ -169,9 +293,9 @@ $(function(){
         </div>
         <div class="layout_center over_hidden" id="center">
             <table class="flexme3" id="versionList"></table>
-          <!--   <div id="grid_detail" class="h100b">
+          <div id="grid_detail" class="h100b">
                 <iframe id="summary" width="100%" height="100%" frameborder="0"  style="overflow-y:hidden"></iframe>
-            </div> --> 
+            </div> 
         </div>
     </div>
 </body>
