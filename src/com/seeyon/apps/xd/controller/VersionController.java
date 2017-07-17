@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.seeyon.apps.xd.manager.VersionManger;
+import com.seeyon.apps.xd.manager.VersionManager;
 import com.seeyon.apps.xd.po.VersionPo;
 import com.seeyon.ctp.common.controller.BaseController;
 import com.seeyon.ctp.common.exceptions.BusinessException;
@@ -28,9 +28,9 @@ public class VersionController extends BaseController {
  
 	private Logger LOGGER = Logger.getLogger(VersionController.class);
 	
-	private VersionManger versionManager;
+	private VersionManager versionManager;
 	
-	public void setVersionManager(VersionManger versionManager) {
+	public void setVersionManager(VersionManager versionManager) {
 		this.versionManager = versionManager;
 	}
 
@@ -46,28 +46,29 @@ public class VersionController extends BaseController {
 	public ModelAndView newVersion(HttpServletRequest request,HttpServletResponse response) throws BusinessException, ParseException{
 		LOGGER.info("进入跳转新增版本管理页面....");
 		ModelAndView mav = new ModelAndView("apps/xd24zfz/version/saveVersion");
-		long id = UUIDLong.longUUID();
-		long versionId = UUIDLong.longUUID();
-		Map<String, Object> params = ParamUtil.getJsonParams();
+		String type = request.getParameter("type");
 		
-		if(params.size()>0){
-			SimpleDateFormat tempDate = new SimpleDateFormat( "yyyy-MM-dd hh:mm:ss");
-			Integer vState = Integer.parseInt(params.get("is_State").toString());
-			Integer isEnable = Integer.parseInt(params.get("is_Enable").toString());
+		if("save".equals(type)){
+			long id = UUIDLong.longUUID();
+			long versionId = UUIDLong.longUUID();
+			Map<String, Object> params = ParamUtil.getJsonParams();
+			//SimpleDateFormat tempDate = new SimpleDateFormat( "yyyy-MM-dd hh:mm:ss");
+			//Integer vState = Integer.parseInt(params.get("is_State").toString());
+			//Integer isEnable = Integer.parseInt(params.get("is_Enable").toString());
 			String vYear = params.get("v_Year").toString();
 			String vCode = params.get("vCode").toString();
 			String desc = params.get("desc").toString();
-			Date create_time = tempDate.parse(params.get("create_time").toString());
+			//Date create_time = tempDate.parse(params.get("create_time").toString());
 			
 			
 			VersionPo vsPo = new VersionPo();
 			vsPo.setId(id);
-			vsPo.setState(vState);
-			vsPo.setIsEnable(isEnable);
+			vsPo.setState(0);
+			vsPo.setIsEnable(0);
 			vsPo.setvYear(vYear);
 			vsPo.setvCode(vCode);
 			vsPo.setDesc(desc);
-			vsPo.setCreateTime(create_time);
+			vsPo.setCreateTime(new Date());
 			vsPo.setUpdateTime(new Date());
 			vsPo.setIsDelete(0);
 			vsPo.setVersionId(versionId);
@@ -88,8 +89,21 @@ public class VersionController extends BaseController {
 	 */
 	public ModelAndView editVersion(HttpServletRequest request,HttpServletResponse response) throws BusinessException{
 		LOGGER.info("进入跳转编辑版本管理页面....");
-		ModelAndView mav = new ModelAndView("apps/xd24zfz/version/updateVersion");
-	
+		ModelAndView mav = new ModelAndView("apps/xd24zfz/version/editVersion");
+		String type = request.getParameter("type");
+		
+		if("update".equals(type)){
+			Map<String, Object> params = ParamUtil.getJsonParams();
+			Long id = Long.parseLong(params.get("versionId").toString());
+			String desc = params.get("desc").toString();
+			versionManager.updateVersionDesc(id, desc);
+			
+		}else if("search".equals(type) || "change".equals(type)){
+			String id = request.getParameter("id");
+		    VersionPo versionPo = versionManager.getVersionById(Long.valueOf(id));
+		    mav.addObject("version", versionPo);
+		}
+		mav.addObject("openType", type);
 		return mav;
 	}
 	

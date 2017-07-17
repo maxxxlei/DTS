@@ -35,6 +35,41 @@ public class Xd24Enum {
             this.text = text;
         }
 	}
+	
+	/**
+	 * 指标分类枚举
+	 * @author DELL
+	 *
+	 */
+	public enum Quota{
+	    QUOTACLASS_A("0","财务指标"),
+	    QUOTACLASS_B("1","间接财务指标"),
+	    QUOTACLASS_C("2","业务指标");
+	    
+	    private String key;
+	    private String text;
+	    
+	    Quota(String key,String text){
+	        this.setKey(key);
+	        this.setText(text);
+	    }
+
+        public String getKey() {
+            return key;
+        }
+
+        public void setKey(String key) {
+            this.key = key;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public void setText(String text) {
+            this.text = text;
+        }
+	}
 	/**
 	 * 规划计划审批状态
 	 * @author heliang.wang
@@ -71,5 +106,116 @@ public class Xd24Enum {
             this.text = text;
         }
 	}
-     
+	/**
+	 * 版本管理版本是否生效
+	 * @author weiminliu
+	 *
+	 */
+	public enum VersionIs{
+		NOTUSEFUL("1","未生效"),
+		USEFUL("0","生效");
+		 
+		private String key;
+		private String text;
+		
+		VersionIs(String key,String text){
+	        this.setKey(key);
+	        this.setText(text);
+	    }
+		public String getKey() {
+			return key;
+		}
+		public void setKey(String key) {
+			this.key = key;
+		}
+		public String getText() {
+			return text;
+		}
+		public void setText(String text) {
+			this.text = text;
+		}
+		 
+		 
+		 
+	}
+	/**
+	 * 版本是否启用
+	 * @author Administrator
+	 *
+	 */
+	public enum VersionEnable{
+		ENABLE("1","启用"),
+		DISENABLE("0","停用");
+		 
+		private String key;
+		private String text;
+		
+		VersionEnable(String key,String text){
+	        this.setKey(key);
+	        this.setText(text);
+	    }
+		public String getKey() {
+			return key;
+		}
+		public void setKey(String key) {
+			this.key = key;
+		}
+		public String getText() {
+			return text;
+		}
+		public void setText(String text) {
+			this.text = text;
+		}
+	}
+	
+	/**
+	 * 菜单分类
+	 * @author zhaifeng
+	 *
+	 */
+	public enum MenuCategory{
+		GHJH("1","规划计划"),
+		ZXTJ("2","执行统计"),
+		DBFX("3","对比分析"),
+		GXJY("4","更新决议"),
+		KHPJ("5","考核评价"),
+		QMZJ("6","全面总结");
+		 
+		private String key;
+		private String text;
+		
+		MenuCategory(String key,String text){
+	        this.setKey(key);
+	        this.setText(text);
+	    }
+		public String getKey() {
+			return key;
+		}
+		public void setKey(String key) {
+			this.key = key;
+		}
+		public String getText() {
+			return text;
+		}
+		public void setText(String text) {
+			this.text = text;
+		}
+		/**
+		 * 根据key得到枚举类型
+		 * 
+		 * @param key
+		 * @return StateEnum
+		 */
+		public static MenuCategory getValue(String key) {
+			MenuCategory[] enums = MenuCategory.values();
+			if (enums != null) {
+				for (MenuCategory enum1 : enums) {
+					if (enum1.getKey().equals(key)) {
+						return enum1;
+					}
+				}
+			}
+			return null;
+		}
+	}
 }

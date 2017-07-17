@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8" isELIgnored="false"%>
 <%@ include file="/WEB-INF/jsp/common/common.jsp"%>
 <script type="text/javascript" src="${path}/ajax.do?managerName=xd24quotaManager"></script>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,37 +97,38 @@
             
           	//定义列表框选项栏目名称
             var colModel = new Array();
-            colModel.push({display: 'id',name: 'id',width: '4%',type: 'checkbox'});
+            colModel.push({display: 'id',name: 'id',width: '4%',type: 'checkbox'}); 
             //指标项
-            colModel.push({display: "指标项",name: 'quotaName',width: "50%"});
-            //编号quotaCode
-            colModel.push({display: "编号",name: 'quotaCode',width: "15%"});
+            colModel.push({display: "指标项",name: 'quotaName',width: "30%"});
+         //编号quotaCode
+            colModel.push({display: "编号",name: 'quotaCode',width: "5%"});
             
             //分类
-            colModel.push({display: "指标类型",name: 'quotaClass',width: "15%"});
+            colModel.push({display: "指标类型",name: 'quotaClass',width: "20%"});
             //度量
-            colModel.push({display: "度量",name: 'quotaUnit',width: "14%"});
-            
+            colModel.push({display: "度量",name: 'quotaUnit',width: "10%"});
+            //开始时间
+            colModel.push({display: "开始时间",name: 'create_Time',width: "15%"});
+            //结束时间
+            colModel.push({display: "结束时间",name: 'update_Time',width: "15%"}); 
             //构造列表
-             grid = $('#quotalListId').ajaxgrid({
-                click: showInfo,
-                dblclick: dbclickRow,
-                colModel: colModel,
-                height: 200,
-                render : rend,
-                showTableToggleBtn: true,
-                parentId: $('.layout_center').eq(0).attr('id'),
-                vChange: true,
-                isHaveIframe:true,
-                slideToggleBtn:true,
-                onSuccess:function(){
-                	if($.trim(grid) != "" && $.trim(grid.p) != ""){
-                		grid.grid.resizeGridUpDown("down");
-                	}
-                },
-                managerName : "xd24quotaManager",
-                managerMethod : "getQuotaList"
-            });
+            grid = $('#quotalListId').ajaxgrid({
+         click : showInfo,
+         dblclick : dbclickRow,
+         colModel : colModel,
+         height: 200,
+         showTableToggleBtn: true,
+         parentId: $('.layout_center').eq(0).attr('id'),
+         vChange: true,
+         isHaveIframe:true,
+         slideToggleBtn:true,
+         onSuccess:function(msg){
+         },
+         managerName : "xd24QuotaManager",
+         managerMethod : "getQuotaList"
+     });
+            var o = new Object();
+            $("#quotalListId").ajaxgridLoad(o);
             
              function rend(txt, data, r, c) {
             		if(c===1){
@@ -146,7 +148,7 @@
             function addRow(){
                 //将新建页面显示
                 grid.grid.resizeGridUpDown('middle');
-                $('#quotaDetailId').attr("src",_ctxPath + "/xd24quota/xd24quotaController.do?method=newQuota");
+                $('#quotaDetailId').attr("src",_ctxPath + "/xd24/quotaController.do?method=newQuota");
                 
             }
            
@@ -163,7 +165,7 @@
                     return;
                 }
                 grid.grid.resizeGridUpDown('middle');
-                $('#quotaDetailId').attr("src",_ctxPath + "/xd24quota/xd24quotaController.do?method=updateQuota");
+                $('#quotaDetailId').attr("src",_ctxPath + "/xd24/quotaController.do?method=editQuota");
             }
             
             //删除节点

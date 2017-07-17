@@ -1,20 +1,24 @@
 package com.seeyon.apps.xd.controller;
 
-import java.io.PrintWriter;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.web.servlet.ModelAndView;
-
-import www.seeyon.com.utils.UUIDUtil;
 
 import com.seeyon.apps.xd.manager.Xd24QuotaManager;
 import com.seeyon.apps.xd.po.QuotaPo;
+import com.seeyon.apps.xd.vo.QuotaVo;
 import com.seeyon.ctp.common.controller.BaseController;
 import com.seeyon.ctp.common.exceptions.BusinessException;
+import com.seeyon.ctp.util.FlipInfo;
+import com.seeyon.ctp.util.ParamUtil;
+import com.seeyon.ctp.util.UUIDLong;
 
 /**
  * 鑫达24字方针指标库Controller
@@ -39,9 +43,8 @@ public class Xd24QuotaController extends BaseController {
 	 * @throws BusinessException
 	 */
 	public ModelAndView listQuota(HttpServletRequest request,
-			HttpServletResponse response) throws BusinessException {
-
-		ModelAndView view = new ModelAndView("/apps/xd24zfz/quota/quotaList");
+			HttpServletResponse response,FlipInfo fi) throws BusinessException {
+		ModelAndView view = new ModelAndView("/apps/xd24zfz/quota/listQuota");
 		return view;
 
 	}
@@ -56,52 +59,50 @@ public class Xd24QuotaController extends BaseController {
 	public ModelAndView newQuota(HttpServletRequest request,
 			HttpServletResponse response) throws BusinessException {
 		
-     	ModelAndView view = new ModelAndView("/apps/xd24zfz/quota/quotaNew");
-		return view;
+     	ModelAndView mav = new ModelAndView("/apps/xd24zfz/quota/newQuota");
+     	long id = UUIDLong.longUUID();
+		long versionId = UUIDLong.longUUID();
+		Map<String, Object> params = ParamUtil.getJsonParams();
+		
+		if(params.size()>0){
+			Long quotaCode = Long.parseLong(params.get("quotaCode").toString());
+			String quotaName = params.get("quotaName").toString();
+			Integer quotaClass = Integer.parseInt(params.get("quotaClass").toString());
+			Integer quotaUnit = Integer.parseInt(params.get("quotaUnit").toString());
+			//Integer v_state = Integer.parseInt(params.get("v_state").toString());
+			String quotaType = params.get("quotaType").toString();
+			QuotaPo Po = new QuotaPo();
+			Po.setId(id);
+			Po.setVersionId(versionId);
+			Po.setQuotaClass(quotaClass);
+			Po.setQuotaName(quotaName);
+			Po.setQuotaCode(quotaCode);
+			Po.setQuotaUnit(quotaUnit);
+			Po.setQuotaType(quotaType);
+			Po.setCreate_Time(new Date());
+			Po.setUpdate_Time(new Date());
+			Po.setV_state(1);
+			
+			Boolean isSuccess = xd24QuotaManager.saveQuotaPo(Po);
+			LOGGER.info("添加是否成功==="+isSuccess);
+		}
+		return mav;
 
 	}
 	/**
-	 * 保存目标方法
+	 * 修改目标方法
 	 * @param request
 	 * @param response
 	 * @throws Exception
 	 */
-	public void saveQuota(HttpServletRequest request,HttpServletResponse response) throws Exception{
-		LOGGER.info("====进入保存目标方法======");
-		PrintWriter out = response.getWriter();
-		try {
-			QuotaPo qp = new QuotaPo();
-			qp.setId(UUIDUtil.getUUIDLong());
-			//指标项
-			String name = request.getParameter("name");
-			if(Strings.isNotBlank(name)){
-				qp.setQuotaName(name);
-			}
-			//指标编号
-			String code = request.getParameter("code");
-			 qp.setQuotaCode(Long.parseLong(code));
-			//指标类型
-			String qclass = request.getParameter("qclass");
-			qp.setQuotaClass(Integer.valueOf(qclass));
-			//度量
-			String unit = request.getParameter("unit");
-			qp.setQuotaUnit(Integer.valueOf(unit));;
-			//指标控件类型
-			String type = request.getParameter("type");
-			qp.setQuotaType(type);
-			qp.setVersionId(1L);
-			qp.setV_state(1);
-			xd24QuotaManager.saveQuota(qp);
-			out.write("true");
-		} catch (Exception e) {
-			out.write("false");
-			LOGGER.error(e.getMessage(), e);
-			e.printStackTrace();
-		}finally{
-			out.close();
-		}
+	public ModelAndView editQuota(HttpServletRequest request,HttpServletResponse response) throws Exception{
+		ModelAndView view = new ModelAndView("apps/xd24zfz/quota/editQuota");
+		String flag = request.getParameter("flag");
+		view.addObject("flag", flag);
+		return view;
+		
 	}
 
-	
+
 
 }

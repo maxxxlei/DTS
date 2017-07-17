@@ -22,7 +22,7 @@ public class VersionVo extends BasePO {
 	/**
 	 * 启用状态
 	 */
-	private Integer state;
+	private String state;
 	/**
 	 * 创建时间
 	 */
@@ -45,75 +45,97 @@ public class VersionVo extends BasePO {
 		0：停用
 		1：启用
 	 */
-	private Integer isEnable;
+	private String isEnable;
 	
 	/**
 	 * 版本 ID
 	 */
 	private Long versionId;
-	
-	public Date getUpdateTime() {
-		return updateTime;
-	}
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
-	}
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getvCode() {
 		return vCode;
 	}
+
 	public void setvCode(String vCode) {
 		this.vCode = vCode;
 	}
-	public Date getCreateTime() {
-		return createTime;
-	}
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-	public String getDesc() {
-		return desc;
-	}
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
+
 	public String getvYear() {
 		return vYear;
 	}
+
 	public void setvYear(String vYear) {
 		this.vYear = vYear;
 	}
-	public Integer getState() {
+
+	public String getState() {
 		return state;
 	}
-	public void setState(Integer state) {
+
+	public void setState(String state) {
 		this.state = state;
 	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
 	public Integer getIsDelete() {
 		return isDelete;
 	}
+
 	public void setIsDelete(Integer isDelete) {
 		this.isDelete = isDelete;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+
+	public String getDesc() {
+		return desc;
 	}
-	public Integer getIsEnable() {
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+
+	public String getIsEnable() {
 		return isEnable;
 	}
-	public void setIsEnable(Integer isEnable) {
+
+	public void setIsEnable(String isEnable) {
 		this.isEnable = isEnable;
 	}
+
 	public Long getVersionId() {
 		return versionId;
 	}
+
 	public void setVersionId(Long versionId) {
 		this.versionId = versionId;
 	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	
 	
 }

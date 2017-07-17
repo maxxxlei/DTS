@@ -6,12 +6,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>版本控制</title>
+<script type="text/javascript" src="${path}/ajax.do?managerName=versionManager"></script>
 <script type="text/javascript">
 $(function(){
 	//表单提交
 	 $("#versionSubmit").click(function(){
+		 var vYear = $("#v_Year").val();
+		 var vCode = $("#vCode").val();
+		 if(vYear == null || vCode == null || vYear == "" || vCode == ""){
+			 $.alert("年度或版本编号不能为空！");
+			 return;
+		 }
+		 var vsManager = new versionManager();
+		 if(vsManager.getVersionByVcodeAndVyear(vYear,vCode)){
+			 $.alert("该数据已存在，请重新输入！");
+			 return;
+		 }
+		 
 		 var form = $("#version_edit_form");
-         var path = _ctxPath + "/versionController.do?method=newVersion";
+         var path = _ctxPath + "/xd24/versionController.do?method=newVersion&type=save";
          
          form.attr('action',path);
          $('#versionSubmit')[0].disabled = false;
@@ -22,56 +35,60 @@ $(function(){
          	   subCount = 0;
              },
              callback:function(args){
-             	//refreshW();
+            	 parent.location.href = _ctxPath + "/xd24/versionController.do?method=listVersions"; 
              }
          });
-	 })
-})
+         //parent.$("#versionList").ajaxgridLoad();
+          
+	 });
+	$("#rockBack").click(function(){
+		parent.location.href = _ctxPath + "/xd24/versionController.do?method=listVersions"
+	});
+});
 </script>
 </head>
 <body>
    <form id="version_edit_form" class="h100b">
+     <div class="form_area">
+    <div class="one_row">
+        <table border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+                <tr>
+                    <th nowrap="nowrap">
+                        <label class="margin_r_10" for="text">年度:</label></th>
+                    <td width="100%">
+                        <div class="common_txtbox_wrap">
+                            <input type="text" id="v_Year" name="v_Year" class="validate" validate="maxLength:4">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th nowrap="nowrap">
+                        <label class="margin_r_10" for="text">版本编号:</label></th>
+                    <td>
+                        <div class="common_txtbox_wrap">
+                            <input type="text" id="vCode" name="vCode"  class="validate" validate="type:'string',maxLength:85">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th nowrap="nowrap">
+                        <label class="margin_r_10" for="text">备注:</label></th>
+                    <td>
+                        <div class="common_txtbox  clearfix">
+                            <textarea cols="30" rows="7" class="w100b" id="desc" name="desc"></textarea>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="align_center">
+        <a href="javascript:void(0)" class="common_button common_button_emphasize" id="versionSubmit">确定</a>
+        <a href="javascript:void(0)" class="common_button common_button_gray" id="rockBack">取消</a>
+    </div>
+    </div>
    
-   <input type="submit" value="提交" id="versionSubmit">
-     <table style="border: solid;1px">
-	   
-        <thead>
-           <tr><th>版本管理</th></tr></thead>
-        <thead>
-           <tr>
-               <td>年度</td>
-               <td><input type="text" id="v_Year"></td>
-               <td>创建时间</td>
-               <td><input id="create_time" type="text"></td>
-           </tr>
-           <tr>
-               <td>版本编号</td>
-               <td><input type="text" id="vCode"></td>
-               <td></td>
-               <td></td>
-           </tr>
-           <tr>
-               <td>是否启用</td>
-	              <td><select id="is_Enable">
-							<option value="">--请选择--</option>
-							<option value="0">否</option>
-							<option value="1">是</option>
-						</select>
-				   </td>
-               <td>版本是否生效</td>
-               <td><select id="is_State">
-							<option value="">--请选择--</option>
-							<option value="0">否</option>
-							<option value="1">是</option>
-						</select>
-				   </td>
-           </tr>
-           <tr>
-               <td>描述</td>
-               <td rowspan="3"><td><input type="text" id="desc"></td></td>
-           </tr>
-        </thead>
-     </table>
      </form>
 </body>
 </html>

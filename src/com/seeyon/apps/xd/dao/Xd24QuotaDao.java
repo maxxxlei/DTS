@@ -1,8 +1,7 @@
 package com.seeyon.apps.xd.dao;
 
+import java.util.List;
 import java.util.Map;
-
-import org.h2.engine.Session;
 
 import com.seeyon.apps.xd.po.QuotaPo;
 import com.seeyon.ctp.common.exceptions.BusinessException;
@@ -18,14 +17,14 @@ public interface Xd24QuotaDao {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public FlipInfo getQuotaList(FlipInfo flipInfo, Map<String, String> query) throws BusinessException;
+	public FlipInfo getQuotaList(FlipInfo fi,Map<String, Object> map) throws BusinessException;
 	/**
 	 * 添加指标库数据
 	 * @param quota
 	 * @return
 	 * @throws BusinessException
 	 */
-	public void saveQuota(QuotaPo qp) throws BusinessException;
+	public Boolean saveQuotaPo(QuotaPo po) throws BusinessException;
 	/**
 	 * 修改指标库数据
 	 * @param quotal
@@ -39,7 +38,7 @@ public interface Xd24QuotaDao {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public void deleteQuota(String[]  idQuota) throws BusinessException;
+	public void deleteQuota(String[] idQuota) throws BusinessException;
 	
 	
 }

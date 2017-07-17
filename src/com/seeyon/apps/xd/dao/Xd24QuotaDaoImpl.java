@@ -1,10 +1,9 @@
 package com.seeyon.apps.xd.dao;
 
+import java.util.List;
 import java.util.Map;
 
-import org.h2.engine.Session;
-import org.hibernate.Query;
-import org.hibernate.SQLQuery;
+import org.apache.log4j.Logger;
 
 import com.seeyon.apps.xd.po.QuotaPo;
 import com.seeyon.ctp.common.exceptions.BusinessException;
@@ -13,18 +12,28 @@ import com.seeyon.ctp.util.FlipInfo;
 
 public class Xd24QuotaDaoImpl implements Xd24QuotaDao {
 
-
+	private Logger LOGGER = Logger.getLogger(Xd24QuotaDaoImpl.class);
 	@Override
-	public FlipInfo getQuotaList(FlipInfo flipInfo, Map<String, String> query)
+	public FlipInfo getQuotaList(FlipInfo fi,Map<String, Object> map)
 			throws BusinessException {
-		String hql = "select a.quotaCode,a.quotaName,a.quotaUnit,a.quotaType from QuotaPo a where a.quotaName order by a.quotaCode desc";
-		DBAgent.find(hql, query, flipInfo);
-		return flipInfo;
+		
+		String hql="SELECT a.id,a.quotaCode,a.quotaName,a.quotaUnit,a.quotaType,a.create_Time,a.update_Time FROM QuotaPo a";
+//		map.put("quotaName", po.getQuotaName());
+		//hql.append("order by a.update_Time desc");
+//		String hql = "select a.quotaCode,a.quotaName,a.quotaUnit,a.quotaType from QuotaPo a where a.quotaName order by a.quotaCode desc";
+		
+	DBAgent.find(hql, map, fi);
+	return fi;
 	}
 
 	@Override//保存
-	public void saveQuota(QuotaPo qp) throws BusinessException {
-		     DBAgent.save(qp);
+	public Boolean saveQuotaPo(QuotaPo po) throws BusinessException{
+	   Object  obj = DBAgent.save(po);
+	   LOGGER.info("obj==="+obj);
+	   if(obj != null){
+		   return true;
+	   }
+	   return false;
 	}
 
 	@Override
