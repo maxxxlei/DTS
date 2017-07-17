@@ -65,4 +65,36 @@ public class Xd24MenuRoleController extends BaseController {
 		return view;
 
 	}
+	
+	/**
+	 * 菜单修改、查看页面
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws BusinessException
+	 */
+	public ModelAndView editMenu(HttpServletRequest request,
+			HttpServletResponse response) throws BusinessException {
+
+		ModelAndView view = new ModelAndView("/apps/xd24zfz/menurole/menuEdit");
+		String operType = request.getParameter("operType");
+		return view;
+
+	}
+	/**
+	 * 菜单新建页面
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws BusinessException
+	 */
+	public ModelAndView addMenu(HttpServletRequest request,
+			HttpServletResponse response) throws BusinessException {
+
+		ModelAndView view = new ModelAndView("/apps/xd24zfz/menurole/menuEdit");
+		return view;
+
+	}
 }
