@@ -69,7 +69,7 @@
                     <property name="name" value="组织计划类型管理 " />                
                     <property name="target" value="mainfrm" />
                     <property name="icon" value="todoevent.png" />
-                    <property name="url" value="/xd24/zzjhController.do?method=xdcd24SearchList"/>
+                    <property name="url" value="/xd24/zzjhController.do?method=zzjhList"/>
                     <property name="menuCheck">
                         <bean class="com.seeyon.apps.xd.menu.MenuCheck4XdGroupAdmin" />
                     </property>

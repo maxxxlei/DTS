@@ -13,6 +13,10 @@
      
     <bean id="versionDao" class="com.seeyon.apps.xd.dao.VersionDaoImpl"></bean>
     <!-- 战略地图维度 -->
+
+    <!-- 组织计划类型 -->
+    <bean name="zzjhlxManger" class="com.seeyon.apps.xd.manager.Xd24ZzjhlxMangerImpl"/>
+   
     <bean id="xd24ZldtwdManager" class="com.seeyon.apps.xd.manager.Xd24ZldtwdManagerImpl"/>
     <bean id="xd24ZldtwdDao" class="com.seeyon.apps.xd.dao.Xd24ZldtwdDaoImpl"/>
     <!-- 菜单角色管理 -->

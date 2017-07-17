@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.seeyon.ctp.common.po.BasePO;
 
-public class MenuVo extends BasePO {
+public class MenuVo{
 	
 	/**
 	 * 菜单名称

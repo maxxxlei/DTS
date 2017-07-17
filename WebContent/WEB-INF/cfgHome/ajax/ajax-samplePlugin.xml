@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+<bean>
+	<serviceName>zzjhlxManger</serviceName>
+		<operations>
+			<op>getUser</op>
+			<op>saveZzjhlx</op>
+			<op>getZzjhlxById</op>
+			<op>getNameAndId</op>
+			<op>deleteZzjhlx</op>
+		</operations>
+	</bean>
+</beans>
