@@ -167,6 +167,7 @@ create table xd24_target_item
    end_time           DATE,
    goal_Id            NUMBER(21),
    goal_Name          VARCHAR2(255),
+   standardOrDesc     CLOB,
    other_Member       VARCHAR2(500),
    actual_Value       VARCHAR2(500),
    constraint PK_XD24_TARGET_ITEM primary key (ID)

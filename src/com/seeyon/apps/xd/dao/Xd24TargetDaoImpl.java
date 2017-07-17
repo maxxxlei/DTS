@@ -12,10 +12,13 @@ import org.apache.logging.log4j.util.Strings;
 
 import com.seeyon.apps.xd.constants.Xd24Enum;
 import com.seeyon.apps.xd.po.TargetPo;
+import com.seeyon.ctp.common.AppContext;
+import com.seeyon.ctp.common.authenticate.domain.User;
 import com.seeyon.ctp.common.exceptions.BusinessException;
 import com.seeyon.ctp.util.DBAgent;
 import com.seeyon.ctp.util.DateUtil;
 import com.seeyon.ctp.util.FlipInfo;
+import com.seeyon.ctp.util.SQLWildcardUtil;
 
 public class Xd24TargetDaoImpl implements Xd24TargetDao {
 
@@ -29,8 +32,10 @@ public class Xd24TargetDaoImpl implements Xd24TargetDao {
 		Map<String, Object> map = new HashMap<String, Object>();
 		StringBuffer hql = new StringBuffer("select t.id,t.subject,t.createTime,t.effectTime,t.memberId,t.startTime,");
 		hql.append("t.endTime from TargetPo t where ");
-		hql.append("t.isDelete =:isDelete order by t.createTime desc");
+		hql.append("t.isDelete =:isDelete and t.memberId =:memberId order by t.createTime desc");
 		map.put("isDelete", Integer.valueOf(Xd24Enum.Target.DELETE_N.getKey()));
+		User user = AppContext.getCurrentUser();
+		map.put("memberId", user.getId());
 		return DBAgent.find(hql.toString(), map, flipInfo);
 	}
 
@@ -50,13 +55,13 @@ public class Xd24TargetDaoImpl implements Xd24TargetDao {
 		hql.append("t.endTime from TargetPo t where t.isDelete =:isDelete");
 		params.put("isDelete", Integer.valueOf(Xd24Enum.Target.DELETE_N.getKey()));
 		try {
-			if("subject".equals(key)){
-				hql.append(" and t.subject =:subject");
-				params.put("subject", value);
-			}else if("memberId".equals(key)){
+			if("subject".equals(key) && Strings.isNotBlank(value)){
+				hql.append(" and t.subject like :subject");
+				params.put("subject", SQLWildcardUtil.escape(value));
+			}else if("memberId".equals(key) && Strings.isNotBlank(value)){
 				hql.append(" and t.memberId =:memberId");
 				params.put("memberId", Long.valueOf(value.substring(7)));
-			}else if("startTime".equals(key)){
+			}else if("startTime".equals(key) && Strings.isNotBlank(value)){
 				//一、时间以#开头，证明没有form_startTime
 				boolean hb = value.startsWith("#");
 				//二、时间以#结尾，证明没有to_startTime
