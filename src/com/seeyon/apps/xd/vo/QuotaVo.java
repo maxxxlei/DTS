@@ -1,6 +1,5 @@
 package com.seeyon.apps.xd.vo;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import com.seeyon.ctp.common.po.BasePO;
@@ -11,7 +10,7 @@ import com.seeyon.ctp.common.po.BasePO;
  * @author fengkai
  *
  */
-public class QuotaVo extends BasePO {
+public class QuotaVo{
 
 	
 	private static final long serialVersionUID = -6708333852054165703L;
@@ -56,6 +55,9 @@ public class QuotaVo extends BasePO {
 	public Long getId() {
 		return id;
 	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public Long getVersionId() {
 		return versionId;
 	}
@@ -68,13 +70,10 @@ public class QuotaVo extends BasePO {
 	public void setV_state(Integer v_state) {
 		this.v_state = v_state;
 	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public int getQuotaClass() {
+	public Integer getQuotaClass() {
 		return quotaClass;
 	}
-	public void setQuotaClass(int quotaClass) {
+	public void setQuotaClass(Integer quotaClass) {
 		this.quotaClass = quotaClass;
 	}
 	public Long getQuotaCode() {
@@ -89,10 +88,10 @@ public class QuotaVo extends BasePO {
 	public void setQuotaName(String quotaName) {
 		this.quotaName = quotaName;
 	}
-	public int getQuotaUnit() {
+	public Integer getQuotaUnit() {
 		return quotaUnit;
 	}
-	public void setQuotaUnit(int quotaUnit) {
+	public void setQuotaUnit(Integer quotaUnit) {
 		this.quotaUnit = quotaUnit;
 	}
 	public String getQuotaType() {
@@ -113,5 +112,6 @@ public class QuotaVo extends BasePO {
 	public void setUpdate_Time(Date update_Time) {
 		this.update_Time = update_Time;
 	}
+	
 
 }

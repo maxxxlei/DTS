@@ -3,9 +3,10 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping>
 
-	<class name="com.seeyon.apps.xd.po.QuotaPo" table="xd24_quota">
+
+	<hibernate-mapping package="com.seeyon.apps.xd.po">
+   <class name="QuotaPo" table="xd24_quota">
 		<id name="id" type="long" column="id" length="21">
 			<generator class="assigned" />
 		</id>
