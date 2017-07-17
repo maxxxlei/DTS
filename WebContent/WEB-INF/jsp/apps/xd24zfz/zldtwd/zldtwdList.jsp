@@ -36,18 +36,24 @@
 			sortable : true,
 			align : 'center'
 		},{
+            display : "战略地图描述",
+            name : 'description',
+            width : '30%',
+            sortable : true,
+            align : 'center'
+        },{
 			display : "是否启用",
-			name : 'isenable',
-			width : '10%',
-			sortable : true,
-			align : 'center'
-		},{
-			display : "描述",
-			name : 'description',
+			name : 'isEnable',
 			width : '20%',
 			sortable : true,
 			align : 'center'
-		}];
+		},{
+            display : "创建时间",
+            name : 'createTime',
+            width : '20%',
+            sortable : true,
+            align : 'center'
+        }];
 		grid = $('#listSent').ajaxgrid({
             click: showInfo,
             dblclick: dbclickRow,
@@ -79,12 +85,40 @@
 					return;
 				}
 				if (choose === 'name') {
-					o.name = $('#name').val();
-					if (o.name == "") {
-						$.alert("请输入要查询的战略地图名称！");
+                    o.name = $('#name').val();
+                    if (o.name == "") {
+                        $.alert("请输入要查询的战略地图名称！");
+                        return;
+                    }
+                }
+				if (choose === 'description') {
+					o.description = $('#description').val();
+					if (o.description == "") {
+						$.alert("请输入要查询的战略地图描述！");
 						return;
 					}
 				}
+				if (choose === 'isEnable') {
+                    o.isEnable = $('#isEnable_dropdown_text').text();
+                    debugger;
+                    if (o.isEnable == "是") {
+                    	o.isEnable = "1";
+                    }
+                    if (o.isEnable == "否") {
+                        o.isEnable = "0";
+                    }
+                }
+				if (choose === 'createDate') {
+                    startDate = $('#from_datetime').val();
+                    endDate = $('#to_datetime').val();
+                    debugger;
+                    if (startDate != "") {
+                        o.from_datetime = startDate;
+                    }
+                    if (endDate != "") {
+                        o.to_datetime = endDate;
+                    }
+                }
 				var val = searchobj.g.getReturnValue();
 				debugger;
 				if (window.location.href.indexOf("condition=templeteAll&textfield=all") != -1) {
@@ -102,7 +136,34 @@
 				text : "战略地图名称",
 				value : 'name',
 				maxLength : 100
-			} ]
+			},{
+                id : 'description',
+                name : 'description',
+                type : 'input',
+                text : "战略地图描述",
+                value : 'description',
+                maxLength : 100
+            }, {
+                id: 'isEnable',
+                name: 'isEnable',
+                type: 'select',
+                text: '是否启用',
+                value: 'isEnable',
+                items: [{
+                    text: '是',
+                    value: '1'
+                }, {
+                    text: '否',
+                    value: '0'
+                }]
+            },{
+                id: 'datetime',
+                name: 'datetime',
+                type: 'datemulti',
+                text: '创建时间',
+                value: 'createDate',
+                dateTime: true
+            } ]
 		});
 		
 		var toolbar = new Array();
@@ -120,10 +181,16 @@
             toolbar: toolbar
         });
 
+        var skinPathKey = getCtpTop().skinPathKey == null ? "harmony" : getCtpTop().skinPathKey;
+        var html = '<span class="nowLocation_ico"><img src="'+_ctxPath+'/main/skin/frame/'+skinPathKey+'/menuIcon/'+getCtpTop().currentSpaceType+'.png"></span>';
+        html += '<span class="nowLocation_content">24字方针系统设置 > ';
+        html += '<a>战略地图维度</a>';
+        html += '</span>';
+        getCtpTop().showLocation(html);
 	});
 	//删除用户
-	function deleteUser() {
-		var users = new Array();
+	function deleteRows() {
+		var ids = new Array();
 		var manager = new xd24ZldtwdManager();
 		var v = getTableChecked();
 		if (v.length === 0) {
@@ -132,7 +199,7 @@
 		} else {
 			var checkResult = true;
 			$(v).each(function(index, domEle) {
-				users.push(domEle.id);
+				ids.push(domEle.id);
 			});
 			if (!checkResult)
 				return;
@@ -140,7 +207,7 @@
 				'msg' : "确定要删除战略地图？",
 				ok_fn : function() {
 					debugger;
-					manager.deleteUser(users, {
+					manager.deleteZldtwd(ids, {
 						success : function() {
 							reloadtab();
 						}
@@ -155,6 +222,7 @@
 	function reloadtab() {
 		var o = new Object();
 		$("#listSent").ajaxgridLoad(o);
+		location.href = _ctxPath + "/xd24/zldtwdController.do?method=zldtwdList"
 	};
 	//获取选中
 	function getTableChecked() {
@@ -168,12 +236,12 @@
     function showInfo(row, rowIndex, colIndex) {
 		debugger;
 		grid.grid.resizeGridUpDown('middle');
-        $('#summary').attr("src",_ctxPath + "/xd24/zldtwdController.do?method=edit&flag=show&"+row.id);
-    }
+        $('#summary').attr("src",_ctxPath + "/xd24/zldtwdController.do?method=edit&flag=show&id="+row.id);
+    };
     //双击修改
     function dbclickRow(){
         updateRow();
-    }
+    };
     //点击修改
     function updateRow(){
     	debugger;
@@ -188,13 +256,8 @@
             return;
         }
         grid.grid.resizeGridUpDown('middle');
-        $('#summary').attr("src",_ctxPath + "/xd24/zldtwdController.do?method=edit&flag=update&"+ rows[0].id);
-    }
-    
-    //删除行
-    function deleteRows(){
-    	
-    }
+        $('#summary').attr("src",_ctxPath + "/xd24/zldtwdController.do?method=edit&flag=update&&id="+ rows[0].id);
+    };
     //添加行
     function addRow(){
         grid.grid.resizeGridUpDown('middle');
@@ -209,8 +272,8 @@
         </div>
 	    <div class="layout_center over_hidden" id="center">
             <table class="flexme3" id="listSent"></table>
-            <div id="grid_detail" class="h100b">
-                <iframe id="summary" width="100%" height="100%" frameborder="0"  style="overflow-y:hidden"></iframe>
+            <div id="grid_detail" class="h100b" style="overflow:hidden">
+                <iframe id="summary" width="100%" height="100%" frameborder="0" style="overflow:hidden"></iframe>
             </div>
         </div>
 	</div>
