@@ -8,7 +8,7 @@ import com.seeyon.ctp.common.exceptions.BusinessException;
  *
  * @time 2017年7月17日
  */
-public interface UserManager {
+public interface XdUserManager {
 	/**
 	 * 获取鑫达组织架构中单位、中心、部门、组、人员信息、岗位
 	 * @param memberId

@@ -20,7 +20,7 @@
     <bean name="menuRoleDao" class="com.seeyon.apps.xd.dao.MenuRoleDaoImpl"/>
 
     <!-- 人员基础信息 -->
-    <bean id="userManager" class="com.seeyon.apps.xd.manager.UserManagerImpl"/>
+    <bean id="xdUserManager" class="com.seeyon.apps.xd.manager.XdUserManagerImpl"/>
     
     <!-- 规划 -->
      <bean name="guiHuaManager" class="com.seeyon.apps.xd.manager.Xd24GuiHuaManagerImpl"/>

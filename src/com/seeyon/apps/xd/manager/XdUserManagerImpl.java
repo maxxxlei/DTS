@@ -8,7 +8,7 @@ import com.seeyon.ctp.organization.bo.V3xOrgMember;
 import com.seeyon.ctp.organization.bo.V3xOrgPost;
 import com.seeyon.ctp.organization.manager.OrgManager;
 
-public class UserManagerImpl implements UserManager {
+public class XdUserManagerImpl implements XdUserManager {
 
 	private OrgManager orgManager;
 	

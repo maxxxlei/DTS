@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import www.seeyon.com.utils.UUIDUtil;
 
 import com.seeyon.apps.xd.constants.Xd24Enum;
-import com.seeyon.apps.xd.manager.UserManager;
+import com.seeyon.apps.xd.manager.XdUserManager;
 import com.seeyon.apps.xd.manager.Xd24TargetManager;
 import com.seeyon.apps.xd.po.TargetPo;
 import com.seeyon.apps.xd.vo.UserVo;
@@ -21,10 +21,6 @@ import com.seeyon.ctp.common.AppContext;
 import com.seeyon.ctp.common.authenticate.domain.User;
 import com.seeyon.ctp.common.controller.BaseController;
 import com.seeyon.ctp.common.exceptions.BusinessException;
-import com.seeyon.ctp.organization.bo.V3xOrgAccount;
-import com.seeyon.ctp.organization.bo.V3xOrgDepartment;
-import com.seeyon.ctp.organization.bo.V3xOrgPost;
-import com.seeyon.ctp.organization.manager.OrgManager;
 import com.seeyon.ctp.util.DateUtil;
 import com.seeyon.ctp.util.ParamUtil;
 /**
@@ -37,10 +33,10 @@ public class Xd24TargetController extends BaseController{
 
 	private static final Logger LOGGER = Logger.getLogger(Xd24TargetController.class);
 	private Xd24TargetManager xd24TargetManager;
-	private UserManager   userManager;
+	private XdUserManager   xdUserManager;
 
-	public void setUserManager(UserManager userManager) {
-		this.userManager = userManager;
+	public void setXdUserManager(XdUserManager xdUserManager) {
+		this.xdUserManager = xdUserManager;
 	}
 	public void setXd24TargetManager(Xd24TargetManager xd24TargetManager) {
 		this.xd24TargetManager = xd24TargetManager;
@@ -176,7 +172,7 @@ public class Xd24TargetController extends BaseController{
 	public ModelAndView transTargetForm(HttpServletRequest request,HttpServletResponse response) throws BusinessException{
 		ModelAndView mav = new ModelAndView("apps/xd24zfz/target/targetForm");
 		User user = AppContext.getCurrentUser();
-		UserVo userInfo = userManager.getUserInfo(user.getId());
+		UserVo userInfo = xdUserManager.getUserInfo(user.getId());
 		mav.addObject("user", userInfo);
 		return mav;
 	}
