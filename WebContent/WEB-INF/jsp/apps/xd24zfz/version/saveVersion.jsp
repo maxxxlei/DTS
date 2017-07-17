@@ -42,7 +42,7 @@ $(function(){
           
 	 });
 	$("#rockBack").click(function(){
-		
+		parent.location.href = _ctxPath + "/xd24/versionController.do?method=listVersions"
 	});
 });
 </script>

@@ -12,6 +12,7 @@ $(function(){
 	
 	if("search" == type){
 		$("#version_edit_form").attr("disabled",true);
+		$("#versionSubmit").attr("disabled",true);
 	}
 	$("#versionSubmit").click(function(){
        
@@ -38,7 +39,7 @@ $(function(){
          
     });
 	$("#rockBack").click(function(){
-		
+		parent.location.href = _ctxPath + "/xd24/versionController.do?method=listVersions"
    });
 
 });
