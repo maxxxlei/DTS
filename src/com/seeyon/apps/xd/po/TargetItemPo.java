@@ -1,5 +1,6 @@
 package com.seeyon.apps.xd.po;
 
+import java.sql.Clob;
 import java.util.Date;
 
 import com.seeyon.ctp.common.po.BasePO;
@@ -22,9 +23,16 @@ public class TargetItemPo extends BasePO{
 	private Date  	endTime;	//考核、考察结束日
 	private Long 	goalId;	//目标项ID
 	private String 	goalName;	//目标项名称
+	private Clob  standardOrDesc;//目标完成标准or完成内容描述
 	private String 	otherMember;	//协同责任人
 	private String 	actualValue;	//实际值
 	
+	public Clob getStandardOrDesc() {
+		return standardOrDesc;
+	}
+	public void setStandardOrDesc(Clob standardOrDesc) {
+		this.standardOrDesc = standardOrDesc;
+	}
 	public Long getGoalId() {
 		return goalId;
 	}

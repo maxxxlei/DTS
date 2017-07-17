@@ -8,12 +8,14 @@
 <title>版本控制</title>
 <script type="text/javascript">
 $(function(){
+	//获取页面展示类型，查看还是修改，如果是查看输入框全部为不可以编辑状态
 	var type = "${openType}"
-	
 	if("search" == type){
-		$("#version_edit_form").attr("disabled",true);
-		$("#versionSubmit").attr("disabled",true);
+		$("#desc").attr("disabled",true);
+		//$("#versionSubmit").attr("disabled",true);
+		document.getElementById("buttons").style.visibility="hidden";//隐藏
 	}
+	//表单提交
 	$("#versionSubmit").click(function(){
        
 		var vDesc = $("#desc").val();
@@ -57,7 +59,7 @@ $(function(){
                         <label class="margin_r_10" for="text">年度:</label></th>
                     <td width="100%">
                         <div class="common_txtbox_wrap">
-                            <input type="text" id="v_Year" value="${version.vYear }" readonly="readonly">
+                            <input type="text" id="v_Year" value="${version.vYear }" disabled="disabled">
                         </div>
                     </td>
                 </tr>
@@ -66,7 +68,7 @@ $(function(){
                         <label class="margin_r_10" for="text">版本编号:</label></th>
                     <td>
                         <div class="common_txtbox_wrap">
-                            <input type="text" id="vCode" value="${version.vCode }" readonly="readonly">
+                            <input type="text" id="vCode" value="${version.vCode }" disabled="disabled">
                         </div>
                     </td>
                 </tr>
@@ -83,7 +85,7 @@ $(function(){
             </tbody>
         </table>
     </div>
-    <div class="align_center">
+    <div class="align_center" id="buttons">
         <a href="javascript:void(0)" class="common_button common_button_emphasize" id="versionSubmit">确定</a>
         <a href="javascript:void(0)" class="common_button common_button_gray" id="rockBack">取消</a>
     </div>

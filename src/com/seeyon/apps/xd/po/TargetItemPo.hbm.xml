@@ -3,9 +3,9 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping>
+<hibernate-mapping package="com.seeyon.apps.xd.po">
 
-	<class entity-name="com.seeyon.apps.xd.po.TargetItemPo" table="xd24_target_item">
+	<class entity-name="TargetItemPo" table="xd24_target_item">
 		<id name="id" type="long" column="id" length="21">
 			<generator class="assigned" />
 		</id>
@@ -19,6 +19,7 @@
 		<property name="endTime" type="timestamp" column="end_time" />
 		<property name="goalId" type="long" column="goal_Id" length="21" />
 		<property name="goalName" type="string" column="goal_Name" length="255" />
+		<property name="standardOrDesc" type="string" column="goal_Name"/>
 		<property name="otherMember" type="string" column="other_Member" length="500"/>
 		<property name="actualValue" type="string" column="actual_Value" length="500"/>
 

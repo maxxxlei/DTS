@@ -10,7 +10,6 @@
     
 <script type="text/javascript">
 var grid;
-var edocDialog;
 $(function(){
 	new MxtLayout({
         'id': 'layout',
@@ -39,7 +38,7 @@ $(function(){
      //停用
      toolbar.push({ id: "disableVersion",name: "停用",className: "ico16 editor_16",click:disenableRow });
     
-     
+     //工具栏
      $("#toolbars").toolbar({
          borderLeft:false,
          borderTop:false,
@@ -83,7 +82,7 @@ $(function(){
      }
      var width = '20%';
      var nameWidth = '20%';
-   //定义列表框选项栏目名称
+    //定义列表框选项栏目名称
      var colModel = new Array();
      colModel.push({display: 'id',name:'id',width: '4%',type: 'checkbox'});
      colModel.push({display: "年度",name:'vYear',width: nameWidth});
@@ -114,7 +113,7 @@ $(function(){
      var o = new Object();
      //$('#versionList').ajaxgrid();
      $("#versionList").ajaxgridLoad(o);
-     
+     //单击数据操作
      function showInfo(){
     	 var rows = grid.grid.getSelectRows();
          
@@ -123,15 +122,17 @@ $(function(){
    
    
      }
+     //双击数据
      function dbclickRow(){
     	 updateRow();
      }
+     //启用
      function enableRow(){
     	 var type = "enable";
     	 var rows = grid.grid.getSelectRows();
     	 
     	 var tranObj = new Array();
-        
+         
          if(rows.length === 0){
              $.alert("请选择一条记录!");//请选择一条记录
              return;
@@ -144,11 +145,12 @@ $(function(){
         	 $.alert("该版本已启用!");
              return;
          }
+         //判断是否有其他版本已启用，只能有一个版本是启用状态
          var vsManager = new versionManager();
          var o = new Object();
          o.isEnable = 1;
          if(vsManager.getVersionByVcodeAndVyear(o)){
-             $.alert("已有版本启用！");
+             $.alert("已有版本启用,只能有一个版本是启用状态！");
              return;
          }
          tranObj[0] = rows[0].id;
@@ -160,10 +162,8 @@ $(function(){
                          if("SUCCESS" === msg){
                              $.alert("修改成功！");
                              var o = new Object();
-                             //$('#versionList').ajaxgrid();
                              $("#versionList").ajaxgridLoad(o);
                          }
-                        
                      }, 
                      error : function(request, settings, e){
                          $.alert(e);
@@ -177,7 +177,7 @@ $(function(){
         
      }
      
-     
+     //停用操作
      function disenableRow(){
     	 var type = "disenable";
     	 
@@ -223,7 +223,7 @@ $(function(){
          });
      }
      
-     
+     //新增
      function  addRow(){
      	//将新建页面显示
      	grid.grid.resizeGridUpDown('middle');
@@ -231,7 +231,7 @@ $(function(){
 
           
       }
-     
+     //修改
       function updateRow(){
     	  var rows = grid.grid.getSelectRows();
           if(rows.length === 0){
@@ -242,6 +242,7 @@ $(function(){
               $.alert("只能选择一条记录进行修改!");//只能选择一条记录进行修改
               return;
           }
+          //判断该条信息是否背使用，如果背使用不能进行修改
           var tranObj = new Array();
           tranObj[0] = rows[0].id;
           var vsManager = new versionManager();
@@ -249,10 +250,13 @@ $(function(){
         	//  $.alert("该条版本信息已被使用不进行修改操作！");
         	//  return;
          // }
+          //页面展示
           grid.grid.resizeGridUpDown('middle');
           $('#summary').attr("src",_ctxPath + "/xd24/versionController.do?method=editVersion&type=change&id="+rows[0].id);
     
       }
+     
+     //删除
       function deleteRow(){
     	  var type = "del";
     	  var rows = grid.grid.getSelectRows();
@@ -277,12 +281,9 @@ $(function(){
             	  vsManager.updateVersions(tranObj,type,{
                       success : function(msg){
                     	  if("SUCCESS" === msg){
-                    		  $.alert("删除成功！");
-                              var o = new Object();
-                              //$('#versionList').ajaxgrid();
-                              $("#versionList").ajaxgridLoad(o);
+                    		  //$.alert("删除成功！");
+                    		  parent.location.href = _ctxPath + "/xd24/versionController.do?method=listVersions"; 
                     	  }
-                    	 
                       }, 
                       error : function(request, settings, e){
                     	  $.alert(e);
@@ -294,6 +295,7 @@ $(function(){
               }
           });
       }
+     
       var skinPathKey = getCtpTop().skinPathKey == null ? "harmony" : getCtpTop().skinPathKey;
       var html = '<span class="nowLocation_ico"><img src="'+_ctxPath+'/main/skin/frame/'+skinPathKey+'/menuIcon/'+getCtpTop().currentSpaceType+'.png"></span>';
       html += '<span class="nowLocation_content">24字方针系统设置 > ';
