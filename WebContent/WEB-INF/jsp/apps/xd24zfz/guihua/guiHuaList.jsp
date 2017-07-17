@@ -5,11 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>版本控制</title>
+<title>规划计划</title>
 <script type="text/javascript" src="${path}/ajax.do?managerName=versionManager"></script>
     
 <script type="text/javascript">
 var grid;
+var edocDialog;
 $(function(){
 	new MxtLayout({
         'id': 'layout',
@@ -33,12 +34,9 @@ $(function(){
      toolbar.push({id: "update",name: "修改",className: "ico16 editor_16",click:updateRow });
      //删除
      toolbar.push({ id: "delete",name: "删除",className: "ico16 del_16",click:deleteRow });
-     //启用
-     toolbar.push({ id: "enableVersion",name: "启用",className: "ico16 editor_16",click:enableRow });
-     //停用
-     toolbar.push({ id: "disableVersion",name: "停用",className: "ico16 editor_16",click:disenableRow });
-    
-     //工具栏
+     //申请审批
+     toolbar.push({ id: "enableVersion",name: "申请审批",className: "ico16 editor_16",click:enableRow });
+     
      $("#toolbars").toolbar({
          borderLeft:false,
          borderTop:false,
@@ -47,8 +45,10 @@ $(function(){
      });
    //定义搜索条件选项
      var condition = new Array();
-     //版本名称
-     condition.push({id: 'vCode',name: 'vCode',type: 'input',text: "版本编号",value: 'vCode' });
+     //编号
+     condition.push({id: 'vCode',name: 'vCode',type: 'input',text: "编号",value: 'vCode' });
+     //规划名称
+     condition.push({id: 'ghName',name: 'ghName',type: 'input',text: "规划名称",value: 'ghName' });
      //引用状态
      condition.push({id: 'createTime',name: 'createTime',type: 'datemulti',text: "创建时间",value: 'createTime', dateTime:true });
      
@@ -73,26 +73,29 @@ $(function(){
         	 var startTime = $('#from_createTime').val();
         	 var endTime = $('#to_createTime').val();
              o.value  = startTime +"#"+ endTime;
+         }else if(choose === 'ghName'){
+             o.value  =  $('#ghName').val();
          }
          
          var val = searchobj.g.getReturnValue();
          if(val !== null){
-             $("#versionList").ajaxgridLoad(o);
+             $("#guihuaList").ajaxgridLoad(o);
          }
      }
      var width = '20%';
      var nameWidth = '20%';
-    //定义列表框选项栏目名称
+     //定义列表框选项栏目名称
      var colModel = new Array();
      colModel.push({display: 'id',name:'id',width: '4%',type: 'checkbox'});
-     colModel.push({display: "年度",name:'vYear',width: nameWidth});
-     colModel.push({display: "版本编号",name:'vCode',width: width});
-     colModel.push({display: "是否启用",name:'isEnable',width: width});
-     colModel.push({display: "是否生效",name:'state',width: width});
-     colModel.push({display: "创建时间",name:'createTime',width: width});
+     colModel.push({display: "审批状态",name:'state',width: nameWidth});
+     colModel.push({display: "规划类型",name:'type',width: width});
+     colModel.push({display: "标的物有无",name:'attachment',width: width});
+     colModel.push({display: "规划名称",name:'ghName',width: width});
+     colModel.push({display: "编制人",name:'memberId',width: width});
+     colModel.push({display: "编制时间",name:'createTime',width: width});
      
      //构造列表
-      grid = $('#versionList').ajaxgrid({
+      grid = $('#guihuaList').ajaxgrid({
          click: showInfo,
          dblclick: dbclickRow,
          colModel: colModel,
@@ -111,9 +114,9 @@ $(function(){
      
      //初始化列表
      var o = new Object();
-     //$('#versionList').ajaxgrid();
-     $("#versionList").ajaxgridLoad(o);
-     //单击数据操作
+     //$('#guihuaList').ajaxgrid();
+     $("#guihuaList").ajaxgridLoad(o);
+     
      function showInfo(){
     	 var rows = grid.grid.getSelectRows();
          
@@ -122,17 +125,15 @@ $(function(){
    
    
      }
-     //双击数据
      function dbclickRow(){
     	 updateRow();
      }
-     //启用
      function enableRow(){
     	 var type = "enable";
     	 var rows = grid.grid.getSelectRows();
     	 
     	 var tranObj = new Array();
-         
+        
          if(rows.length === 0){
              $.alert("请选择一条记录!");//请选择一条记录
              return;
@@ -141,18 +142,11 @@ $(function(){
              $.alert("只能选择一条记录进行修改!");//只能选择一条记录进行修改
              return;
          }
-         if("启用" == rows[0].isEnable){
+         if(1 == rows[0].isEnable){
         	 $.alert("该版本已启用!");
              return;
          }
-         //判断是否有其他版本已启用，只能有一个版本是启用状态
          var vsManager = new versionManager();
-         var o = new Object();
-         o.isEnable = 1;
-         if(vsManager.getVersionByVcodeAndVyear(o)){
-             $.alert("已有版本启用,只能有一个版本是启用状态！");
-             return;
-         }
          tranObj[0] = rows[0].id;
          var confirm = $.confirm({
              'msg': "确定启用该版本？",//确定删除该权限，该操作无法恢复
@@ -162,8 +156,10 @@ $(function(){
                          if("SUCCESS" === msg){
                              $.alert("修改成功！");
                              var o = new Object();
-                             $("#versionList").ajaxgridLoad(o);
+                             //$('#guihuaList').ajaxgrid();
+                             $("#guihuaList").ajaxgridLoad(o);
                          }
+                        
                      }, 
                      error : function(request, settings, e){
                          $.alert(e);
@@ -177,53 +173,8 @@ $(function(){
         
      }
      
-     //停用操作
-     function disenableRow(){
-    	 var type = "disenable";
-    	 
-    	 var rows = grid.grid.getSelectRows();
-    	 
-    	 var tranObj = new Array();
-         
-         if(rows.length === 0){
-             $.alert("请选择一条记录!");//请选择一条记录
-             return;
-         }
-         if(rows.length>1){
-             $.alert("只能选择一条记录进行修改!");//只能选择一条记录进行修改
-             return;
-         }
-         if("停用" == rows[0].isEnable){
-             $.alert("该版本已停用!");
-             return;
-         }
-         var vsManager = new versionManager();
-         tranObj[0] = rows[0].id;
-         var confirm = $.confirm({
-             'msg': "确定停用该版本？",//确定删除该权限，该操作无法恢复
-             ok_fn: function () { 
-                 vsManager.updateVersions(tranObj,type,{
-                     success : function(msg){
-                         if("SUCCESS" === msg){
-                             $.alert("修改成功！");
-                             var o = new Object();
-                             //$('#versionList').ajaxgrid();
-                             $("#versionList").ajaxgridLoad(o);
-                         }
-                        
-                     }, 
-                     error : function(request, settings, e){
-                         $.alert(e);
-                     }
-                  });
-             },
-             cancel_fn:function(){
-                 confirm.close();
-             }
-         });
-     }
      
-     //新增
+     
      function  addRow(){
      	//将新建页面显示
      	grid.grid.resizeGridUpDown('middle');
@@ -231,7 +182,7 @@ $(function(){
 
           
       }
-     //修改
+     
       function updateRow(){
     	  var rows = grid.grid.getSelectRows();
           if(rows.length === 0){
@@ -242,22 +193,12 @@ $(function(){
               $.alert("只能选择一条记录进行修改!");//只能选择一条记录进行修改
               return;
           }
-          //判断该条信息是否背使用，如果背使用不能进行修改
-          var tranObj = new Array();
-          tranObj[0] = rows[0].id;
-          var vsManager = new versionManager();
-          //if(vsManager.getTargetByVersionId(tranObj)){
-        	//  $.alert("该条版本信息已被使用不进行修改操作！");
-        	//  return;
-         // }
-          //页面展示
           grid.grid.resizeGridUpDown('middle');
           $('#summary').attr("src",_ctxPath + "/xd24/versionController.do?method=editVersion&type=change&id="+rows[0].id);
     
       }
-     
-     //删除
       function deleteRow(){
+    	  debugger;
     	  var type = "del";
     	  var rows = grid.grid.getSelectRows();
           if(rows.length === 0){
@@ -265,25 +206,23 @@ $(function(){
               return;
           }
           var vsManager = new versionManager();
-          
           var tranObj = new Array();
           for(i=0;i<rows.length;i++){
              //进行数据验证，是否可以进行删除操作
               tranObj[i] = rows[i].id;
           }
-          //if(vsManager.getTargetByVersionId(tranObj)){
-          //    $.alert("该条版本信息已被使用不进行删除！");
-          //   return;
-          //}
           var confirm = $.confirm({
               'msg': "确定删除该数据，该操作无法恢复",//确定删除该权限，该操作无法恢复
               ok_fn: function () { 
             	  vsManager.updateVersions(tranObj,type,{
                       success : function(msg){
                     	  if("SUCCESS" === msg){
-                    		  //$.alert("删除成功！");
-                    		  parent.location.href = _ctxPath + "/xd24/versionController.do?method=listVersions"; 
+                    		  $.alert("删除成功！");
+                              var o = new Object();
+                              //$('#guihuaList').ajaxgrid();
+                              $("#guihuaList").ajaxgridLoad(o);
                     	  }
+                    	 
                       }, 
                       error : function(request, settings, e){
                     	  $.alert(e);
@@ -295,7 +234,6 @@ $(function(){
               }
           });
       }
-     
       var skinPathKey = getCtpTop().skinPathKey == null ? "harmony" : getCtpTop().skinPathKey;
       var html = '<span class="nowLocation_ico"><img src="'+_ctxPath+'/main/skin/frame/'+skinPathKey+'/menuIcon/'+getCtpTop().currentSpaceType+'.png"></span>';
       html += '<span class="nowLocation_content">24字方针系统设置 > ';
@@ -311,7 +249,7 @@ $(function(){
             <div id="toolbars"></div>
         </div>
         <div class="layout_center over_hidden" id="center">
-            <table class="flexme3" id="versionList"></table>
+            <table class="flexme3" id="guihuaList"></table>
           <div id="grid_detail" class="h100b">
                 <iframe id="summary" width="100%" height="100%" frameborder="0"  style="overflow-y:hidden"></iframe>
             </div> 

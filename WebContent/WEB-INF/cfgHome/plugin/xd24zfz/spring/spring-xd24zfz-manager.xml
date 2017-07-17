@@ -9,17 +9,24 @@
 
 	<!--目标Dao  -->
 	<bean id="xd24TargetDao" class="com.seeyon.apps.xd.dao.Xd24TargetDaoImpl"/>
-
 	<bean id="xd24TargetManager" class="com.seeyon.apps.xd.manager.Xd24TargetManagerImpl"/>
      
     <bean id="versionDao" class="com.seeyon.apps.xd.dao.VersionDaoImpl"></bean>
     <!-- 战略地图维度 -->
-    <bean name="xd24ZldtwdManager" class="com.seeyon.apps.xd.manager.Xd24ZldtwdManagerImpl"/>
-    <bean name="xd24ZldtwdDao" class="com.seeyon.apps.xd.dao.Xd24ZldtwdDaoImpl"/>
+
     <!-- 组织计划类型 -->
     <bean name="zzjhlxManger" class="com.seeyon.apps.xd.manager.Xd24ZzjhlxMangerImpl"/>
-    
+   
+    <bean id="xd24ZldtwdManager" class="com.seeyon.apps.xd.manager.Xd24ZldtwdManagerImpl"/>
+    <bean id="xd24ZldtwdDao" class="com.seeyon.apps.xd.dao.Xd24ZldtwdDaoImpl"/>
     <!-- 菜单角色管理 -->
     <bean name="menuRoleManager" class="com.seeyon.apps.xd.manager.MenuRoleManagerImpl"/>
     <bean name="menuRoleDao" class="com.seeyon.apps.xd.dao.MenuRoleDaoImpl"/>
+
+    <!-- 人员基础信息 -->
+    <bean id="xdUserManager" class="com.seeyon.apps.xd.manager.XdUserManagerImpl"/>
+    
+    <!-- 规划 -->
+     <bean name="guiHuaManager" class="com.seeyon.apps.xd.manager.Xd24GuiHuaManagerImpl"/>
+    <bean name="guiHuaDao" class="com.seeyon.apps.xd.dao.Xd24GuiHuaDaoImpl"/>
 </beans>

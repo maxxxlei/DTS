@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import www.seeyon.com.utils.UUIDUtil;
 
 import com.seeyon.apps.xd.constants.Xd24Enum;
+import com.seeyon.apps.xd.manager.XdUserManager;
 import com.seeyon.apps.xd.manager.Xd24TargetManager;
 import com.seeyon.apps.xd.po.TargetPo;
 import com.seeyon.apps.xd.vo.UserVo;
@@ -20,10 +21,6 @@ import com.seeyon.ctp.common.AppContext;
 import com.seeyon.ctp.common.authenticate.domain.User;
 import com.seeyon.ctp.common.controller.BaseController;
 import com.seeyon.ctp.common.exceptions.BusinessException;
-import com.seeyon.ctp.organization.bo.V3xOrgAccount;
-import com.seeyon.ctp.organization.bo.V3xOrgDepartment;
-import com.seeyon.ctp.organization.bo.V3xOrgPost;
-import com.seeyon.ctp.organization.manager.OrgManager;
 import com.seeyon.ctp.util.DateUtil;
 import com.seeyon.ctp.util.ParamUtil;
 /**
@@ -35,14 +32,14 @@ import com.seeyon.ctp.util.ParamUtil;
 public class Xd24TargetController extends BaseController{
 
 	private static final Logger LOGGER = Logger.getLogger(Xd24TargetController.class);
-	private OrgManager orgManager;
 	private Xd24TargetManager xd24TargetManager;
+	private XdUserManager   xdUserManager;
 
+	public void setXdUserManager(XdUserManager xdUserManager) {
+		this.xdUserManager = xdUserManager;
+	}
 	public void setXd24TargetManager(Xd24TargetManager xd24TargetManager) {
 		this.xd24TargetManager = xd24TargetManager;
-	}
-	public void setOrgManager(OrgManager orgManager) {
-		this.orgManager = orgManager;
 	}
 	/**
 	 * 跳转新增目标页面
@@ -54,29 +51,7 @@ public class Xd24TargetController extends BaseController{
 	public ModelAndView newTarget(HttpServletRequest request,HttpServletResponse response) throws BusinessException{
 		LOGGER.info("进入跳转新增目标页面....");
 		ModelAndView mav = new ModelAndView("apps/xd24zfz/target/newTarget");
-		User user = AppContext.getCurrentUser();
-		UserVo uv = new UserVo();
-		uv.setId(user.getId());
-		uv.setName(user.getName());
-		Long accountId = user.getAccountId();
-		uv.setAccountId(accountId);
-		Long postId = user.getPostId();
-		uv.setPostId(postId);
-		V3xOrgPost post = orgManager.getPostById(postId);
-		uv.setPostName(post.getName());
-		Long groupId = user.getDepartmentId();
-		uv.setGroupId(groupId);
-		V3xOrgDepartment group = orgManager.getDepartmentById(groupId);
-		uv.setGroupName(group.getName());
-		V3xOrgAccount orgAccount = orgManager.getAccountById(accountId);
-		uv.setAccountName(orgAccount.getName());
-		V3xOrgDepartment departMent = orgManager.getDepartmentByPath(group.getParentPath());
-		uv.setDepartMentId(departMent.getId());
-		uv.setDepartMentName(departMent.getName());
-		V3xOrgDepartment center = orgManager.getDepartmentByPath(departMent.getParentPath());
-		uv.setCenterId(center.getId());
-		uv.setCenterName(center.getName());
-		mav.addObject("user", uv);
+		
 		return mav;
 
 	}
@@ -186,5 +161,19 @@ public class Xd24TargetController extends BaseController{
 		}finally{
 			out.close();
 		}
+	}
+	/**
+	 * 加载目标录入页面
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws BusinessException
+	 */
+	public ModelAndView transTargetForm(HttpServletRequest request,HttpServletResponse response) throws BusinessException{
+		ModelAndView mav = new ModelAndView("apps/xd24zfz/target/targetForm");
+		User user = AppContext.getCurrentUser();
+		UserVo userInfo = xdUserManager.getUserInfo(user.getId());
+		mav.addObject("user", userInfo);
+		return mav;
 	}
 }

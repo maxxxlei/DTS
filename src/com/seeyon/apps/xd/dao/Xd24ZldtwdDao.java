@@ -23,4 +23,42 @@ public interface Xd24ZldtwdDao {
 	 * @throws BusinessException
 	 */
 	public void saveZldtwd(ZldtwdPo po) throws BusinessException;
+	
+	/**
+	 * 修改战略地图维度
+	 * @param zldtwd
+	 * @throws BusinessException
+	 */
+	public void updateZldtwd(ZldtwdPo po) throws BusinessException;
+	
+	/**
+	 * 删除战略地图维度
+	 * @param zldtwd
+	 * @throws BusinessException
+	 */
+	public void deleteZldtwd(String[] ids) throws BusinessException;
+	
+	/**
+	 * 通过主键检索战略地图维度信息
+	 * @param id
+	 * @return
+	 * @throws BusinessException
+	 */
+	public List getZldtwdById(long id) throws BusinessException;
+	
+	/**
+	 * 新建用户或者修改用户时，先查询是否有名称重复
+	 * @param name
+	 * @param id
+	 * @param isNew
+	 * @return
+	 * @throws BusinessException
+	 */
+	public boolean getSumZldtwName(String name,String id,boolean isNew) throws BusinessException;
+	/**
+	 * 根据状态获取所有战略地图维度
+	 * @return
+	 * @throws BusinessException
+	 */
+	public List<ZldtwdPo> getAllZldtwd(Integer isEnable,Integer isDelete,Integer isVersionEnable) throws BusinessException;
 }

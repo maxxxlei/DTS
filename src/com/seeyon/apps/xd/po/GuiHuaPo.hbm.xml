@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class entity-name="com.seeyon.apps.xd.po.GuiHuaPo" table="xd24_guihua">
+		<id name="id" type="long" column="id" length="21">
+			<generator class="assigned" />
+		</id>
+		<!-- 规划名称 -->
+        <property name="ghName" column="ghName" type="string" not-null="false" length="255" />
+         <!-- 年度 -->
+        <property name="year" type="string" column="year" length="4"/>
+        <!-- 审批状态 -->
+        <property name="state" type="integer" column="state"/>
+        <!-- 创建时间 -->
+        <property name="createTime" type="timestamp" column="createTime"/>
+        <!-- 修改时间 -->
+        <property name="updateTime" type="timestamp" column="udpateTime"/>
+        <!-- 单位ID-->
+        <property name="accountId" type="long" column="accountId" length="21"/>
+        <!-- 编辑人ID-->
+        <property name="memberId" type="long" column="memberId" length="21"/>
+        <!-- 描述 -->
+        <property name="desc" type="string" column="description"/>
+        <!-- 规划类型 -->
+        <property name="type" type="integer" column="type"/>
+        <!-- 标的物 -->
+        <property name="attachment" type="string" column="attachment" length="500"/>
+        <!-- 版本状态，是否启用、停用，0：停用 1：启用 -->
+        <property name="isDelete" type="integer" column="is_delete" />
+         <!-- 版本id -->
+        <property name="versionId" type="long" column="versionId" length="21"/>
+         <!-- 版本生效状态 -->
+        <property name="vState" type="integer" column="v_state"/>
+	</class>
+</hibernate-mapping>

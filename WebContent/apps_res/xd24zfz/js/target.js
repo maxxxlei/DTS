@@ -15,5 +15,14 @@
 		var time = Format(date,"yyyy-MM-dd HH:mm:ss");
 		$("#year").val(year);
 		$("#bzsj").val(time).attr("readonly",true);
+		//当前登录人所属岗位id
+		var postId = $("#postId").val();
+		//CEO 岗位ID
+		var pid = "-7947150997509224459";
+		//登录人为boss时，隐藏上级目标及
+		if(postId == pid){
+			$("#pid").hide();
+			$("#jtmc_div").hide();
+		}
     });
 })();
