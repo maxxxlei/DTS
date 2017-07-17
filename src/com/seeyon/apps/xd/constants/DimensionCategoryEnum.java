@@ -25,12 +25,9 @@ public class DimensionCategoryEnum implements CustomCode {
 	
 	@Override
 	public Map getCodesMap(Map codeCfg) {
-		Integer isEnable = Integer.valueOf(Xd24Enum.Zldtwd.ENABLE_Y.getKey());
-		Integer isDelete = Integer.valueOf(Xd24Enum.Target.DELETE_N.getKey());
-		Integer isVersionEnable = Integer.valueOf(Xd24Enum.VersionEnable.ENABLE.getKey());
 		Map myMap = new LinkedHashMap();
 		try {
-			List<ZldtwdPo> list = xd24ZldtwdManager.getAllZldtwd(isEnable, isDelete, isVersionEnable);
+			List<ZldtwdPo> list = xd24ZldtwdManager.getZldtwdList4Enum();
 			if(Strings.isNotEmpty(list)){
 				for(ZldtwdPo zp : list){
 					myMap.put(zp.getId(), zp.getName());
