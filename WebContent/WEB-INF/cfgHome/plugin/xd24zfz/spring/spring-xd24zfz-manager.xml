@@ -19,4 +19,7 @@
     <!-- 组织计划类型 -->
     <bean name="zzjhlxManger" class="com.seeyon.apps.xd.manager.Xd24ZzjhlxMangerImpl"/>
     
+    <!-- 菜单角色管理 -->
+    <bean name="menuRoleManager" class="com.seeyon.apps.xd.manager.MenuRoleManagerImpl"/>
+    <bean name="menuRoleDao" class="com.seeyon.apps.xd.dao.MenuRoleDaoImpl"/>
 </beans>

@@ -1,11 +1,15 @@
 package com.seeyon.apps.xd.manager;
 
+import java.util.Date;
 import java.util.Map;
 
 import com.seeyon.apps.xd.dao.Xd24QuotaDao;
 import com.seeyon.apps.xd.po.QuotaPo;
+import com.seeyon.apps.xd.po.VersionPo;
+import com.seeyon.apps.xd.po.ZldtwdPo;
 import com.seeyon.ctp.common.exceptions.BusinessException;
 import com.seeyon.ctp.util.FlipInfo;
+import com.seeyon.ctp.util.annotation.AjaxAccess;
 
 public class Xd24QuotaManagerImpl implements Xd24QuotaManager {
 	private Xd24QuotaDao xd24QuotaDao;
@@ -24,9 +28,10 @@ public class Xd24QuotaManagerImpl implements Xd24QuotaManager {
 		return flipInfo;
 	}
 
-	@Override
-	public void saveQuota(QuotaPo qp) throws BusinessException {
-		xd24QuotaDao.saveQuota(qp);
+	@AjaxAccess
+	public Boolean saveQuotaPo(QuotaPo po) throws BusinessException{
+		
+		return xd24QuotaDao.saveQuotaPo(po);
 	}
 
 

@@ -25,7 +25,7 @@
 		<property name="startTime" type="timestamp" column="START_TIME" />
 		<property name="endTime" type="timestamp" column="END_TIME" />
 		<property name="isCore" type="integer" column="IS_CORE" />
-		<property name="description" type="clob" column="DESCRIPTION" />
+		<property name="description" type="string" column="DESCRIPTION" />
 		<property name="versionId" type="long" column="VERSION_ID" length="21" />
 		<property name="versionState" type="integer" column="VERSION_STATE" />
 		<property name="isDelete" type="integer" column="IS_DELETE" />

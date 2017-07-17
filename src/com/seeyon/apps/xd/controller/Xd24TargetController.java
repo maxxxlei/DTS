@@ -1,6 +1,7 @@
 package com.seeyon.apps.xd.controller;
 
 import java.io.PrintWriter;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,7 @@ import com.seeyon.ctp.organization.bo.V3xOrgDepartment;
 import com.seeyon.ctp.organization.bo.V3xOrgPost;
 import com.seeyon.ctp.organization.manager.OrgManager;
 import com.seeyon.ctp.util.DateUtil;
+import com.seeyon.ctp.util.ParamUtil;
 /**
  * 目标controller
  * @author heliang.wang
@@ -99,8 +101,10 @@ public class Xd24TargetController extends BaseController{
 		LOGGER.info("============进入保存目标方法===================");
 		PrintWriter out = response.getWriter();
 		try {
+			Map<String,Object> params = ParamUtil.getJsonParams();
 			TargetPo tp = new TargetPo();
-			tp.setId(UUIDUtil.getUUIDLong());
+			long uuid = UUIDUtil.getUUIDLong();
+			tp.setId(uuid);
 			//年度
 			String year = request.getParameter("year");
 			tp.setYear(year);
@@ -163,9 +167,16 @@ public class Xd24TargetController extends BaseController{
 			if(Strings.isNotBlank(desciption)){
 				tp.setDescription(desciption);
 			}
+			//TODO 查询版本的信息，目前写死，后续改为调用接口获取
 			tp.setVersionId(1L);
 			tp.setVersionState(1);
+			//新增计划，是否删除状态
 			tp.setIsDelete(Integer.valueOf(Xd24Enum.Target.DELETE_N.getKey()));
+			//目标录入保存时，设置当前规划计划阶段状态为未审批
+			tp.setGhjhState(Integer.valueOf(Xd24Enum.PlanEnum.PLAN_DISAPPROVE.getKey()));
+			//TODO 执行阶段审批状态、对比分析状态、更新决议 审批状态、考核评价 审批状态、全面总结状态 需要确定好枚举进行初始值保存
+			
+			String khzbx_khzq = params.get("khzbx_khzq").toString();
 			xd24TargetManager.saveTarget(tp);
 			out.write("true");
 		} catch (Exception e) {

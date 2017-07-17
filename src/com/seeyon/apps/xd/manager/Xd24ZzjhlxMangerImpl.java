@@ -1,6 +1,7 @@
 package com.seeyon.apps.xd.manager;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,13 +10,16 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.seeyon.apps.xd.constants.Xd24Enum;
 import com.seeyon.apps.xd.dao.Xd24ZzjhlxDao;
+import com.seeyon.apps.xd.po.TargetPo;
 import com.seeyon.apps.xd.po.ZldtwdPo;
 import com.seeyon.apps.xd.po.ZzjhlxPo;
 import com.seeyon.apps.xd.vo.ZzjhlxVo;
 import com.seeyon.ctp.common.dao.BaseHibernateDao;
 import com.seeyon.ctp.common.exceptions.BusinessException;
 import com.seeyon.ctp.util.BeanUtils;
+import com.seeyon.ctp.util.DateUtil;
 import com.seeyon.ctp.util.FlipInfo;
 import com.seeyon.ctp.util.Strings;
 import com.seeyon.ctp.util.annotation.AjaxAccess;
@@ -31,13 +35,37 @@ public class Xd24ZzjhlxMangerImpl implements Xd24ZzjhlxManger{
 	public void setZzjhlxDao(Xd24ZzjhlxDao zzjhlxDao) {
 		this.zzjhlxDao = zzjhlxDao;
 	}
-
+/**
+ * 删除功能
+ * @param ids 选中要删除的id数组可能多个
+ * @return
+ * @throws BusinessException
+ */
+	@AjaxAccess
+	@Override
+	public String deleteZzjhlx(String[] ids) throws BusinessException {
+		log.info("进入批量删除目标方法====");
+		if(ids.length > 0){
+			for(int i = 0;i<ids.length;i++){
+				ZzjhlxPo zzjhlxPo = zzjhlxDao.getZzjhlxPoById(Long.valueOf(ids[i].toString()));
+				zzjhlxPo.setIsDelete(Integer.valueOf(Xd24Enum.Target.DELETE_Y.getKey()));
+				zzjhlxDao.updateZzjhlx(zzjhlxPo);
+			}
+			log.info("共删除目标 "+ids.length+" 条记录");
+			return "SUCCESS";
+		}else{
+			return "FALSE";
+		}
+	}
+	
+	
 	/**
 	 * 通过id和name属性查询是否有相同的name属性和是否是自己本身查询组织计划
+	 * @throws BusinessException 
 	 */
 	@Override
 	@AjaxAccess
-	public Boolean getNameAndId(String name, String id){
+	public Boolean getNameAndId(String name, String id) throws BusinessException{
 		Boolean flag = false;
 		List list = zzjhlxDao.getNameAndId(id,name);
 		List<ZzjhlxVo> zv = new ArrayList<ZzjhlxVo>();
@@ -75,10 +103,11 @@ public class Xd24ZzjhlxMangerImpl implements Xd24ZzjhlxManger{
 	
 	/**
 	 * 通过id查询组织计划
+	 * @throws BusinessException 
 	 */
 	@Override
 	@AjaxAccess
-	public ZzjhlxVo getZzjhlxById(String id){
+	public ZzjhlxVo getZzjhlxById(String id) throws BusinessException{
 
 		List list = zzjhlxDao.getZzjhlxById(id);
 		ZzjhlxVo  vo = new ZzjhlxVo();
@@ -138,27 +167,15 @@ public class Xd24ZzjhlxMangerImpl implements Xd24ZzjhlxManger{
 	
 	
 	/**
-	 * 查询到的结果放到FlipInfo里,返回FlipInfo
+	 * 获取组织计划列表
 	 */
 	@AjaxAccess
-	public FlipInfo getUser(FlipInfo fi, Map<String, Object> map) {
-		List<ZzjhlxVo> zzjhlxVo = new ArrayList<ZzjhlxVo>();
-		//fi.setSize(15);//设置默认显示条数
-		String key = (String) map.get("condition");//取前台查询按钮中的选择项，取得值为conditions中的value属性值
-		String value = (String) map.get("value");
-		if(key != null&&!key.equals("")){
-		if(key.equals("createDate")){
-			return null;
-		}else{
-			List list=zzjhlxDao.find(fi, map, key, value);
-				fi.setData(list);
-		}
-		}else{
-			fi = zzjhlxDao.getUser(fi, map);
-			List list  = fi.getData();
-			List<ZzjhlxVo>  result = this.convert(list);
-			fi.setData(result);	
-			return fi;
+	public FlipInfo getZzjhList(FlipInfo fi, Map<String, Object> map) throws BusinessException{
+		zzjhlxDao.getZzjhList(fi, map);
+		List list = fi.getData();
+		if(Strings.isNotEmpty(list)){
+			List<ZzjhlxVo> result = this.convert(list);
+			fi.setData(result);
 		}
 		return fi;
 	}
@@ -186,6 +203,12 @@ public class Xd24ZzjhlxMangerImpl implements Xd24ZzjhlxManger{
 				Object isEnable = obj[j++];
 				if(isEnable != null){
 				    vo.setIsEnable(Integer.parseInt(isEnable.toString()));
+				    if("1".equals(isEnable.toString())){
+				    	vo.setIsEnableName("启用");
+				    }
+				    if("0".equals(isEnable.toString())){
+				    	vo.setIsEnableName("停用");
+				    }
 				}
 				Object updateTime = obj[j++];
 				if(updateTime != null){

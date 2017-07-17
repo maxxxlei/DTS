@@ -20,6 +20,11 @@ public class ZzjhlxVo {
 	private int isEnable;
 	
 	/**
+	 * 是否启用 中文名称
+	 */
+	private String isEnableName;
+	
+	/**
 	 * 版本是否有效
 	 */
 	
@@ -49,24 +54,16 @@ public class ZzjhlxVo {
 	 * 描述
 	 */
 	private String desc;
+	
+	
+	
 
-	public ZzjhlxVo() {
-		super();
+	public String getIsEnableName() {
+		return isEnableName;
 	}
 
-	public ZzjhlxVo(Long id, String name, int isEnable, Long versionId,
-			int state, Date createTime, Date updateTime, int isDelete,
-			String desc) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.isEnable = isEnable;
-		this.versionId = versionId;
-		this.state = state;
-		this.createTime = createTime;
-		this.updateTime = updateTime;
-		this.isDelete = isDelete;
-		this.desc = desc;
+	public void setIsEnableName(String isEnableName) {
+		this.isEnableName = isEnableName;
 	}
 
 	public Long getId() {

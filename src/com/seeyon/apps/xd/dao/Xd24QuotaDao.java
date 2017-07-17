@@ -25,7 +25,7 @@ public interface Xd24QuotaDao {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public void saveQuota(QuotaPo qp) throws BusinessException;
+	public Boolean saveQuotaPo(QuotaPo po) throws BusinessException;
 	/**
 	 * 修改指标库数据
 	 * @param quotal

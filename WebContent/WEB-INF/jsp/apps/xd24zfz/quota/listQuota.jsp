@@ -98,14 +98,18 @@
             var colModel = new Array();
             colModel.push({display: 'id',name: 'id',width: '4%',type: 'checkbox'});
             //指标项
-            colModel.push({display: "指标项",name: 'quotaName',width: "50%"});
+            colModel.push({display: "指标项",name: 'quotaName',width: "30%"});
             //编号quotaCode
-            colModel.push({display: "编号",name: 'quotaCode',width: "15%"});
+            colModel.push({display: "编号",name: 'quotaCode',width: "5%"});
             
             //分类
-            colModel.push({display: "指标类型",name: 'quotaClass',width: "15%"});
+            colModel.push({display: "指标类型",name: 'quotaClass',width: "20%"});
             //度量
-            colModel.push({display: "度量",name: 'quotaUnit',width: "14%"});
+            colModel.push({display: "度量",name: 'quotaUnit',width: "10%"});
+            //开始时间
+            colModel.push({display: "开始时间",name: 'creteTime',width: "15%"});
+            //结束时间
+            colModel.push({display: "结束时间",name: 'updateTime',width: "15%"});
             
             //构造列表
              grid = $('#quotalListId').ajaxgrid({
@@ -146,7 +150,7 @@
             function addRow(){
                 //将新建页面显示
                 grid.grid.resizeGridUpDown('middle');
-                $('#quotaDetailId').attr("src",_ctxPath + "/xd24quota/xd24quotaController.do?method=newQuota");
+                $('#quotaDetailId').attr("src",_ctxPath + "/xd24/quotaController.do?method=newQuota");
                 
             }
            
@@ -163,7 +167,7 @@
                     return;
                 }
                 grid.grid.resizeGridUpDown('middle');
-                $('#quotaDetailId').attr("src",_ctxPath + "/xd24quota/xd24quotaController.do?method=updateQuota");
+                $('#quotaDetailId').attr("src",_ctxPath + "/xd24/quotaController.do?method=editQuota");
             }
             
             //删除节点

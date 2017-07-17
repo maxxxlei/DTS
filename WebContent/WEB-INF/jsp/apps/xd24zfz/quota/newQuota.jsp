@@ -7,59 +7,36 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>底部菜单</title>
-<script>
-$(document).ready(function() {
-	//提交表单
-	$("#submit")
-			.click(
-					function() {
-						$.ajax({
-						    type : "post",
-						    dataType : "json",
-							url : _ctxPath+ '/xd24quota/xd24quotaController.do?method=saveQuota',
-							async : false,
-							data : getFormData(),
-							success : function(result) {
-								if (result) {
-									$.alert("目标录入成功！");
-									window.close();
-									window.location.href = _ctxPath+ '/xd24quota/xd24quotaController.do?method=quotaList';
-										} else {
-											$.alert("保存数据失败！");
-										}
-									},
-									error : function() {
-										$.alert("服务器异常！");
-									}
-							});
-					});
-		function getFormData() {
-			var year = $("#name").val();
-			var bzsj = $("#code").val();
-			var sxsj = $("#qclass").val();
-			var wjh = $("#unit").val();
-			var bh = $("#type").val();
-			var data = {
-				name : name,
-				code : code,
-				qclass : qclass,
-				unit : unit,
-				type : type,
-			}
-			return data;
-		}
-	});
+<script type="text/javascript">
+$(function(){
+	//表单提交
+	 $("#quotaSubmit").click(function(){
+		 var form = $("#quota_edit_form");
+         var path = _ctxPath + "/xd24/quotaController.do?method=newQuota";
+         
+         form.attr('action',path);
+         $('#quotaSubmit')[0].disabled = false;
+         form.jsonSubmit({
+             validate : true,
+             errorIcon : true,
+             collbackError:function(){
+         	   subCount = 0;
+             },
+             callback:function(args){
+             	//refreshW();
+             }
+         });
+	 })
+})
 </script>
 </head>
 <body>
 
 	<div>
-		<form id="myfrm" name="myfrm" align="center" method="post">
+	  
+		<form id="quota_edit_form" class="h100b" name="myfrm" align="center" method="post">
+		<input type="submit" value="提交" id="quotaSubmit">
 			<div class="form_area" id='form_area' align="center">
-				<input type="hidden" id="id" class="validate"
-					validate="type:'string',name:'编号',notNull:true,maxLength:50,avoidChar:'!@#$%^&amp;*+|,'" />
-				<input type="hidden" id="departCode" class="validate"
-					validate="type:'string',name:'兼职部门代码',notNull:true,maxLength:50,avoidChar:'!@#$%^&amp;*+|,'" />
 				<table border="0" cellspacing="0" cellpadding="0"
 					class="margin_lr_10 margin_t_10" align="center" width="700px">
 					<br>
@@ -68,7 +45,7 @@ $(document).ready(function() {
 							class="margin_r_10" for="text">指标分类:</label></th>
 						<td>
 							<div>
-								<select style="width: 90px" id="qclass">
+								<select style="width: 90px" id="quotaClass">
 									<option value="">请选择</option>
 									<option value="1">财务指标</option>
 									<option value="2">间接财务指标</option>
@@ -80,20 +57,17 @@ $(document).ready(function() {
 							class="margin_r_10" for="text">指标项:</label></th>
 						<td>
 							<div>
-								<!--     readonly unselectable="on"
-					<input type="text" id="spc1" name="spc1" class="comp" comp="type:'selectPeople',mode:'open',selectType:'Member',value:'',text:''"/>-->
-								<input type="text" id="name" class="validate"
+								<input type="text" id="quotaName" class="validate"
 									validate="type:'string',name:'指标项',notNull:true,maxLength:50,avoidChar:'!@#$%^&amp;*+|,'"
 									style="width: 200px" />
 						</td>
-
 					</tr>
 					<tr>
 						<th><font color="red">*</font><label class="margin_r_10"
 							for="text">度量:</label></th>
 						<td>
 							<div>
-								<select style="width: 90px" id="unit">
+								<select style="width: 90px" id="quotaUnit">
 									<option value="">请选择</option>
 									<option value="1">元</option>
 									<option value="2">倍数</option>
@@ -108,9 +82,7 @@ $(document).ready(function() {
 							class="margin_r_10" for="text">编号:</label></th>
 						<td>
 							<div>
-								<!--     readonly unselectable="on"
-					<input type="text" id="spc1" name="spc1" class="comp" comp="type:'selectPeople',mode:'open',selectType:'Member',value:'',text:''"/>-->
-								<input type="text" id="code" class="validate"
+								<input type="text" id="quotaCode" class="validate"
 									validate="type:'string',name:'编号',notNull:true,maxLength:50,avoidChar:'!@#$%^&amp;*+|,'"
 									style="width: 40px" />
 						</td>
@@ -121,7 +93,7 @@ $(document).ready(function() {
 							for="text">指标控件类型:</label></th>
 						<td>
 							<div>
-								<select style="width: 90px" id="type">
+								<select style="width: 90px" id="quotaType">
 									<option value="">请选择</option>
 									<option value="1">数字</option>
 									<option value="2">日期</option>
@@ -143,16 +115,16 @@ $(document).ready(function() {
 				<div class="stadic_layout_footer stadic_footer_height"
 					id="bottomButton">
 					<div id="button" align="center" class="page_color button_container">
-						<div
+						<%-- <div
 							class="common_checkbox_box clearfix  stadic_footer_height padding_t_5 border_t">
 							<a href="javascript:OK()"
 								class="common_button common_button_emphasize margin_r_10 hand"
 								id="submit">${ctp:i18n('permission.confirm')}</a>&nbsp;
-							<%--确定 --%>
+							确定
 							<a href="javascript:void(0)"
 								class="common_button common_button_gray" id="edit_cancel_button">${ctp:i18n('permission.cancel')}</a>
-							<%--取消 --%>
-						</div>
+							取消
+						</div> --%>
 					</div>
 				</div>
 			</div>

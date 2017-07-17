@@ -7,6 +7,7 @@
 			<op>saveZzjhlx</op>
 			<op>getZzjhlxById</op>
 			<op>getNameAndId</op>
+			<op>deleteZzjhlx</op>
 		</operations>
 	</bean>
 </beans>

@@ -32,7 +32,7 @@ public class Xd24ZzjhlxController extends BaseController{
 	 * @throws Exception
 	 */
 	public ModelAndView xdcd24SearchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView view = new ModelAndView("apps/xd24zzjhlx/xdZzjhlxList");
+		ModelAndView view = new ModelAndView("apps/xd24zfz/xd24zzjhlx/xdZzjhlxList");
 		return view;
 	}
 	
@@ -45,7 +45,7 @@ public class Xd24ZzjhlxController extends BaseController{
 	 * @throws Exception
 	 */
 		public ModelAndView newaddRow(HttpServletRequest request, HttpServletResponse response) throws Exception {
-			ModelAndView view = new ModelAndView("apps/xd24zzjhlx/xdZzjhlxadd");
+			ModelAndView view = new ModelAndView("apps/xd24zfz/xd24zzjhlx/xdZzjhlxadd");
 			String flag = request.getParameter("flag");
 			view.addObject("flag", flag);
 			String rowsId = request.getParameter("rowsId");
