@@ -220,6 +220,52 @@ public class Xd24Enum {
 	}
 	
 	/**
+	 * 规划类型枚举
+	 * @author ML
+	 *
+	 */
+	public enum GuiHuaType{
+		ZLGH("1","战略规划"),
+		ZYGH("2","专业规划");
+		 
+		private String key;
+		private String text;
+		
+		GuiHuaType(String key,String text){
+	        this.setKey(key);
+	        this.setText(text);
+	    }
+		public String getKey() {
+			return key;
+		}
+		public void setKey(String key) {
+			this.key = key;
+		}
+		public String getText() {
+			return text;
+		}
+		public void setText(String text) {
+			this.text = text;
+		}
+		/**
+		 * 根据key得到枚举类型
+		 * 
+		 * @param key
+		 * @return StateEnum
+		 */
+		public static GuiHuaType getValue(String key) {
+			GuiHuaType[] enums = GuiHuaType.values();
+			if (enums != null) {
+				for (GuiHuaType enum1 : enums) {
+					if (enum1.getKey().equals(key)) {
+						return enum1;
+					}
+				}
+			}
+			return null;
+		}
+	}
+	/**
 	 * 战略地图维度_是否启用枚举
 	 * @author 继往开来
 	 *
@@ -252,4 +298,5 @@ public class Xd24Enum {
             this.text = text;
         }
 	}
+
 }

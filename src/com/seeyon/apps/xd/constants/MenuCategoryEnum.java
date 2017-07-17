@@ -23,5 +23,5 @@ public class MenuCategoryEnum implements CustomCode {
 		}
 		return myMap;
 	}
-
+	
 }
