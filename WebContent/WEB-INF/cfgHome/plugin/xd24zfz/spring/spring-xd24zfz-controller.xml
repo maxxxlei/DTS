@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans default-autowire="byName">
 <!-- 组织计划类型 -->
-	<bean name="/xdcd24/zzjhController.do" class="com.seeyon.apps.xd.controller.Xd24ZzjhlxController"/>
+	<bean name="/xd24/zzjhController.do" class="com.seeyon.apps.xd.controller.Xd24ZzjhlxController"/>
 	<!--目 标 -->
 	<bean name="/xd24/targetController.do" class="com.seeyon.apps.xd.controller.Xd24TargetController"/>
 	<!-- 指标库管理 -->
