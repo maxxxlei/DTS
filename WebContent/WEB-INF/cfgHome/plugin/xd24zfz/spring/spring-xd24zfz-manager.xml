@@ -19,4 +19,8 @@
     <!-- 菜单角色管理 -->
     <bean name="menuRoleManager" class="com.seeyon.apps.xd.manager.MenuRoleManagerImpl"/>
     <bean name="menuRoleDao" class="com.seeyon.apps.xd.dao.MenuRoleDaoImpl"/>
+    
+    <!-- 规划 -->
+     <bean name="guiHuaManager" class="com.seeyon.apps.xd.manager.Xd24GuiHuaManagerImpl"/>
+    <bean name="guiHuaDao" class="com.seeyon.apps.xd.dao.Xd24GuiHuaDaoImpl"/>
 </beans>
