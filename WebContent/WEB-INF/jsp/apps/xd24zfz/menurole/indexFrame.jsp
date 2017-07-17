@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>菜单角色权限管理</title>
+<title>角色及菜单管理</title>
 
 <script type="text/javascript">
 $(function(){
@@ -19,14 +19,18 @@ $(function(){
         $("#tab2").removeClass("common_tabs A").addClass("current");
         $("#templateSysMgr").attr("src",_ctxPath + "/xd24/menuRoleController.do?method=listRole");
     });
+    var skinPathKey = getCtpTop().skinPathKey == null ? "harmony" : getCtpTop().skinPathKey;
+    var html = '<span class="nowLocation_ico"><img src="'+_ctxPath+'/main/skin/frame/'+skinPathKey+'/menuIcon/'+getCtpTop().currentSpaceType+'.png"></span>';
+    html += '<span class="nowLocation_content">24字方针系统设置 > ';
+    html += '<a>角色及菜单管理</a>';
+    html += '</span>';
+    getCtpTop().showLocation(html);
 });
 </script>
 
 </head>
 <body>
     <div id='layout' class="comp" comp="type:'layout',border:false">
-        <div class="comp" comp="type:'breadcrumb',comptype:'location',code:'F01_collappset'"></div>
-        <div class="comp" comp="type:'breadcrumb',comptype:'location',code:'F01_colltemplate'"></div>
         <div class="layout_north page_color" layout="height:38,sprit:false,border:false">
             <div>
                 <div id="tabs2_head" class="common_tabs clearfix margin_l_5 margin_t_5">

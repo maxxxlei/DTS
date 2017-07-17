@@ -1,24 +1,22 @@
 package com.seeyon.apps.xd.controller;
 
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.web.servlet.ModelAndView;
-
-import www.seeyon.com.utils.UUIDUtil;
 
 import com.seeyon.apps.xd.manager.Xd24QuotaManager;
 import com.seeyon.apps.xd.po.QuotaPo;
-import com.seeyon.apps.xd.po.VersionPo;
+import com.seeyon.apps.xd.vo.QuotaVo;
 import com.seeyon.ctp.common.controller.BaseController;
 import com.seeyon.ctp.common.exceptions.BusinessException;
+import com.seeyon.ctp.util.FlipInfo;
 import com.seeyon.ctp.util.ParamUtil;
 import com.seeyon.ctp.util.UUIDLong;
 
@@ -45,8 +43,7 @@ public class Xd24QuotaController extends BaseController {
 	 * @throws BusinessException
 	 */
 	public ModelAndView listQuota(HttpServletRequest request,
-			HttpServletResponse response) throws BusinessException {
-
+			HttpServletResponse response,FlipInfo fi) throws BusinessException {
 		ModelAndView view = new ModelAndView("/apps/xd24zfz/quota/listQuota");
 		return view;
 
@@ -74,7 +71,6 @@ public class Xd24QuotaController extends BaseController {
 			Integer quotaUnit = Integer.parseInt(params.get("quotaUnit").toString());
 			//Integer v_state = Integer.parseInt(params.get("v_state").toString());
 			String quotaType = params.get("quotaType").toString();
-
 			QuotaPo Po = new QuotaPo();
 			Po.setId(id);
 			Po.setVersionId(versionId);

@@ -73,9 +73,9 @@ public class Xd24TargetController extends BaseController{
 		V3xOrgDepartment departMent = orgManager.getDepartmentByPath(group.getParentPath());
 		uv.setDepartMentId(departMent.getId());
 		uv.setDepartMentName(departMent.getName());
-		V3xOrgDepartment centre = orgManager.getDepartmentByPath(departMent.getParentPath());
-		uv.setCentreId(centre.getId());
-		uv.setCentreName(centre.getName());
+		V3xOrgDepartment center = orgManager.getDepartmentByPath(departMent.getParentPath());
+		uv.setCenterId(center.getId());
+		uv.setCenterName(center.getName());
 		mav.addObject("user", uv);
 		return mav;
 

@@ -123,7 +123,6 @@
                 slideToggleBtn:true,
                 onSuccess:function(){
                 	if($.trim(grid) != "" && $.trim(grid.p) != ""){
-                		$('#summary').attr("src",_ctxPath + "/permission/permission.do?method=settingDesc&size="+grid.p.total);
                 		grid.grid.resizeGridUpDown("down");
                 	}
                 },
@@ -132,18 +131,17 @@
             });
              
             function showInfo(row, rowIndex, colIndex) {
-                $('#summary').attr("src",_ctxPath + "/permission/permission.do?method=edit&operType=change&id="+row.flowPermId);
+                $('#summary').attr("src",_ctxPath + "/xd24/menuRoleController.do?method=editMenu&operType=show&id="+row.id);
             }
             //双击事件
             function dbclickRow(){
                 updateRow();
             }
-            //页面底部说明加载
-            $('#summary').attr("src",_ctxPath + "/permission/permission.do?method=settingDesc&size="+grid.p.total);
+            
             //新建节点权限
             function addRow(){
                 //将新建页面显示
-                $('#summary').attr("src",_ctxPath + "/permission/permission.do?method=newPermission&operType=add&category="+$('#category').val());
+                $('#summary').attr("src",_ctxPath + "/xd24/menuRoleController.do?method=addMenu");
                 grid.grid.resizeGridUpDown('middle');
             }
             
@@ -223,10 +221,10 @@
         <div class="layout_center over_hidden" id="center">
             <table class="flexme3" id="menuList"></table>
             <div id="grid_detail" class="h100b">
-                <iframe id="summary" width="100%" height="100%" frameborder="0"  style="overflow-y:hidden"></iframe>
+                <iframe id="summary" width="100%" height="100%" frameborder="0"  scrolling="no"></iframe>
             </div>
         </div>
-        <input type="hidden" name="category" id="category" value="${category}">
+        
     </div>
 </body>
 </html>

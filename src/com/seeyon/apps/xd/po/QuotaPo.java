@@ -3,17 +3,20 @@ package com.seeyon.apps.xd.po;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.seeyon.ctp.common.po.BasePO;
+
 /**
  * 
  * 指标库实体
  * @author fengkai
  *
  */
-@SuppressWarnings("serial")
-public class QuotaPo implements Serializable {
+public class QuotaPo extends BasePO {
 
-	
-	private static final long serialVersionUID = -6708333852054165703L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5591862178663952558L;
 	private Long id;
 	/**
 	 * 版本号id
