@@ -118,7 +118,7 @@ $(function(){
     	 var rows = grid.grid.getSelectRows();
          
          grid.grid.resizeGridUpDown('middle');
-         $('#summary').attr("src",_ctxPath + "/xd24/versionController.do?method=editVersion&type=search&id="+rows[0].id);
+         $('#summary').attr("src",_ctxPath + "/xd24/versionController.do?method=editVersion&type=show&id="+rows[0].id);
    
    
      }
@@ -149,7 +149,7 @@ $(function(){
          var vsManager = new versionManager();
          var o = new Object();
          o.isEnable = 1;
-         if(vsManager.getVersionByVcodeAndVyear(o)){
+         if(vsManager.getVersionByVcodeAndVyear(o,type)){
              $.alert("已有版本启用,只能有一个版本是启用状态！");
              return;
          }
@@ -252,7 +252,7 @@ $(function(){
          // }
           //页面展示
           grid.grid.resizeGridUpDown('middle');
-          $('#summary').attr("src",_ctxPath + "/xd24/versionController.do?method=editVersion&type=change&id="+rows[0].id);
+          $('#summary').attr("src",_ctxPath + "/xd24/versionController.do?method=editVersion&type=updateOpen&id="+rows[0].id);
     
       }
      

@@ -11,24 +11,19 @@
 $(function(){
 	//表单提交
 	 $("#versionSubmit").click(function(){
-		 var valResult = $("#v_Year").validate();
-		 if(valResult == false){
-			 $.alert("验证失败！");
-			 return;
-		 }
-		 
-		 var year =  $("#v_Year").val();
+		 var type = "save";
+		 var re = $("#version_edit_form").validate();
+         if(re == false){
+            return;
+         }
+		 var year =  $("#vYear").val();
 		 var code =  $("#vCode").val();
-		 if(year == null || code == null || year == "" || code == ""){
-			 $.alert("年度或版本编号不能为空！");
-			 return;
-		 }
 		 //根据vcode和vyear判断数据是否存在
 		 var o = new Object();
 		 o.vYear = year;
 		 o.vCode = code;
 		 var vsManager = new versionManager();
-		 if(vsManager.getVersionByVcodeAndVyear(o)){
+		 if(vsManager.getVersionByVcodeAndVyear(o,type)){
 			 $.alert("该数据已存在，请重新输入！");
 			 return;
 		 }
@@ -66,7 +61,7 @@ $(function(){
                         <label class="margin_r_10" for="text">年度:</label></th>
                     <td width="100%">
                         <div class="common_txtbox_wrap">
-                            <input type="text" id="v_Year" name="v_Year" class="validate" validate="maxLength:4,minLength:1">
+                            <input type="text" id="vYear" class="validate" validate="maxLength:4,notNull:true,name:'年度',isInteger:true">
                         </div>
                     </td>
                 </tr>
@@ -75,7 +70,7 @@ $(function(){
                         <label class="margin_r_10" for="text">版本编号:</label></th>
                     <td>
                         <div class="common_txtbox_wrap">
-                            <input type="text" id="vCode" name="vCode"  class="validate" validate="type:'string',maxLength:85,minLength:1">
+                            <input type="text" id="vCode" class="validate" validate="type:'string',maxLength:85,notNull:true,name:'版本编号'">
                         </div>
                     </td>
                 </tr>
@@ -84,19 +79,22 @@ $(function(){
                         <label class="margin_r_10" for="text">备注:</label></th>
                     <td>
                         <div class="common_txtbox  clearfix">
-                            <textarea cols="30" rows="7" class="w100b" id="desc" name="desc"></textarea>
+                            <textarea cols="30" rows="7" class="w100b" id="desc" class="validate" validate="type:'string',maxLength:500,name:'备注'"></textarea>
                         </div>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <div class="align_center">
-        <a href="javascript:void(0)" class="common_button common_button_emphasize" id="versionSubmit">确定</a>
-        <a href="javascript:void(0)" class="common_button common_button_gray" id="rockBack">取消</a>
+   <div class="stadic_layout_footer stadic_footer_height" id="bottomButton">
+                <div id="button" align="center" class="page_color button_container">
+                    <div class="common_checkbox_box clearfix  stadic_footer_height padding_t_5 border_t">
+                       <a href="javascript:void(0)" class="common_button common_button_emphasize margin_r_10 hand" id="versionSubmit">确定</a>&nbsp;<%--确定 --%>
+                        <a href="javascript:void(0)" class="common_button common_button_gray" id="rockBack">取消</a><%--取消 --%>
+                    </div>
+                </div>
+        </div>
     </div>
-    </div>
-   
-     </form>
+ </form>
 </body>
 </html>

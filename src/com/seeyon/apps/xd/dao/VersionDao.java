@@ -50,7 +50,7 @@ public interface VersionDao {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public Integer getVersionCounts(Map<String, Object> params) throws BusinessException;
+	public Integer getVersionCounts(Map<String, Object> params,String type) throws BusinessException;
 	/**
 	 * 根据id获取修改页面展示数据
 	 */
@@ -63,7 +63,7 @@ public interface VersionDao {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public String updateVersionDesc(Long id,String desc) throws BusinessException;
+	public String updateVersionDesc(Long id,Map<String, Object> params) throws BusinessException;
 	/**
 	 * 根据id获取目标表中是否引用该版本
 	 * @param id   版本id

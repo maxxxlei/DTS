@@ -52,14 +52,9 @@ public class VersionController extends BaseController {
 			long id = UUIDLong.longUUID();
 			long versionId = UUIDLong.longUUID();
 			Map<String, Object> params = ParamUtil.getJsonParams();
-			//SimpleDateFormat tempDate = new SimpleDateFormat( "yyyy-MM-dd hh:mm:ss");
-			//Integer vState = Integer.parseInt(params.get("is_State").toString());
-			//Integer isEnable = Integer.parseInt(params.get("is_Enable").toString());
-			String vYear = params.get("v_Year").toString();
+			Integer vYear = Integer.parseInt(params.get("vYear").toString());
 			String vCode = params.get("vCode").toString();
 			String desc = params.get("desc").toString();
-			//Date create_time = tempDate.parse(params.get("create_time").toString());
-			
 			
 			VersionPo vsPo = new VersionPo();
 			vsPo.setId(id);
@@ -91,19 +86,20 @@ public class VersionController extends BaseController {
 		LOGGER.info("进入跳转编辑版本管理页面....");
 		ModelAndView mav = new ModelAndView("apps/xd24zfz/version/editVersion");
 		String type = request.getParameter("type");
-		
+		String id = request.getParameter("id");
 		if("update".equals(type)){
 			Map<String, Object> params = ParamUtil.getJsonParams();
-			Long id = Long.parseLong(params.get("versionId").toString());
-			String desc = params.get("desc").toString();
-			versionManager.updateVersionDesc(id, desc);
+			Long vid = Long.parseLong(params.get("id").toString());
+			versionManager.updateVersionDesc(vid, params);
 			
-		}else if("search".equals(type) || "change".equals(type)){
-			String id = request.getParameter("id");
-		    VersionPo versionPo = versionManager.getVersionById(Long.valueOf(id));
-		    mav.addObject("version", versionPo);
 		}
+//		else if("show".equals(type) || "change".equals(type)){
+//			String id = request.getParameter("id");
+//		    VersionPo versionPo = versionManager.getVersionById(Long.valueOf(id));
+//		    mav.addObject("version", versionPo);
+//		}
 		mav.addObject("openType", type);
+		mav.addObject("vid", id);
 		return mav;
 	}
 	

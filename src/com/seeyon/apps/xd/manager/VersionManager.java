@@ -30,7 +30,13 @@ public interface VersionManager {
 	 */
 	public FlipInfo  getVersion(FlipInfo fi,Map<String, Object> param) throws BusinessException;
 
-	
+	/**
+	 * 更新数据状态
+	 * @param ids  id集合
+	 * @param type
+	 * @return
+	 * @throws BusinessException
+	 */
 	public String updateVersions(String[] ids,String type) throws BusinessException;
 	/**
 	 * 根据条件判断数据是否重复
@@ -39,7 +45,7 @@ public interface VersionManager {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public Boolean getVersionByVcodeAndVyear(Map<String, Object> params) throws BusinessException;
+	public Boolean getVersionByVcodeAndVyear(Map<String, Object> params,String type) throws BusinessException;
 	/**
 	 * 
 	 * @param id
@@ -55,7 +61,7 @@ public interface VersionManager {
 	 * @return
 	 * @throws BusinessException
 	 */
-	public String updateVersionDesc(Long id,String desc) throws BusinessException;
+	public String updateVersionDesc(Long id,Map<String, Object> params) throws BusinessException;
 	
 	/**
 	 * 根据verionId查询记录数判断版本是否被使用

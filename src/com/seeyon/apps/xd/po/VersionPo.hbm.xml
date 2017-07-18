@@ -31,7 +31,7 @@
     <property
       name="vYear"
       column="v_year"
-      type="string"
+      type="integer"
       not-null="false"
       length="4"
     />

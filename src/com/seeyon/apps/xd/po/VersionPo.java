@@ -18,7 +18,7 @@ public class VersionPo extends BasePO {
 	/**
 	 * 年度
 	 */
-	private String vYear;
+	private Integer vYear;
 	/**
 	 * 启用状态
 	 */
@@ -51,69 +51,88 @@ public class VersionPo extends BasePO {
 	 * 版本 ID
 	 */
 	private Long versionId;
-	
-	public Date getUpdateTime() {
-		return updateTime;
-	}
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
-	}
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getvCode() {
 		return vCode;
 	}
+
 	public void setvCode(String vCode) {
 		this.vCode = vCode;
 	}
-	public Date getCreateTime() {
-		return createTime;
-	}
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-	public String getDesc() {
-		return desc;
-	}
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
-	public String getvYear() {
+
+	public Integer getvYear() {
 		return vYear;
 	}
-	public void setvYear(String vYear) {
+
+	public void setvYear(Integer vYear) {
 		this.vYear = vYear;
 	}
+
 	public Integer getState() {
 		return state;
 	}
+
 	public void setState(Integer state) {
 		this.state = state;
 	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
 	public Integer getIsDelete() {
 		return isDelete;
 	}
+
 	public void setIsDelete(Integer isDelete) {
 		this.isDelete = isDelete;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+
+	public String getDesc() {
+		return desc;
 	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+
 	public Integer getIsEnable() {
 		return isEnable;
 	}
+
 	public void setIsEnable(Integer isEnable) {
 		this.isEnable = isEnable;
 	}
+
 	public Long getVersionId() {
 		return versionId;
 	}
+
 	public void setVersionId(Long versionId) {
 		this.versionId = versionId;
 	}
-	
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }

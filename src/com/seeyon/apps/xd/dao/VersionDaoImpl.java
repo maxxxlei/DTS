@@ -134,15 +134,22 @@ public class VersionDaoImpl  implements VersionDao {
 	
 	
 	
-	public Integer getVersionCounts(Map<String, Object> params)
+	public Integer getVersionCounts(Map<String, Object> params,String type)
 			throws BusinessException {
 		
 	    StringBuffer hql = new StringBuffer("select count(*) from VersionPo");
 	    hql.append(" where isDelete =:isDelete");
-	    if(params.size() == 1){
+	    if("enable".equals(type)){
 	    	hql.append(" and isEnable =:isEnable");
 	    }else{
 	    	hql.append(" and vYear =:vYear and vCode = :vCode");
+	    	Integer vYear = Integer.parseInt(params.get("vYear").toString());
+	    	params.put("vYear", vYear);
+	    	if("update".equals(type)){
+	    		Long id = Long.parseLong(params.get("id").toString());
+	    		params.put("id", id);
+	    		hql.append(" and id != :id");
+	    	}
 	    }
 	    params.put("isDelete", 0);
 	    List list = DBAgent.find(hql.toString(),params);
@@ -156,13 +163,13 @@ public class VersionDaoImpl  implements VersionDao {
 	}
 	
 	@Override
-	public String updateVersionDesc(Long id, String desc)
+	public String updateVersionDesc(Long id, Map<String, Object> params)
 			throws BusinessException {
-
         VersionPo vspo = DBAgent.get(VersionPo.class, id);
-		
-		LOGGER.info("要修改的数据===" + vspo);
-		vspo.setDesc(desc);
+		LOGGER.info("要修改的数据id===" + id);
+		vspo.setDesc(params.get("desc").toString());
+		vspo.setvYear(Integer.parseInt(params.get("vYear").toString()));
+		vspo.setvCode(params.get("vCode").toString());
 		vspo.setUpdateTime(new Date());
 	    DBAgent.update(vspo);	
 		
