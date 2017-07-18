@@ -10,9 +10,10 @@
 <title>录入</title>
 <link rel="stylesheet" type="text/css" href="${path }/apps_res/xd24zfz/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="${path }/apps_res/xd24zfz/css/css.css">
-    <link rel="stylesheet" type="text/css" href="${path }/apps_res/xd24zfz/js/datepicker/css/bootstrap-datepicker.css">
+<link rel="stylesheet" type="text/css" href="${path }/apps_res/xd24zfz/js/datepicker/css/bootstrap-datepicker.css">
+<script src="${path }/apps_res/xd24zfz/js/jquery.js"></script>
 <script src="${path }/apps_res/xd24zfz/js/bootstrap.js"></script>
-<script src="${path }/apps_res/xd24zfz/js/bootstrap-datepicker.js"></script>
+<script src="${path }/apps_res/xd24zfz/js/datepicker/js/bootstrap-datepicker.js"></script>
 <script src="${path }/apps_res/xd24zfz/js/datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
 <script src="${path }/apps_res/xd24zfz/js/target.js"></script>
 <script src="${path }/apps_res/xd24zfz/js/formatDate.js"></script>
@@ -29,11 +30,11 @@
 						</div>
 						<label class="col-md-1 form-label">编制时间</label>
 						<div class="col-md-2">
-							<input class="datepicker" id="bzsj" placeholder="编制时间">
+							<input class="form-control" id="bzsj" placeholder="编制时间">
 						</div>
 						<label class="col-md-1 form-label">生效时间</label>
 						<div class="col-md-2">
-							<input class="form-control" placeholder="生效时间"
+							<input class="datepicker" placeholder="生效时间"
 								readonly="readonly">
 						</div>
 						<label class="col-md-1 form-label">单位</label>
@@ -89,7 +90,7 @@
 				</div>
 			</div>
 
-			<div class="goal-content">
+			<div class="goal-content" id="goal-content">
 				<div class="goal-origin-super" id="pid">
 					<div class="goal-origin-super-header">上级目标信息</div>
 					<div class="goal-origin-super-content container-fluid">
@@ -137,10 +138,18 @@
 								</div>
 								<label class="col-md-1 form-label">目标来源</label>
 								<div class="col-md-5">
-									<input type="radio" name="targetAttr" id="bcmc" value="0">补充目标
-									<input type="radio" name="targetAttr" id="cjmc" value="1">承接目标
-									<div id="jtmc_div">
-										<input type="radio" name="targetAttr" id="jtmc" value="2">集团目标(首目标)
+									<div class="radio">
+										<label>
+											<input type="radio" name="targetAttr" id="bcmc" value="0">补充目标
+										</label>
+										<label>
+											<input type="radio" name="targetAttr" id="cjmc" value="1">承接目标
+										</label>
+										<div id="jtmc_div">
+											<label>
+												<input type="radio" name="targetAttr" id="jtmc" value="2">集团目标(首目标)
+											</label>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -149,20 +158,22 @@
 							<div class="form-group">
 								<label class="col-md-1 form-label">目标开始时间</label>
 								<div class="col-md-2">
-									<input class="comp"
-										comp="type:'calendar',ifFormat:'%Y-%m-%d %H:%M',showsTime:true,cache:false"
-										id="startDate" placeholder="目标开始时间">
+									<input class="datepicker" id="startDate" placeholder="目标开始时间">
 								</div>
 								<label class="col-md-1 form-label">到</label>
 								<div class="col-md-2">
-									<input class="comp"
-										comp="type:'calendar',ifFormat:'%Y-%m-%d %H:%M',showsTime:true,cache:false"
-										id="endDate" placeholder="目标结束时间">
+									<input class="datepicker" id="endDate" placeholder="目标结束时间">
 								</div>
 								<label class="col-md-1 form-label">是否关键目标</label>
 								<div class="col-md-5">
-									<input type="radio" name="isCore" id="isCore_yes" value="0">是
-									<input type="radio" name="isCore" id="isCore_no" value="1">否
+									<div class="radio">
+										<label>
+											<input type="radio" name="isCore" id="isCore_yes" value="0">是
+										</label>
+										<label>
+											<input type="radio" name="isCore" id="isCore_no" value="1">否
+										</label>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -178,7 +189,9 @@
 				</div>
 
 				<div class="goal-assessment">
-					<div class="goal-assessment-header">+ 目标考核项</div>
+					<div class="goal-assessment-header">
+                    	<a href="javascript:;" class="add-goal-assessment">+ 目标考核项</a>
+                	</div>
 					<div class="goal-assessment-body">
 						<div class="goal-assessment-item">
 							<div class="goal-assessment-item-header">考核指标项</div>
@@ -201,7 +214,7 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td><input class="form-control" placeholder="序号"></td>
+											<td><input class="form-control" placeholder="序号" value="1"></td>
 											<td><input class="form-control" placeholder="目标周期" id="khzb_mbzq"></td>
 											<td><input class="form-control" placeholder="目标周期细项" id="khzb_mbzqxx"></td>
 											<td>
@@ -214,14 +227,10 @@
 												</div>
 											</td>
 											<td>
-												<input class="comp"
-													comp="type:'calendar',ifFormat:'%Y-%m-%d %H:%M',showsTime:true,cache:false"
-													id="khzb_startDate" placeholder="开始时间">
+												<input class="datepicker" id="khzb_startDate" placeholder="开始时间">
 											</td>
 											<td>
-												<input class="comp"
-													comp="type:'calendar',ifFormat:'%Y-%m-%d %H:%M',showsTime:true,cache:false"
-													id="khzb_endDate" placeholder="结束时间">
+												<input class="datepicker" id="khzb_endDate" placeholder="结束时间">
 											</td>
 											<td>
 												<input class="form-control" placeholder="指标项" id="khzb_zbx">
@@ -249,7 +258,7 @@
 								</table>
 							</div>
 							<div class="goal-assessment-item-footer">
-								<button class="btn btn-link">+ 添加</button>
+								<button class="btn btn-link add-assessment-index-item">+ 添加</button>
 							</div>
 						</div>
 						<div class="goal-assessment-item">
@@ -283,14 +292,10 @@
 												</div>
 											</td>
 											<td>
-												<input class="comp"
-														comp="type:'calendar',ifFormat:'%Y-%m-%d %H:%M',showsTime:true,cache:false"
-														id="khmb_startDate" placeholder="目标开始时间">
+												<input class="datepicker" id="khmb_startDate" placeholder="目标开始时间">
 											</td>
 											<td>
-												<input class="comp"
-														comp="type:'calendar',ifFormat:'%Y-%m-%d %H:%M',showsTime:true,cache:false"
-														id="khmb_startDate" placeholder="目标结束时间">
+												<input class="datepicker" id="khmb_startDate" placeholder="目标结束时间">
 											</td>
 											<td><input class="form-control" placeholder="完成标准" id="khmb_wcbz"></td>
 											<td><input id="khmb_userName" name="khmb_userName"
@@ -302,7 +307,7 @@
 								</table>
 							</div>
 							<div class="goal-assessment-item-footer">
-								<button class="btn btn-link">+ 添加</button>
+								<button class="btn btn-link add-assessment-target-item">+ 添加</button>
 							</div>
 						</div>
 						<div class="goal-assessment-item">
@@ -339,14 +344,10 @@
 												</div>
 											</td>
 											<td>
-												<input class="comp"
-														comp="type:'calendar',ifFormat:'%Y-%m-%d %H:%M',showsTime:true,cache:false"
-														id="kczb_startDate" placeholder="开始时间">
+												<input class="datepicker" id="kczb_startDate" placeholder="开始时间">
 											</td>
 											<td>
-												<input class="comp"
-														comp="type:'calendar',ifFormat:'%Y-%m-%d %H:%M',showsTime:true,cache:false"
-														id="kczb_startDate" placeholder="结束时间">
+												<input class="datepicker" id="kczb_startDate" placeholder="结束时间">
 											</td>
 											<td>
 												<input class="form-control" placeholder="指标项" id="kczb_zbx">
@@ -376,7 +377,7 @@
 								</table>
 							</div>
 							<div class="goal-assessment-item-footer">
-								<button class="btn btn-link">+ 添加</button>
+								<button class="btn btn-link add-index-item">+ 添加</button>
 							</div>
 						</div>
 						<div class="goal-assessment-item">
@@ -397,7 +398,7 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td><input class="form-control" placeholder="序号"></td>
+											<td>1</td>
 											<td><input class="form-control" placeholder="目标周期" id="kcmb_mbzq"></td>
 											<td><input class="form-control" placeholder="周期细项" id="kcmb_mbzqxx"></td>
 											<td>
@@ -410,14 +411,10 @@
 												</div>
 											</td>
 											<td>
-												<input class="comp"
-														comp="type:'calendar',ifFormat:'%Y-%m-%d %H:%M',showsTime:true,cache:false"
-														id="kcmb_startDate" placeholder="开始时间">
+												<input class="datepicker" id="kcmb_startDate" placeholder="开始时间">
 											</td>
 											<td>
-												<input class="comp"
-														comp="type:'calendar',ifFormat:'%Y-%m-%d %H:%M',showsTime:true,cache:false"
-														id="kcmb_endDate" placeholder="结束时间">
+												<input class="datepicker" id="kcmb_endDate" placeholder="结束时间">
 											</td>
 											<td><input class="form-control" placeholder="工作目标完成标准" id="kcmb_gzmuwcbz"></td>
 											<td><input id="kczb_memberId" name="kczb_userName"
@@ -429,7 +426,7 @@
 								</table>
 							</div>
 							<div class="goal-assessment-item-footer">
-								<button class="btn btn-link">+ 添加</button>
+								<button class="btn btn-link add-target-item">+ 添加</button>
 							</div>
 						</div>
 						<div class="goal-assessment-item">
@@ -457,18 +454,195 @@
 								</table>
 							</div>
 							<div class="goal-assessment-item-footer">
-								<button class="btn btn-link">+ 添加</button>
+								<button class="btn btn-link add-target-down-decomposition">+ 添加</button>
 							</div>
 						</div>
-
-
-						<br /> <br />
-
 					</div>
 				</div>
-
 			</div>
 		</form>
+		<div id="goal-assessment-html" class="hide">
+			<div class="goal-assessment">
+				<div class="goal-assessment-header">
+					<a href="javascript:;" class="add-goal-assessment">+ 目标考核项</a>
+				</div>
+				<div class="goal-assessment-body">
+					<div class="goal-assessment-item">
+						<div class="goal-assessment-item-header">考核指标项</div>
+						<div class="goal-assessment-item-body">
+							<table class="table table-bordered table-assessment text-center">
+								<thead>
+									<tr>
+										<th class="text-center">序号</th>
+										<th class="text-center">目标周期项</th>
+										<th class="text-center">月</th>
+										<th class="text-center">开始日期</th>
+										<th class="text-center">结束日期</th>
+										<th class="text-center">指标项</th>
+										<th class="text-center">度量</th>
+										<th class="text-center">条件</th>
+										<th class="text-center">目标直</th>
+										<th class="text-center">协同负责人</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>1</td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="goal-assessment-item-footer">
+							<a class="btn btn-link add-assessment-index-item"> + 添加</a>
+						</div>
+					</div>
+					<div class="goal-assessment-item">
+						<div class="goal-assessment-item-header">考核目标项</div>
+						<div class="goal-assessment-item-body">
+							<table class="table table-bordered table-assessment text-center">
+								<thead>
+									<tr>
+										<th class="text-center">序号</th>
+										<th class="text-center">目标周期</th>
+										<th class="text-center">目标周期项</th>
+										<th class="text-center">月</th>
+										<th class="text-center">开始日期</th>
+										<th class="text-center">结束日期</th>
+										<th class="text-center">工作目标完成标准</th>
+										<th class="text-center">协同负责人</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>1</td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="goal-assessment-item-footer">
+							<a class="btn btn-link add-assessment-target-item"> + 添加</a>
+						</div>
+					</div>
+
+					<div class="goal-assessment-item">
+						<div class="goal-assessment-item-header">考察指标项</div>
+						<div class="goal-assessment-item-body">
+							<table class="table table-bordered table-assessment text-center">
+								<thead>
+									<tr>
+										<th class="text-center">序号</th>
+										<th class="text-center">目标周期</th>
+										<th class="text-center">目标周期项</th>
+										<th class="text-center">月</th>
+										<th class="text-center">开始日期</th>
+										<th class="text-center">结束日期</th>
+										<th class="text-center">指标项</th>
+										<th class="text-center">度量</th>
+										<th class="text-center">条件</th>
+										<th class="text-center">目标直</th>
+										<th class="text-center">协同负责人</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>1</td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="goal-assessment-item-footer">
+							<a class="btn btn-link add-index-item"> + 添加</a>
+						</div>
+					</div>
+
+					<div class="goal-assessment-item">
+						<div class="goal-assessment-item-header">考察目标项</div>
+						<div class="goal-assessment-item-body">
+							<table class="table table-bordered table-assessment text-center">
+								<thead>
+									<tr>
+										<th class="text-center">序号</th>
+										<th class="text-center">目标周期</th>
+										<th class="text-center">目标周期项</th>
+										<th class="text-center">月</th>
+										<th class="text-center">开始日期</th>
+										<th class="text-center">结束日期</th>
+										<th class="text-center">工作目标完成标准</th>
+										<th class="text-center">协同负责人</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>1</td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="goal-assessment-item-footer">
+							<a class="btn btn-link add-target-item"> + 添加</a>
+						</div>
+					</div>
+					<div class="goal-assessment-item">
+						<div class="goal-assessment-item-header">目标向下分解</div>
+						<div class="goal-assessment-item-body">
+							<table class="table table-bordered table-assessment text-center">
+								<thead>
+									<tr>
+										<th class="text-center">序号</th>
+										<th class="text-center">目标描述</th>
+										<th class="text-center">承接人</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>1</td>
+										<td></td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="goal-assessment-item-footer">
+							<a class="btn btn-link add-target-down-decomposition"> + 添加</a>
+						</div>
+					</div>
+					<br /> <br />
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
