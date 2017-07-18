@@ -246,10 +246,10 @@ $(function(){
           var tranObj = new Array();
           tranObj[0] = rows[0].id;
           var vsManager = new versionManager();
-          //if(vsManager.getTargetByVersionId(tranObj)){
-        	//  $.alert("该条版本信息已被使用不进行修改操作！");
-        	//  return;
-         // }
+          if(vsManager.getTargetByVersionId(tranObj)){
+        	  $.alert("该条版本信息已被目标使用不进行修改操作！");
+        	  return;
+          }
           //页面展示
           grid.grid.resizeGridUpDown('middle');
           $('#summary').attr("src",_ctxPath + "/xd24/versionController.do?method=editVersion&type=updateOpen&id="+rows[0].id);
@@ -271,18 +271,19 @@ $(function(){
              //进行数据验证，是否可以进行删除操作
               tranObj[i] = rows[i].id;
           }
-          //if(vsManager.getTargetByVersionId(tranObj)){
-          //    $.alert("该条版本信息已被使用不进行删除！");
-          //   return;
-          //}
+          if(vsManager.getTargetByVersionId(tranObj)){
+              $.alert("要删除的版本信息中有版本信息被目标引用不进行删除！");
+              return;
+          }
           var confirm = $.confirm({
               'msg': "确定删除该数据，该操作无法恢复",//确定删除该权限，该操作无法恢复
               ok_fn: function () { 
             	  vsManager.updateVersions(tranObj,type,{
                       success : function(msg){
                     	  if("SUCCESS" === msg){
-                    		  //$.alert("删除成功！");
-                    		  parent.location.href = _ctxPath + "/xd24/versionController.do?method=listVersions"; 
+                    		  $.alert("删除成功！");
+                    		  var o = new Object();
+                              $("#versionList").ajaxgridLoad(o);
                     	  }
                       }, 
                       error : function(request, settings, e){

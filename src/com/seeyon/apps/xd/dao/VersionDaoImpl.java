@@ -180,12 +180,13 @@ public class VersionDaoImpl  implements VersionDao {
 	public Boolean getTargetCountByVersionId(String[] ids) throws BusinessException {
 		Boolean exist = false;
 		for (String id : ids) {
+			VersionPo vspo = DBAgent.get(VersionPo.class, Long.parseLong(id));
 			Map<String,Object> params = new HashMap<String,Object>();
 			StringBuffer hql = new StringBuffer("select count(*) from TargetPo");
 		    hql.append(" where isDelete =:isDelete");
 		    params.put("isDelete", 0);
 		    hql.append(" and versionId = :versionId");
-		    params.put("versionId", Long.valueOf(id));
+		    params.put("versionId", vspo.getVersionId());
 		    
 		    LOGGER.info("hql==" + hql +";params" + params);
 		    List list = DBAgent.find(hql.toString(),params);
