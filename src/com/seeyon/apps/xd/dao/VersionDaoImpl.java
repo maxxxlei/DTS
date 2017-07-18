@@ -92,26 +92,26 @@ public class VersionDaoImpl  implements VersionDao {
 			params.put("vCode", "%"+value+"%");
 		}else if("createTime".equals(key)){
 			try {
-				//一、时间以#开头，证明没有form_startTime
-				boolean hb = value.startsWith("#");
-				//二、时间以#结尾，证明没有to_startTime
-				boolean fb = value.endsWith("#");
+				//如果vallength值为1，判断二个时间输入框都无空，直接查询所有
+				int valLength = value.length();
+				int len = value.indexOf("#");
 				String[] time = value.split("#");
-				if(hb){
-					String sd = time[0];
+				//如果获取#下标为0并且value长度不为1 则判断该value只含有结束时间
+				if(len == 0 && valLength != 1){
+					String sd = time[1];
 					if(Strings.isNotBlank(sd)){
 						Date d1 = DateUtil.parse(sd);
 						hql.append(" and v.createTime <=:endTime");
 						params.put("endTime", d1);
 					}
-				}else if(fb){
+				}else if(len == (valLength-1) && len >0){  //如果获取#下标不为0并且value长度等于获取的下标则判断该value只含有开始时间	
 					String ed = time[0];
 					if(Strings.isNotBlank(ed)){
 						hql.append(" and v.createTime >=:startTime");
 						Date d2 = DateUtil.parse(ed);
 						params.put("startTime", d2);
 					}
-				}else{
+				}else if(len > 0 && len < (valLength-1)){   //如果获取#下标不为0并且value长度大于获取的下标则判断该value含有开始和结束时间
 					//三、两个时间段都存在值
 					String st = time[0];
 					String ft = time[1];
